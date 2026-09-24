@@ -18,6 +18,15 @@ Files in this folder that are gitignored (local only, never published): `ASSIGNM
 | Free models | `:free` suffix; 20 req/min; 1,000 req/day once ≥$10 of credit has been purchased (50/day otherwise) | from OpenRouter docs, 2026-09-24. Observed 18:59: `qwen/qwen3.8-27b:free` and `google/gemma-4-31b-it:free` returned upstream `429 Provider returned error`; `nvidia/nemotron-3-super-120b-a12b:free` worked (≈30–65 s per extraction) |
 | Settings | `temperature=0` on every call | project rule |
 
+**Pilot result (10 pilot apps, same evidence bundles, prompt p1-12ca05, 2026-09-24 19:23 IST; `python scripts/pilot_compare.py`)**
+
+| model | schema-valid 1st try | grounded | unknown | needs_human | cost | mean latency |
+|---|---|---|---|---|---|---|
+| deepseek/deepseek-v4-flash | 90% | 99% | 4% | 0% | $0.0220 | 30.4 s |
+| nvidia/nemotron-3-super-120b-a12b:free | 70% | 100% | 11% | 10% | $0 | 68.9 s |
+
+Cross-model agreement 71% of scored fields. Rule (schema-valid ≥ 90% AND grounded ≥ 80%): **PASS1_MODEL = deepseek/deepseek-v4-flash**. Prompt frozen at `p1-12ca05`. (`qwen/qwen3.8-27b:free` and `google/gemma-4-31b-it:free` could not be piloted: upstream 429.)
+
 Candidate models (prices $/M tokens in/out, OpenRouter catalogue 2026-09-24, not benchmarked):
 
 | Role | Model | Price |

@@ -1,0 +1,25 @@
+{
+ "models": {
+  "deepseek/deepseek-v4-flash": {
+   "n_rows": 10,
+   "schema_valid_rate": 0.9,
+   "needs_human_rate": 0.0,
+   "grounded_rate": 0.9891,
+   "unknown_rate": 0.0429,
+   "cost_usd": 0.021977,
+   "mean_latency_ms": 30430
+  },
+  "nvidia/nemotron-3-super-120b-a12b:free": {
+   "n_rows": 10,
+   "schema_valid_rate": 0.7,
+   "needs_human_rate": 0.1,
+   "grounded_rate": 1.0,
+   "unknown_rate": 0.1143,
+   "cost_usd": 0.0,
+   "mean_latency_ms": 68875
+  }
+ },
+ "agreement": {
+  "deepseek/deepseek-v4-flash | nvidia/nemotron-3-super-120b-a12b:free": 0.7143
+ }
+}

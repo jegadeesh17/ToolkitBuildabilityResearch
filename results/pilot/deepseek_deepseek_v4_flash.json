@@ -1,0 +1,856 @@
+[
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "All API requests require authentication. Two methods are supported: - API Keys — Best for scripts, internal tools, and server-side integrations. Use HTTP Basic Auth with your API key as the username and an empty password. - OAuth 2.0 — Best for user-facing integrations."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://close.com/pricing",
+     "quote": "Try for free"
+    },
+    {
+     "url": "https://close.com/pricing",
+     "quote": "No credit card required."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "Close uses industry-standard REST conventions with predictable URL structures, standard HTTP methods, and JSON request/response bodies."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "Leads | Companies or organizations — the primary object in Close. Contain contacts, tasks, opportunities, and activities."
+    },
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "Contacts | Individual people within a lead. | Opportunities | Potential deals tracked through pipeline stages. | Activities | Calls, emails, notes, SMS, meetings, and other interactions logged on leads. | Custom Fields | Store arbitrary data on leads, contacts, opportunities, and custom activities."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://help.close.com/docs/mcp-server",
+     "quote": "Model Context Protocol (MCP) servers provide a standardized interface that allows any compatible AI model or agent to access your Close data in a simple and secure way."
+    },
+    {
+     "url": "https://help.close.com/docs/mcp-server",
+     "quote": "The MCP server URL is `https://mcp.close.com/mcp` and has \"HTTP Streamable\" and \"OAuth 2.0 Dynamic Client Registration (DCR)\" support."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "All API requests require authentication. Two methods are supported: - API Keys — Best for scripts, internal tools, and server-side integrations. Use HTTP Basic Auth with your API key as the username and an empty password. - OAuth 2.0 — Best for user-facing integrations."
+    },
+    {
+     "url": "https://close.com/pricing",
+     "quote": "Try for free"
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://close.com/pricing",
+     "quote": "Try for free"
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://close.com/pricing",
+     "quote": "Try for free"
+    },
+    {
+     "url": "https://close.com/pricing",
+     "quote": "No credit card required."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 8,
+  "app": "Close",
+  "category": "CRM and Sales",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:46:43Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key"
+  ],
+  "access_model": "admin_or_approval",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "none_found",
+  "verdict": "buildable_gated",
+  "blocker": "approval_or_partnership",
+  "description": "Customer service platform with REST API for managing customer profiles, conversations, and answers.",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "unknown",
+  "confidence": 0.7,
+  "evidence": {
+   "access_model": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Gladly Administrators can set API permissions on an agent-by-agent basis."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Some examples of what you do through Gladly APIs include managing customer profile data, interacting with a customer's timeline, providing the latest information about a customer's orders, and more."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "You can integrate easily with Gladly by calling Gladly's REST API"
+    }
+   ],
+   "auth_methods": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Gladly API uses token-based Basic Authentication."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://gladysassistant.com/docs/integrations/mcp/",
+     "quote": "Connect an MCP client to Gladys | Gladys Assistant"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "You can integrate easily with Gladly by calling Gladly's REST API"
+    },
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Gladly Administrators can set API permissions on an agent-by-agent basis."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Gladly Administrators can set API permissions on an agent-by-agent basis."
+    }
+   ]
+  },
+  "unknown_reason": {
+   "api_pricing_tier": "no_docs_found"
+  },
+  "id": 20,
+  "app": "Gladly",
+  "category": "Support and Helpdesk",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:04Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "basic",
+   "bearer_token"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "Vonage is a cloud communications platform providing APIs for SMS, voice, messaging, and verification.",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "trial",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developer.vonage.com/en/verify/concepts/authentication",
+     "quote": "Authorization: Basic <base64(api_key:api_secret)>"
+    },
+    {
+     "url": "https://developer.vonage.com/en/verify/concepts/authentication",
+     "quote": "Authorization: Bearer <JWT>"
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Sign up for free if you don't have one yet"
+    },
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "You can explore most features with a free trial account."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developer.vonage.com/en/api-errors",
+     "quote": "Account not enabled for REST - This account is not provisioned for REST submission, you should use SMPP on the SMS API."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developer.vonage.com/en/getting-started/concepts/authentication",
+     "quote": "| Accounts | | |\n| Application | | |\n| Audit | | |\n| Conversation | | |\n| Conversion | | |\n| Device Location Retrieval | | |"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developer.vonage.com/en/mcp-server/conceptual-guides/introduction-to-vonage-mcp",
+     "quote": "Vonage provides a few different individual MCP implementations, based on your needs. We have a Documentation Server which exposes our documentation to LLM models so you can get up-to-date answers, and a Server API Binding MCP server that expose Vonage APIs and developer tools in an AI-native format"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Sign up for free if you don't have one yet"
+    },
+    {
+     "url": "https://developer.vonage.com/en/getting-started/concepts/authentication",
+     "quote": "Vonage APIs support different authentication methods depending on which product you are using:"
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Sign up for free if you don't have one yet"
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "You can explore most features with a free trial account."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 30,
+  "app": "Vonage",
+  "category": "Communications and Messaging",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:33Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "third_party",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "Meta's social media platform for text, image, and video posts, with a public REST API.",
+  "existing_mcp_url": "https://github.com/MetaThreads/meta-threads-mcp",
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developers.facebook.com/docs/threads/get-started/",
+     "quote": "API authentication is handled by Threads user access tokens that conform to the OAuth 2.0 protocol."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "Threads API pricing in 2026 is free."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developers.facebook.com/docs/threads/overview/",
+     "quote": "The Threads API can be accessed by either `graph.threads.com` or `graph.threads.net`."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developers.facebook.com/docs/threads/overview/",
+     "quote": "You may use the Threads API to enable people to create and publish content on a person behalf on Threads"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://github.com/MetaThreads/meta-threads-mcp",
+     "quote": "Unofficial MCP server for Meta's Threads API."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "Threads API pricing in 2026 is free."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developers.facebook.com/docs/threads/get-started/",
+     "quote": "To access the Threads API, create an app and pick the Threads Use Case."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "Threads API pricing in 2026 is free."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 39,
+  "app": "Threads (Meta)",
+  "category": "Marketing, Ads, Email and Social",
+  "flags": [
+   "grounding_failed"
+  ],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:46:51Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key"
+  ],
+  "access_model": "paid_plan_required",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "official",
+  "verdict": "buildable_gated",
+  "blocker": "paid_plan_required",
+  "description": "Squarespace is a website builder and ecommerce platform with commerce APIs for orders, products, inventory, and more.",
+  "existing_mcp_url": "https://mcp.squarespace.com/mcp",
+  "api_pricing_tier": "paid_standard",
+  "confidence": 0.95,
+  "evidence": {
+   "access_model": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "With Squarespace's Commerce Advanced plan, you can develop a custom application for a Squarespace merchant site. Follow the steps below to generate an API key for a custom application."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "http://developers.squarespace.com/",
+     "quote": "Read and write orders, products, inventory, and transactions."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "With Squarespace's Commerce Advanced plan, you can develop a custom application for a Squarespace merchant site."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/overview",
+     "quote": "All Commerce APIs are built on HTTPS and designed with REST principles in mind."
+    }
+   ],
+   "auth_methods": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "authenticate requests by using an API key or OAuth access token."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "With Squarespace's Commerce Advanced plan, you can develop a custom application for a Squarespace merchant site."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developers-preview.squarespace.com/mcp/overview",
+     "quote": "The Squarespace MCP server connects AI assistants and agents to Squarespace."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/oauth",
+     "quote": "We will review your registration and respond with your_client_id and your_client_secret as soon as possible."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 46,
+  "app": "Squarespace",
+  "category": "Ecommerce",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:34Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "official",
+  "verdict": "unknown",
+  "blocker": "unknown",
+  "description": "Bright Data provides proxy, web scraping, and AI data access services including REST APIs and an MCP server.",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://docs.brightdata.com/api-reference/authentication",
+     "quote": "Authenticate with Bright Data using 1 of 2 methods: API Access with an API key or Native Access with proxy username and password."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://docs.brightdata.com/general/account/billing-and-pricing/free-tier",
+     "quote": "Every new Bright Data account gets 5,000 free credits per month across Web Unlocker API, SERP API, Web Scraper API and Scraper Studio. No credit card required."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://docs.brightdata.com/api-reference/scrapers/synchronous-requests",
+     "quote": "Use the Bright Data Web Scraper API to synchronous Requests. POST /datasets/v3/scrape returns scraped data synchronously in a single response."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://docs.brightdata.com/general/account/billing-and-pricing/free-tier",
+     "quote": "Web Unlocker API, SERP API, Web Scraper API and Scraper Studio."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://docs.brightdata.com/ai/mcp-server/overview",
+     "quote": "Use the Bright Data MCP server to give AI agents real-time access to public web data with 5,000 free requests per month and zero infrastructure setup."
+    }
+   ]
+  },
+  "unknown_reason": {
+   "verdict": "model_unsure",
+   "blocker": "model_unsure"
+  },
+  "id": 57,
+  "app": "Bright Data",
+  "category": "Data, SEO and Scraping",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:04Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key",
+   "bearer_token"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest",
+   "graphql"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "Cloudflare provides CDN, security, and developer services including DNS, Workers, and R2.",
+  "existing_mcp_url": "https://mcp.cloudflare.com/mcp",
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "When you connect, you will be redirected to Cloudflare to authorize via OAuth and select the permissions to grant to your agent."
+    },
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "For CI/CD or automation, you can create a Cloudflare API token with the permissions you need and pass it as a bearer token in the Authorization header."
+    },
+    {
+     "url": "https://developers.cloudflare.com/api/resources/rate_limits/methods/create/",
+     "quote": "The previous authorization scheme for interacting with the Cloudflare API, used in conjunction with a Global API key."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/zones/subresources/rate_plans/methods/get/",
+     "quote": "result\": [{\"id\": \"free\", \"components\": [{\"default\": 5, \"name\": \"page_rules\", \"unit_price\": 1}], \"currency\": \"USD\", \"duration\": 1, \"frequency\": \"monthly\", \"name\": \"Free Plan\"}]"
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/iam/subresources/oauth_clients/methods/create/",
+     "quote": "POST/accounts/{account_id}/oauth_clients"
+    },
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "GraphQL server: Get analytics data using Cloudflare's GraphQL API"
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "The Cloudflare API MCP server provides access to the entire Cloudflare API — over 2,500 endpoints across DNS, Workers, R2, Zero Trust, and every other product"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "Cloudflare runs a catalog of managed remote MCP servers which you can connect to using OAuth on clients like Claude"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "For CI/CD or automation, you can create a Cloudflare API token with the permissions you need and pass it as a bearer token in the Authorization header."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/zones/subresources/rate_plans/methods/get/",
+     "quote": "result\": [{\"id\": \"free\", \"components\": [{\"default\": 5, \"name\": \"page_rules\", \"unit_price\": 1}], \"currency\": \"USD\", \"duration\": 1, \"frequency\": \"monthly\", \"name\": \"Free Plan\"}]"
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 64,
+  "app": "Cloudflare",
+  "category": "Developer, Infra and Data platforms",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:52Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "unknown",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": "https://mcp.clickup.com/mcp",
+  "api_pricing_tier": "free",
+  "confidence": 0.7,
+  "evidence": {
+   "access_model": [
+    {
+     "url": "https://help.clickup.com/hc/en-us/articles/6303422883095-Create-your-own-app-with-the-ClickUp-API",
+     "quote": "Members and limited members with full edit permissions can use personal API tokens."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://developer.clickup.com/docs/rate-limits",
+     "quote": "Free Forever, Unlimited, Business: 100 requests per minute per token."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developer.clickup.com/reference/getauthorizeduser",
+     "quote": "ClickUp API v2 Reference"
+    }
+   ],
+   "auth_methods": [
+    {
+     "url": "https://developer.clickup.com/docs/authentication",
+     "quote": "Authenticate to the ClickUp API using a personal token or OAuth."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+     "quote": "Our Public API is available on all ClickUp Plans."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server-1",
+     "quote": "Learn how to setup your AI assistant with ClickUp's MCP server."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+     "quote": "Our Public API is available on all ClickUp Plans."
+    }
+   ]
+  },
+  "unknown_reason": {
+   "api_breadth": "no_docs_found"
+  },
+  "id": 77,
+  "app": "ClickUp",
+  "category": "Productivity and Project Management",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:34Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "third_party",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://binance-docs.github.io/apiAgent-API-EN/",
+     "quote": "API-keys are passed into the Rest API via the `X-MBX-APIKEY` header."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md",
+     "quote": "API keys can be created on the API Management page of your Binance account."
+    },
+    {
+     "url": "https://dev.binance.vision/t/question-regarding-api-for-commercial-purposes/13350",
+     "quote": "All the endpoints on the API Documentation are public endpoints, although please take in attention the Limits associated."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://binance-docs.github.io/apiAgent-API-EN/",
+     "quote": "All endpoints return either a JSON object or array."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://github.com/nirholas/Binance-MCP",
+     "quote": "The most comprehensive Model Context Protocol server for Binance — 478+ tools covering the entire Binance.com API"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://github.com/nirholas/Binance-MCP",
+     "quote": "A Model Context Protocol (MCP) server for Binance.com API."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md",
+     "quote": "API keys can be created on the API Management page of your Binance account."
+    },
+    {
+     "url": "https://dev.binance.vision/t/question-regarding-api-for-commercial-purposes/13350",
+     "quote": "All the endpoints on the API Documentation are public endpoints, although please take in attention the Limits associated."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md",
+     "quote": "API keys can be created on the API Management page of your Binance account."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://dev.binance.vision/t/question-regarding-api-for-commercial-purposes/13350",
+     "quote": "All the endpoints on the API Documentation are public endpoints, although please take in attention the Limits associated."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 83,
+  "app": "Binance",
+  "category": "Finance and Fintech",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:48:01Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key",
+   "bearer_token"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "narrow",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "AI-powered research tool that searches peer-reviewed academic papers.",
+  "existing_mcp_url": "https://mcp.consensus.app/mcp",
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "access_model": [
+    {
+     "url": "https://consensus.app/home/api/",
+     "quote": "The Consensus API is now open to everyone."
+    },
+    {
+     "url": "https://help.consensus.app/en/articles/10087865-subscription-plans",
+     "quote": "Free Tier Cost: $0"
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://docs.consensus.app/reference/v1_quick_search",
+     "quote": "paths: { '/v1/quick_search': { get: { summary: 'Query for relevant papers.' } } }"
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://help.consensus.app/en/articles/10087865-subscription-plans",
+     "quote": "30 included API & MCP calls per month"
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://docs.consensus.app/reference/v1_quick_search",
+     "quote": "\"openapi\": \"3.1.0\", \"info\": { \"title\": \"Consensus API\", \"version\": \"1.0\" }"
+    }
+   ],
+   "auth_methods": [
+    {
+     "url": "https://docs.consensus.app/reference/v1_quick_search",
+     "quote": "security: [ { \"XApiKeyHeader\": [] } ]"
+    },
+    {
+     "url": "https://docs.consensus.app/consensus-mcp",
+     "quote": "OAuth will open in your browser automatically on first use."
+    },
+    {
+     "url": "https://docs.consensus.app/consensus-mcp",
+     "quote": "For enterprise access with unlimited rate limits, include your API key as a Bearer token: Authorization: Bearer YOUR_API_KEY"
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://consensus.app/home/api/",
+     "quote": "The Consensus API is now open to everyone."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://docs.consensus.app/consensus-mcp",
+     "quote": "Server URL: https://mcp.consensus.app/mcp"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://consensus.app/home/api/",
+     "quote": "The Consensus API is now open to everyone."
+    },
+    {
+     "url": "https://help.consensus.app/en/articles/10087865-subscription-plans",
+     "quote": "Free Tier Cost: $0"
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 94,
+  "app": "Consensus",
+  "category": "AI, Research and Media-native",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-44ad86",
+   "model": "deepseek/deepseek-v4-flash",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:48:05Z"
+  }
+ }
+]

@@ -1,0 +1,816 @@
+[
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key"
+  ],
+  "access_model": "self_serve_trial",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "CRM with built-in calling, email, and SMS – plus Chloe, your AI sales agent.",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "trial",
+  "confidence": 0.9,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "API Keys — Best for scripts, internal tools, and server-side integrations. Use HTTP Basic Auth with your API key as the username and an empty password."
+    },
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "OAuth 2.0 — Best for user-facing integrations."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://developer.close.com/topics/authentication",
+     "quote": "API keys can be created and managed in your Close account under Settings → Developer → API Keys."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "Close uses industry-standard REST conventions with predictable URL structures, standard HTTP methods, and JSON request/response bodies."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "| Leads | Companies or organizations — the primary object in Close. Contain contacts, tasks, opportunities, and activities. |"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://help.close.com/docs/mcp-server",
+     "quote": "The MCP server URL is https://mcp.close.com/mcp and has"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developer.close.com/api/overview.md",
+     "quote": "Base URL: `https://api.close.com/api/v1`"
+    },
+    {
+     "url": "https://close.com/pricing",
+     "quote": "Try Close free for 14 Days"
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://close.com/pricing",
+     "quote": "Try Close free for 14 Days"
+    },
+    {
+     "url": "https://close.com/pricing",
+     "quote": "No credit card required."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://close.com/pricing",
+     "quote": "Try Close free for 14 Days"
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 8,
+  "app": "Close",
+  "category": "CRM and Sales",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:48:24Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "basic"
+  ],
+  "access_model": "unknown",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "unknown",
+  "verdict": "unknown",
+  "blocker": "unknown",
+  "description": "At Gladly, we believe that customer service is best when it's a conversation.",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "unknown",
+  "confidence": 0.6,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Gladly API uses token-based Basic Authentication."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Clients can access the REST API via HTTPS at your organization's Gladly domain"
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developer.gladly.com/rest/index.html",
+     "quote": "Some examples of what you do through Gladly APIs include managing customer profile data, interacting with a customer's timeline, providing the latest information about a customer's orders, and more."
+    }
+   ]
+  },
+  "unknown_reason": {
+   "access_model": "no_docs_found",
+   "verdict": "no_docs_found",
+   "blocker": "no_docs_found",
+   "api_pricing_tier": "no_docs_found",
+   "existing_mcp": "no_docs_found"
+  },
+  "id": 20,
+  "app": "Gladly",
+  "category": "Support and Helpdesk",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:32Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key",
+   "basic",
+   "bearer_token"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.85,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developer.vonage.com/en/getting-started/concepts/authentication",
+     "quote": "When you create a Vonage account, an API key and secret will be created for you. These are located in your account settings in the Vonage Dashboard."
+    },
+    {
+     "url": "https://developer.vonage.com/en/getting-started/concepts/authentication",
+     "quote": "A number of newer Vonage APIs require authentication to be done using an API key and secret sent Base64 encoded in the `Authorization` header."
+    },
+    {
+     "url": "https://developer.vonage.com/en/verify/concepts/authentication",
+     "quote": "Authorization: Bearer <JWT>"
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Please note: Some Dashboard features require account verification and payment method setup. You can explore most features with a free trial account."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developer.vonage.com/en/verify/concepts/authentication",
+     "quote": "curl --location --request POST 'https://api.nexmo.com/v2/verify'"
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developer.vonage.com/en/getting-started/concepts/authentication",
+     "quote": "Accounts | Application | Audit | Conversation | Conversion | Device Location Retrieval | Dispatch | Identity Insights | Media | Messages 1 | Numbers | Number Insight | Pricing v1 | Pricing v2 | Programmable SIP | Quality on Demand | Redact | Reports | SMS | Verify (Legacy) | Verify 2 | Voice 3 | Video"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developer.vonage.com/en/mcp-server/conceptual-guides/introduction-to-vonage-mcp",
+     "quote": "Vonage provides a few different individual MCP implementations, based on your needs. We have a Documentation Server which exposes our documentation to LLM models so you can get up-to-date answers, and a Server API Binding MCP server that expose Vonage APIs and developer tools in an AI-native format that can be used directly by MCP-compatible clients"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Please note: Some Dashboard features require account verification and payment method setup. You can explore most features with a free trial account."
+    },
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Your API key and secret are required to authenticate API requests."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Please note: Some Dashboard features require account verification and payment method setup. You can explore most features with a free trial account."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://developer.vonage.com/en/dashboard/getting-started",
+     "quote": "Prerequisites: Before you begin, make sure you have: 1. A Vonage account - Sign up for free if you don't have one yet"
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 30,
+  "app": "Vonage",
+  "category": "Communications and Messaging",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:47:38Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "third_party",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.8,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developers.facebook.com/docs/threads/get-started/",
+     "quote": "API authentication is handled by Threads user access tokens that conform to the OAuth 2.0 protocol."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "You create a Meta app, add the Threads use case, request the permissions you need, and go through Meta App Review to take your app out of development mode."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developers.facebook.com/docs/threads/overview/",
+     "quote": "The Threads API can be accessed by either graph.threads.com or graph.threads.net."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "Through 2025 it expanded to include insights, reply management, deletion, and the threads_location_tagging permission. By 2026 the surface area is wide enough to build a real client on top of, not just a posting bot."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://github.com/MetaThreads/meta-threads-mcp",
+     "quote": "Unofficial MCP server for Meta's Threads API."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "Threads API (Meta, official) | No paid tier or per-call fee published"
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "Meta does not publish a paid tier or per-call fee for the Threads API"
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://www.blotato.com/blog/threads-api-pricing",
+     "quote": "Meta does not publish a paid tier or per-call fee for the Threads API"
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 39,
+  "app": "Threads (Meta)",
+  "category": "Marketing, Ads, Email and Social",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:48:49Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key"
+  ],
+  "access_model": "paid_plan_required",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "official",
+  "verdict": "buildable_gated",
+  "blocker": "paid_plan_required",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "paid_standard",
+  "confidence": 0.9,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "Depending on your development needs, you can use a generated API key or start the OAuth process with Squarespace to become a registered OAuth client."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "With Squarespace's Commerce Advanced plan, you can develop a custom application for a Squarespace merchant site."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/overview",
+     "quote": "All Commerce APIs are built on HTTPS and designed with REST principles in mind."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/overview",
+     "quote": "With Squarespace Commerce APIs, you can build applications to manage the commerce features of a Squarespace merchant site."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developers-preview.squarespace.com/mcp/overview",
+     "quote": "The Squarespace MCP server connects AI assistants and agents to Squarespace. Built on the Model Context Protocol, an open standard for connecting AI applications to external tools, it lets clients like Claude, ChatGPT, and Gemini call Squarespace tools mid-conversation and return live results."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/overview",
+     "quote": "All Commerce APIs are built on HTTPS and designed with REST principles in mind."
+    },
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "With Squarespace's Commerce Advanced plan, you can develop a custom application for a Squarespace merchant site."
+    },
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/oauth",
+     "quote": "We will review your registration and respond with your_client_id and your_client_secret as soon as possible."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "With Squarespace's Commerce Advanced plan, you can develop a custom application for a Squarespace merchant site."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions",
+     "quote": "With Squarespace's Commerce Advanced plan, you can develop a custom application for a Squarespace merchant site."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 46,
+  "app": "Squarespace",
+  "category": "Ecommerce",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:48:43Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key",
+   "basic"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "moderate",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.9,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://docs.brightdata.com/api-reference/authentication",
+     "quote": "An API key is a secure hashed token used to authenticate with Bright Data API."
+    },
+    {
+     "url": "https://docs.brightdata.com/api-reference/authentication",
+     "quote": "Native Access - Authenticate and interact with the Bright Data platform using proxy protocol username and password."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://docs.brightdata.com/general/account/billing-and-pricing/free-tier",
+     "quote": "Every new Bright Data account gets 5,000 free credits per month across Web Unlocker API, SERP API, Web Scraper API and Scraper Studio. No credit card required."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://docs.brightdata.com/api-reference/authentication",
+     "quote": "--url https://api.brightdata.com/request"
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://docs.brightdata.com/general/account/billing-and-pricing/free-tier",
+     "quote": "Every new Bright Data account gets 5,000 free credits per month across Web Unlocker API, SERP API, Web Scraper API and Scraper Studio. No credit card required."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://docs.brightdata.com/ai/mcp-server/overview",
+     "quote": "Use the Bright Data MCP server to give AI agents real-time access to public web data with 5,000 free requests per month and zero infrastructure setup."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://docs.brightdata.com/general/account/billing-and-pricing/free-tier",
+     "quote": "Every new Bright Data account gets 5,000 free credits per month across Web Unlocker API, SERP API, Web Scraper API and Scraper Studio. No credit card required."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://docs.brightdata.com/general/account/billing-and-pricing/free-tier",
+     "quote": "No credit card required."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://docs.brightdata.com/general/account/billing-and-pricing/free-tier",
+     "quote": "Every new Bright Data account gets 5,000 free credits per month across Web Unlocker API, SERP API, Web Scraper API and Scraper Studio. No credit card required."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 57,
+  "app": "Bright Data",
+  "category": "Data, SEO and Scraping",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:49:39Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key",
+   "bearer_token"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.9,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/iam/subresources/oauth_clients/methods/create/",
+     "quote": "API Token The preferred authorization scheme for interacting with the Cloudflare API. Create a token. Example:`Authorization: Bearer Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY`"
+    },
+    {
+     "url": "https://developers.cloudflare.com/api/resources/iam/subresources/oauth_clients/methods/create/",
+     "quote": "API Email + API Key The previous authorization scheme for interacting with the Cloudflare API, used in conjunction with a Global API key. Example:`X-Auth-Email: user@example.com`"
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/iam/subresources/oauth_clients/methods/create/",
+     "quote": "API Token The preferred authorization scheme for interacting with the Cloudflare API. Create a token."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/iam/subresources/oauth_clients/methods/create/",
+     "quote": "POST/accounts/{account_id}/oauth_clients"
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "The Cloudflare API MCP server provides access to the entire Cloudflare API — over 2,500 endpoints across DNS, Workers, R2, Zero Trust, and every other product"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "Cloudflare runs a catalog of managed remote MCP servers which you can connect to using OAuth on clients like Claude ↗, Windsurf ↗, our own AI Playground ↗ or any SDK that supports MCP ↗."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/iam/subresources/oauth_clients/methods/create/",
+     "quote": "API Token The preferred authorization scheme for interacting with the Cloudflare API. Create a token."
+    },
+    {
+     "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+     "quote": "For CI/CD or automation, you can create a Cloudflare API token ↗ with the permissions you need and pass it as a bearer token in the `Authorization` header."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/iam/subresources/oauth_clients/methods/create/",
+     "quote": "API Token The preferred authorization scheme for interacting with the Cloudflare API. Create a token."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://developers.cloudflare.com/api/resources/zones/subresources/rate_plans/methods/get/",
+     "quote": "result: [ { id: 'free', components: [ { default: 5, name: 'page_rules', unit_price: 1 } ], currency: 'USD', duration: 1, frequency: 'monthly', name: 'Free Plan' } ]"
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 64,
+  "app": "Cloudflare",
+  "category": "Developer, Infra and Data platforms",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:49:05Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "oauth2",
+   "api_key"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": "unknown",
+  "api_breadth": "broad",
+  "existing_mcp": "official",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://developer.clickup.com/docs/authentication",
+     "quote": "For apps or integrations that other people use, use the OAuth flow, allowing users to authorize Workspaces for your app."
+    },
+    {
+     "url": "https://developer.clickup.com/docs/authentication",
+     "quote": "For personal use, authenticate with your personal API token."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+     "quote": "Our Public API is available on all ClickUp Plans ."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+     "quote": "Some endpoints and parameters are limited by plan."
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server-1",
+     "quote": "Remote MCP Server URL: https://mcp.clickup.com/mcp"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+     "quote": "Our Public API is available on all ClickUp Plans ."
+    },
+    {
+     "url": "https://developer.clickup.com/docs/authentication",
+     "quote": "For personal use, authenticate with your personal API token."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+     "quote": "Our Public API is available on all ClickUp Plans ."
+    },
+    {
+     "url": "https://developer.clickup.com/docs/authentication",
+     "quote": "For personal use, authenticate with your personal API token."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+     "quote": "Our Public API is available on all ClickUp Plans ."
+    }
+   ]
+  },
+  "unknown_reason": {
+   "api_type": "no_docs_found"
+  },
+  "id": 77,
+  "app": "ClickUp",
+  "category": "Productivity and Project Management",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:53:32Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": [
+   "rest"
+  ],
+  "api_breadth": "broad",
+  "existing_mcp": "third_party",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.9,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://binance-docs.github.io/apiAgent-API-EN/",
+     "quote": "API-keys are passed into the Rest API via the `X-MBX-APIKEY` header."
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://dev.binance.vision/t/question-regarding-api-for-commercial-purposes/13350",
+     "quote": "All the endpoints on the API Documentation are public endpoints, although please take in attention the Limits associated."
+    }
+   ],
+   "api_type": [
+    {
+     "url": "https://binance-docs.github.io/apiAgent-API-EN/",
+     "quote": "For `GET` endpoints, parameters must be sent as a `query string`. For `POST`, `PUT`, and `DELETE` endpoints, the parameters may be sent as a `query string` or in the `request body` with content type `application/x-www-form-urlencoded`."
+    }
+   ],
+   "api_breadth": [
+    {
+     "url": "https://github.com/nirholas/Binance-MCP",
+     "quote": "The most comprehensive Model Context Protocol server for Binance — 478+ tools covering the entire Binance.com API"
+    }
+   ],
+   "existing_mcp": [
+    {
+     "url": "https://github.com/nirholas/Binance-MCP",
+     "quote": "A Model Context Protocol (MCP) server for Binance.com API."
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://dev.binance.vision/t/question-regarding-api-for-commercial-purposes/13350",
+     "quote": "All the endpoints on the API Documentation are public endpoints, although please take in attention the Limits associated."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://dev.binance.vision/t/question-regarding-api-for-commercial-purposes/13350",
+     "quote": "All the endpoints on the API Documentation are public endpoints, although please take in attention the Limits associated."
+    }
+   ],
+   "api_pricing_tier": [
+    {
+     "url": "https://dev.binance.vision/t/question-regarding-api-for-commercial-purposes/13350",
+     "quote": "All the endpoints on the API Documentation are public endpoints, although please take in attention the Limits associated."
+    }
+   ]
+  },
+  "unknown_reason": {},
+  "id": 83,
+  "app": "Binance",
+  "category": "Finance and Fintech",
+  "flags": [],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:50:21Z"
+  }
+ },
+ {
+  "auth_methods": [
+   "api_key",
+   "bearer_token"
+  ],
+  "access_model": "self_serve_free",
+  "api_type": "unknown",
+  "api_breadth": "unknown",
+  "existing_mcp": "unknown",
+  "verdict": "buildable_now",
+  "blocker": "none",
+  "description": "",
+  "existing_mcp_url": null,
+  "api_pricing_tier": "free",
+  "confidence": 0.95,
+  "evidence": {
+   "auth_methods": [
+    {
+     "url": "https://docs.consensus.app/consensus-mcp",
+     "quote": "For enterprise access with unlimited rate limits, include your API key as a Bearer token:"
+    }
+   ],
+   "access_model": [
+    {
+     "url": "https://help.consensus.app/en/articles/10087865-subscription-plans",
+     "quote": "30 included API & MCP calls per month"
+    }
+   ],
+   "verdict": [
+    {
+     "url": "https://consensus.app/home/api/",
+     "quote": "The Consensus API is now open to everyone. Calls are $0.05 each beyond the credits included in your plan (500 on Pro/Team/Enterprise, 2,000 on Deep) plus 1 additional credit per 100 papers."
+    }
+   ],
+   "blocker": [
+    {
+     "url": "https://consensus.app/home/api/",
+     "quote": "The Consensus API is now open to everyone."
+    }
+   ]
+  },
+  "unknown_reason": {
+   "api_type": "model_unsure",
+   "api_breadth": "model_unsure",
+   "existing_mcp": "model_unsure"
+  },
+  "id": 94,
+  "app": "Consensus",
+  "category": "AI, Research and Media-native",
+  "flags": [
+   "needs_human"
+  ],
+  "pass2_diff": null,
+  "meta": {
+   "pass": 1,
+   "run_id": "20260924T134629Z-d033a4",
+   "model": "nvidia/nemotron-3-super-120b-a12b:free",
+   "prompt_version": "p1-12ca05",
+   "updated_at": "2026-09-24T13:52:49Z"
+  }
+ }
+]
