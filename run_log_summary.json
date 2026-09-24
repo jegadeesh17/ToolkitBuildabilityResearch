@@ -1,0 +1,91 @@
+{
+ "total_cost_usd": 4.379817,
+ "llm_calls": 567,
+ "tool_calls": 1220,
+ "retries": 26,
+ "failures": 28,
+ "schema_invalid_rate": 0.1854,
+ "by_stage": {
+  "pass1": {
+   "cost_usd": 0.568521,
+   "llm_calls": 266,
+   "tool_calls": 1010,
+   "retries": 9,
+   "failures": 19
+  },
+  "pilot": {
+   "cost_usd": 0.022079,
+   "llm_calls": 48,
+   "tool_calls": 100,
+   "retries": 14,
+   "failures": 2
+  },
+  "verify": {
+   "cost_usd": 0.506055,
+   "llm_calls": 108,
+   "tool_calls": 0,
+   "retries": 0,
+   "failures": 0
+  },
+  "judge": {
+   "cost_usd": 3.14462,
+   "llm_calls": 102,
+   "tool_calls": 0,
+   "retries": 0,
+   "failures": 6
+  },
+  "reresearch": {
+   "cost_usd": 0.138542,
+   "llm_calls": 43,
+   "tool_calls": 110,
+   "retries": 3,
+   "failures": 1
+  }
+ },
+ "by_model": {
+  "qwen/qwen3.8-27b:free": {
+   "cost_usd": 0.0,
+   "llm_calls": 4,
+   "tool_calls": 0,
+   "retries": 12,
+   "failures": 4
+  },
+  "google/gemma-4-31b-it:free": {
+   "cost_usd": 0.0,
+   "llm_calls": 1,
+   "tool_calls": 0,
+   "retries": 3,
+   "failures": 1
+  },
+  "nvidia/nemotron-3-super-120b-a12b:free": {
+   "cost_usd": 0.0,
+   "llm_calls": 35,
+   "tool_calls": 0,
+   "retries": 8,
+   "failures": 0
+  },
+  "deepseek/deepseek-v4-flash": {
+   "cost_usd": 0.590599,
+   "llm_calls": 274,
+   "tool_calls": 0,
+   "retries": 0,
+   "failures": 16
+  },
+  "openai/gpt-5.6-luna": {
+   "cost_usd": 0.644597,
+   "llm_calls": 151,
+   "tool_calls": 0,
+   "retries": 0,
+   "failures": 0
+  },
+  "anthropic/claude-sonnet-5": {
+   "cost_usd": 3.14462,
+   "llm_calls": 102,
+   "tool_calls": 0,
+   "retries": 0,
+   "failures": 6
+  }
+ },
+ "pass1_run_id": "20260924T143612Z-929b15",
+ "final_run_id": "20260924T150032Z-15c3cf"
+}
