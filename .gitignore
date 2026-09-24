@@ -1,0 +1,20 @@
+.env
+.env.local
+venv/
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+# Brief is company-provided; keep out of the public repo
+docs/reference/ASSIGNMENT.md
+docs/reference/HANDOFF.md
+# Private working notes (process notes, not deliverables)
+docs/PROJECT_MENTAL_MODEL.md
+docs/PROJECT_STATUS.md
+# Large/raw run artefacts
+results/raw/
+test_env/
+.claude/settings.local.json
