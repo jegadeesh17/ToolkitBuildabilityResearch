@@ -72,6 +72,7 @@ def compute_patterns(rows: list[dict]) -> dict:
                 if r["verdict"] == "buildable_gated" and r["blocker"] in OUTREACH_BLOCKERS]
     ranking = blockers.most_common()
     top = ranking[0] if ranking else (None, 0)
+    takeaways = _takeaways(n, auth, access, mcp, ranking, by_category, easy, outreach, rows)
 
     def pct(k: int) -> float:
         return round(100 * k / n, 1) if n else 0.0
@@ -87,12 +88,65 @@ def compute_patterns(rows: list[dict]) -> dict:
                               "access": dict(c["access"])} for cat, c in by_category.items()},
         "easy_wins": sorted(easy, key=lambda x: x["app"].lower()),
         "needs_outreach": sorted(outreach, key=lambda x: x["app"].lower()),
+        "takeaways": takeaways,
         "headline": {"pct_buildable_now": pct(verdicts.get("buildable_now", 0)),
                      "pct_gated": pct(verdicts.get("buildable_gated", 0)),
                      "pct_blocked": pct(verdicts.get("blocked", 0)),
                      "pct_unknown": pct(verdicts.get("unknown", 0)),
                      "top_blocker": top[0], "top_blocker_n": top[1]},
     }
+
+
+def _takeaways(n, auth, access, mcp, ranking, by_category, easy, outreach, rows) -> dict[str, str]:
+    """One plain sentence per pattern, computed from the counts (never hand-written numbers)."""
+    known = [(k, v) for k, v in auth.most_common() if k != "unknown"]
+    both = sum(1 for r in rows if isinstance(r["auth_methods"], list)
+               and {"oauth2", "api_key"} <= set(r["auth_methods"]))
+    auth_s = (f"{AUTH_LABEL[known[0][0]]} ({known[0][1]}) and {AUTH_LABEL[known[1][0]]} ({known[1][1]}) dominate; "
+              f"{both} apps offer both.") if len(known) >= 2 else "Auth methods could not be established."
+    self_serve = access.get("self_serve_free", 0) + access.get("self_serve_trial", 0)
+    gated = sum(access.get(k, 0) for k in ("paid_plan_required", "admin_or_approval", "partner_or_sales"))
+    access_s = (f"{self_serve} of {n} apps let a developer get working credentials alone "
+                f"({access.get('self_serve_free', 0)} free, {access.get('self_serve_trial', 0)} on a trial); "
+                f"{gated} need a paid plan, an approval or a partner/sales route.")
+    cats = sorted(by_category.items(), key=lambda kv: kv[0])
+    open_cat = max(cats, key=lambda kv: (kv[1]["verdicts"]["buildable_now"], kv[0]))
+    gated_cat = max(cats, key=lambda kv: (kv[1]["verdicts"]["buildable_gated"] + kv[1]["verdicts"]["blocked"], kv[0]))
+    gated_n = gated_cat[1]["verdicts"]["buildable_gated"] + gated_cat[1]["verdicts"]["blocked"]
+    cat_s = (f"Most self-serve: {open_cat[0]} ({open_cat[1]['verdicts']['buildable_now']} of "
+             f"{len(open_cat[1]['apps'])} buildable now). Most gated: {gated_cat[0]} ({gated_n} of "
+             f"{len(gated_cat[1]['apps'])}).")
+    runner_up = (f", ahead of {BLOCKER_LABEL[ranking[1][0]].lower()} ({ranking[1][1]})."
+                 if len(ranking) > 1 else ".")
+    blocker_s = (f"{BLOCKER_LABEL[ranking[0][0]]} is the most common blocker ({ranking[0][1]} apps){runner_up}"
+                 if ranking else "No app has a blocker.")
+    none_found = mcp.get("none_found", 0)
+    mcp_s = (f"{mcp.get('official', 0)} apps already have an official MCP server and {mcp.get('third_party', 0)} a "
+             f"third-party one" + (f"; none was found for {none_found}." if none_found else "."))
+    wins_s = (f"{len(easy)} easy wins (buildable now with a moderate or broad API) versus {len(outreach)} that "
+              "need outreach (a partnership, approval or sales gate).")
+    return {"auth": auth_s, "access": access_s, "categories": cat_s, "blockers": blocker_s, "mcp": mcp_s,
+            "wins": wins_s}
+
+
+def human_verified(spot: dict | None, pass1: list[dict], final: list[dict]) -> dict | None:
+    """Agent verdicts vs verdicts a person confirmed by hand (spot check); 'can't tell' items are excluded."""
+    if not spot:
+        return None
+    p1 = {r["id"]: r["verdict"] for r in pass1}
+    p2 = {r["id"]: r["verdict"] for r in final}
+    items = []
+    for c in spot.get("checks") or []:
+        if c.get("judgement") not in ("correct", "wrong") or "id" not in c or not c.get("reference_verdict"):
+            continue
+        truth = c.get("corrected_verdict") or c["reference_verdict"]
+        items.append({"id": c["id"], "app": c["app"], "category": c.get("category"), "truth": truth,
+                      "pass1": p1.get(c["id"]), "pass2": p2.get(c["id"]),
+                      "ok1": p1.get(c["id"]) == truth, "ok2": p2.get(c["id"]) == truth})
+    if not items:
+        return None
+    return {"n": len(items), "pass1_correct": sum(i["ok1"] for i in items),
+            "pass2_correct": sum(i["ok2"] for i in items), "items": items}
 
 
 def grounding_stats(rows: list[dict]) -> dict | None:
@@ -143,7 +197,7 @@ def verification_block(scores: dict, pass1: list[dict], final: list[dict], sampl
                                     "misses", "calibration", "jaccard", "ground_truth_sha256") if k in rep}
     return {"status": "scored" if p1 else "pending_labels", "n_sample": len(sample_ids), "sample_ids": sample_ids,
             "labeller": labeller, "labeller_is_human": bool(labeller) and labeller.startswith("human"),
-            "spot_check": spot_summary(spot),
+            "spot_check": spot_summary(spot), "human_verified": human_verified(spot, pass1, final),
             "pass1": slim(p1), "pass2": slim(p2),
             "compare": {k: cmp_[k] for k in ("overall", "per_field", "fixed", "regressed", "tuned_on_sample", "n")
                         if k in cmp_} if cmp_ else None,

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-09-24T16:25:30Z",
+  "generated_at": "2026-09-24T16:37:33Z",
   "source": "pass2",
   "models": [
    "deepseek/deepseek-v4-flash | verify openai/gpt-5.6-luna | judge anthropic/claude-sonnet-5"
@@ -11218,6 +11218,14 @@
     "blocker": "sales_contact_only"
    }
   ],
+  "takeaways": {
+   "auth": "API key (76) and OAuth 2.0 (64) dominate; 45 apps offer both.",
+   "access": "74 of 100 apps let a developer get working credentials alone (59 free, 15 on a trial); 25 need a paid plan, an approval or a partner/sales route.",
+   "categories": "Most self-serve: Productivity and Project Management (9 of 10 buildable now). Most gated: Marketing, Ads, Email and Social (5 of 10).",
+   "blockers": "Paid plan required is the most common blocker (14 apps), ahead of approval or partnership (9).",
+   "mcp": "75 apps already have an official MCP server and 23 a third-party one.",
+   "wins": "69 easy wins (buildable now with a moderate or broad API) versus 10 that need outreach (a partnership, approval or sales gate)."
+  },
   "headline": {
    "pct_buildable_now": 73.0,
    "pct_gated": 26.0,
@@ -11340,6 +11348,113 @@
      "reference_verdict": "buildable_now",
      "judgement": "correct",
      "corrected_verdict": null
+    }
+   ]
+  },
+  "human_verified": {
+   "n": 10,
+   "pass1_correct": 6,
+   "pass2_correct": 8,
+   "items": [
+    {
+     "id": 1,
+     "app": "Salesforce",
+     "category": "CRM and Sales",
+     "truth": "buildable_now",
+     "pass1": "buildable_now",
+     "pass2": "buildable_now",
+     "ok1": true,
+     "ok2": true
+    },
+    {
+     "id": 14,
+     "app": "Front",
+     "category": "Support and Helpdesk",
+     "truth": "buildable_now",
+     "pass1": "buildable_now",
+     "pass2": "buildable_now",
+     "ok1": true,
+     "ok2": true
+    },
+    {
+     "id": 25,
+     "app": "Pumble",
+     "category": "Communications and Messaging",
+     "truth": "buildable_now",
+     "pass1": "unknown",
+     "pass2": "buildable_now",
+     "ok1": false,
+     "ok2": true
+    },
+    {
+     "id": 36,
+     "app": "Klaviyo",
+     "category": "Marketing, Ads, Email and Social",
+     "truth": "buildable_now",
+     "pass1": "buildable_now",
+     "pass2": "buildable_now",
+     "ok1": true,
+     "ok2": true
+    },
+    {
+     "id": 45,
+     "app": "Magento (Adobe Commerce)",
+     "category": "Ecommerce",
+     "truth": "buildable_gated",
+     "pass1": "unknown",
+     "pass2": "buildable_gated",
+     "ok1": false,
+     "ok2": true
+    },
+    {
+     "id": 59,
+     "app": "Waterfall.io",
+     "category": "Data, SEO and Scraping",
+     "truth": "buildable_gated",
+     "pass1": "buildable_gated",
+     "pass2": "buildable_gated",
+     "ok1": true,
+     "ok2": true
+    },
+    {
+     "id": 68,
+     "app": "MongoDB Atlas",
+     "category": "Developer, Infra and Data platforms",
+     "truth": "buildable_now",
+     "pass1": "unknown",
+     "pass2": "unknown",
+     "ok1": false,
+     "ok2": false
+    },
+    {
+     "id": 76,
+     "app": "Monday.com",
+     "category": "Productivity and Project Management",
+     "truth": "buildable_now",
+     "pass1": "buildable_now",
+     "pass2": "buildable_now",
+     "ok1": true,
+     "ok2": true
+    },
+    {
+     "id": 85,
+     "app": "iPayX",
+     "category": "Finance and Fintech",
+     "truth": "buildable_gated",
+     "pass1": "buildable_now",
+     "pass2": "buildable_now",
+     "ok1": false,
+     "ok2": false
+    },
+    {
+     "id": 99,
+     "app": "YouTube Transcript",
+     "category": "AI, Research and Media-native",
+     "truth": "buildable_now",
+     "pass1": "buildable_now",
+     "pass2": "buildable_now",
+     "ok1": true,
+     "ok2": true
     }
    ]
   },

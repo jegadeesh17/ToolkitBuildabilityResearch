@@ -178,3 +178,42 @@ def test_human_needed_box_matches_who_labelled(rows):
     human_html = render_html(build_results(rows, rows, "pass2", {}, [], splits, None, "human", None))
     box = human_html[human_html.index("Where a human was needed"):human_html.index('class="stats"')]
     assert "Labelling the 20-app sample blind" in box
+
+
+def test_takeaways_are_plainly_stated_up_top_and_on_cards(results):
+    t = results["patterns"]["takeaways"]
+    assert set(t) == {"auth", "access", "categories", "blockers", "mcp", "wins"}
+    html = render_html(results)
+    hero = html[html.index('id="result"'):html.index('id="patterns"')]
+    patterns = html[html.index('id="patterns"'):html.index('id="agent"')]
+    for k in ("auth", "categories", "blockers", "wins"):
+        assert t[k] in hero
+    for k in ("auth", "access", "blockers", "mcp", "categories", "wins"):
+        assert t[k] in patterns
+
+
+def test_human_verified_verdicts_are_the_headline_check(rows):
+    splits = {"seed": 20260924, "sample": load_split("sample")}
+    a, b = rows[0], rows[1]
+    spot = {"seed": 7, "checks": [
+        {"id": a["id"], "app": a["app"], "category": a["category"], "reference_verdict": a["verdict"],
+         "judgement": "correct"},
+        {"id": b["id"], "app": b["app"], "category": b["category"], "reference_verdict": "unknown_x",
+         "judgement": "wrong", "corrected_verdict": "blocked"},
+        {"id": 99, "app": "Z", "category": "C", "reference_verdict": "blocked", "judgement": "cant_tell"}]}
+    res = build_results(rows, rows, "pass2", {}, [], splits, None, "agent:x", spot)
+    hv = res["verification"]["human_verified"]
+    expected = 1 + (b["verdict"] == "blocked")
+    assert hv["n"] == 2 and hv["pass2_correct"] == expected
+    html = render_html(res)
+    hero = html[html.index('id="result"'):html.index('id="patterns"')]
+    assert f"{expected}/2 <small>→</small> {expected}/2" in hero and "Verdicts checked by hand" in hero
+    verif = html[html.index('id="verification"'):html.index('id="table"')]
+    assert "Verdicts checked by hand" in verif and a["app"] in verif
+
+
+def test_composio_sdk_and_new_limitations_are_stated(results):
+    html = render_html(results)
+    assert "Composio's search toolkit through its Python SDK" in html
+    assert "There is no browser-based verification loop" in html
+    assert "There is no hosted run button" in html

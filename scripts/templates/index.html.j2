@@ -86,6 +86,10 @@ section > h2{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.02e
 .passtag{display:inline-block;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;font-style:normal;color:var(--faint);border:1px solid var(--line);border-radius:2px;padding:0 5px;margin-left:8px;vertical-align:2px}
 .steps .pass2 .passtag{color:var(--gated);border-color:var(--gated)}
 .tile p.note{margin-top:10px;font-size:13px;color:var(--faint)}
+.findings{margin:-12px 0 8px;padding-left:20px;max-width:78ch}
+.findings li{margin:5px 0;color:var(--text)}
+.takeaway{color:var(--text);font-size:15px;margin:0 0 8px;max-width:72ch}
+.subhead{font-weight:500;font-size:19px;letter-spacing:-.01em;margin:30px 0 6px}
 .human{border:1px solid var(--hi);border-radius:2px;padding:14px 18px;margin-top:22px;max-width:760px}
 .human h3{color:var(--hi);font-weight:500;font-size:15px;margin:0 0 6px}
 .human ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
@@ -154,6 +158,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
   .matrix .dots .dot{width:12px;height:12px}
   .bars{grid-template-columns:1fr 3ch}.bars .label{grid-column:1/-1;margin-bottom:-4px}
   .acc{grid-template-columns:1fr 11ch}.acc .label{grid-column:1/-1;margin-bottom:-4px}
+  table.kv{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
   table.apps thead{display:none}
   table.apps,table.apps tbody,table.apps tr,table.apps td{display:block;width:100%}
   table.apps tr.app-row{border:1px solid var(--line);border-bottom:0;padding:8px 10px}
@@ -184,8 +189,20 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
 <section id="result" class="hero">
   <h1>{{ vc.buildable_now }} of {{ p.n }} SaaS apps could become an agent toolkit today.</h1>
   <p class="lede">A research agent read each app's own documentation and recorded how an AI agent would authenticate, how a developer gets credentials, and what stands in the way, with a verbatim quote behind every answer. {{ vc.buildable_gated }} more have a public API behind a paid plan, an approval or a sales call; {% if vc.blocked %}{{ vc.blocked }} {{ 'is' if vc.blocked == 1 else 'are' }} blocked{% else %}none is blocked outright{% endif %}{% if vc.unknown %}, and {{ vc.unknown }} could not be settled from the evidence{% endif %}.</p>
+  <ul class="findings">
+    <li>{{ p.takeaways.auth }}</li>
+    <li>{{ p.takeaways.categories }}</li>
+    <li>{{ p.takeaways.blockers }}</li>
+    <li>{{ p.takeaways.wins }}</li>
+  </ul>
   <div class="tiles">
     <div class="tile">
+      {% set hv = v.human_verified %}
+      {% if hv %}
+      <div class="mono" style="color:var(--faint)">Verdicts checked by hand, pass 1 → pass 2</div>
+      <div class="big num">{{ hv.pass1_correct }}/{{ hv.n }} <small>→</small> {{ hv.pass2_correct }}/{{ hv.n }}</div>
+      <p>A person confirmed the correct verdict for {{ hv.n }} apps, one per category, from the vendors' docs.{% if v.compare %} Across all 7 fields of the {{ v.n_sample }}-app sample, agreement with independent reference labels moved {{ v.compare.overall.pass1|pct }} → {{ v.compare.overall.pass2|pct }} (n={{ v.compare.n }}).{% endif %}</p>
+      {% else %}
       <div class="mono" style="color:var(--faint)">{{ "Accuracy" if v.labeller_is_human else "Agreement with reference" }}, pass 1 → pass 2</div>
       {% if v.compare %}
       <div class="big num">{{ v.compare.overall.pass1|pct }} <small>→</small> {{ v.compare.overall.pass2|pct }}</div>
@@ -196,6 +213,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
       {% else %}
       <div class="big">Pending</div>
       <p>Waiting for the reference labels of the {{ v.n_sample }}-app sample.</p>
+      {% endif %}
       {% endif %}
       <p class="note">Pass 1 is the agent's first answer; pass 2 is after its verification loops.</p>
     </div>
@@ -215,6 +233,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
 <section id="patterns">
   <h2>Patterns across the 100 apps</h2>
   <p class="lede">Every dot below is one app. Colours are always paired with a label or symbol; hover a dot for its name.</p>
+  <p class="takeaway">{{ p.takeaways.categories }}</p>
   <div class="matrix" role="list" aria-label="Verdict by category">
     {% for cat, c in p.by_category.items() %}
     <div class="cat" role="listitem">{{ cat }}</div>
@@ -230,6 +249,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
   <div class="cards">
     <div class="card">
       <h3>How agents would authenticate</h3>
+      <p class="takeaway">{{ p.takeaways.auth }}</p>
       <p class="sub">Auth methods the public APIs support. An app can offer several.</p>
       <div class="bars">
         {% for k, n in p.auth_counts.items() %}
@@ -242,6 +262,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
     </div>
     <div class="card">
       <h3>How a developer gets credentials</h3>
+      <p class="takeaway">{{ p.takeaways.access }}</p>
       <p class="sub">The access model decides whether an integration can start today.</p>
       <div class="bars">
         {% for k, n in p.access_counts.items() %}
@@ -254,6 +275,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
     </div>
     <div class="card">
       <h3>What stands in the way</h3>
+      <p class="takeaway">{{ p.takeaways.blockers }}</p>
       <p class="sub">The single primary blocker for every app that is not buildable now.</p>
       <div class="bars">
         {% for b in p.blocker_ranking %}
@@ -266,6 +288,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
     </div>
     <div class="card">
       <h3>Existing MCP servers</h3>
+      <p class="takeaway">{{ p.takeaways.mcp }}</p>
       <p class="sub">Whether someone has already published an MCP server for the app.</p>
       <div class="bars">
         {% for k, n in p.mcp_counts.items() %}
@@ -278,6 +301,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
     </div>
     <div class="card wide">
       <h3>Where to start, and who to call</h3>
+      <p class="takeaway">{{ p.takeaways.wins }}</p>
       <div class="split">
         <div>
           <p class="sub"><b class="num" style="color:var(--now)">{{ p.easy_wins|length }}</b> easy wins: buildable now, with a moderate or broad API.</p>
@@ -295,7 +319,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
 
 <section id="agent">
   <h2>How the agent works</h2>
-  <p class="lede">The agent works in two passes. <b>Pass 1</b> (steps 1–5) researches each app once and records its first answers. <b>Pass 2</b> (steps 6–8) re-checks those answers with a second model, a judge and targeted re-research, and records every change. Every model call and tool call is logged, costed and budget-capped.</p>
+  <p class="lede">The agent works in two passes. <b>Pass 1</b> (steps 1–5) researches each app once and records its first answers. <b>Pass 2</b> (steps 6–8) re-checks those answers with a second model, a judge and targeted re-research, and records every change. Search and page fetches run through Composio's search toolkit through its Python SDK; model calls go through OpenRouter. Every model call and tool call is logged, costed and budget-capped.</p>
   <ol class="steps">
     <li><b>Search <em class="passtag">Pass 1</em></b><span>Four query templates per app, top three results each.</span></li>
     <li><b>Fetch <em class="passtag">Pass 1</em></b><span>Up to six pages, official domains first, 20,000 characters each, saved as an evidence bundle.</span></li>
@@ -340,6 +364,17 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
   {% if v.spot_check %}
   <div class="human" style="border-color:var(--now);margin:0 0 28px"><h3 style="color:var(--now)">Checked by a person</h3>
     <ul><li>A person checked the reference verdict for {{ v.spot_check.n }} apps, one per category (seed {{ v.spot_check.seed }}): <b>{{ v.spot_check.correct }}</b> correct, <b>{{ v.spot_check.wrong }}</b> wrong, <b>{{ v.spot_check.cant_tell }}</b> could not tell from the source page.</li></ul></div>
+  {% endif %}
+  {% set hv = v.human_verified %}
+  {% if hv %}
+  <h3 class="subhead">Verdicts checked by hand</h3>
+  <p class="lede" style="margin-bottom:12px">A person opened the vendor's documentation for {{ hv.n }} apps, one per category, and confirmed the correct verdict. The agent's verdict was right for {{ hv.pass1_correct }} of {{ hv.n }} after pass 1 and {{ hv.pass2_correct }} of {{ hv.n }} after pass 2.</p>
+  <table class="kv">
+    <thead><tr><th>App</th><th>Category</th><th>Correct verdict (by hand)</th><th>Pass 1</th><th>Pass 2</th></tr></thead>
+    <tbody>{% for i in hv["items"] %}<tr><td>{{ i.app }}</td><td>{{ i.category }}</td><td>{{ VERDICT_LABEL.get(i.truth, i.truth) }}</td><td>{{ '✓' if i.ok1 else '✗' }} {{ VERDICT_LABEL.get(i.pass1, i.pass1) }}</td><td>{{ '✓' if i.ok2 else '✗' }} {{ VERDICT_LABEL.get(i.pass2, i.pass2) }}</td></tr>{% endfor %}</tbody>
+  </table>
+  <p class="foot mono">n={{ hv.n }} apps · one per category · seed {{ v.spot_check.seed }}</p>
+  <h3 class="subhead">All 7 fields, against the reference labels</h3>
   {% endif %}
   {% if v.pass1 %}
   <div class="acc">
@@ -475,6 +510,8 @@ pytest -q                     # offline tests, no keys needed</pre>
     <li>“Buildable now” means a developer can obtain credentials alone today. It does not check rate limits, terms of service in depth, or approval timelines.</li>
     <li>The free model named in the plan was unavailable (its provider rate-limited every call), so a different free model was piloted against the paid one; the paid model was chosen on schema validity and quote grounding.</li>
     <li>Pass 1 was re-run once on the same evidence after two fixes found on non-sample apps (answers without evidence, and empty replies from reasoning overruns); every row uses the same pipeline version.</li>
+    <li>There is no browser-based verification loop: checks run on fetched page text, so content that only appears after JavaScript runs can be missed.</li>
+    <li>There is no hosted run button, since it would expose API keys and spend credits; the agent runs from the repository with your own keys, as the README shows.</li>
     <li>This is an independent research submission. It is not affiliated with, or endorsed by, any of the companies whose products are listed.</li>
   </ul>
 </section>

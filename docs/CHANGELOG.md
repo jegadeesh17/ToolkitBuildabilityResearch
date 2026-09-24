@@ -24,6 +24,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `results/runs/run_log.jsonl`: the complete append-only run log (secret-scanned) behind every spend and call count.
 
 - `verification/ground_truth.json`: reference labels for the 20-app sample produced by an independent Gemini CLI agent (self-reported model "Gemini 3.8 Flash") working in a separate folder outside this repository, validated by `scripts/import_reference_labels.py`. **Deviation from SPEC §2.6**: the labels are not human; accuracy figures are reported as agreement with this reference. Agreement pass 1 → pass 2: 74.3% → 77.9% (n=140; fixed 11, regressed 6). No prompt or loop changed after scoring.
+- Human-verified verdict check on the page: the spot check confirmed the correct verdict for 10 apps (one per category); the agent's verdict matched for 6/10 after pass 1 and 8/10 after pass 2 (misses: MongoDB Atlas unknown, iPayX gated-vs-now). Pattern cards and the hero now state each finding in one computed sentence; the page names the Composio search toolkit and discloses the absence of a browser loop and of a hosted run button.
 - `scripts/gen_spot_check.py` → `verification/spot_check.html`: guided human check of the reference verdict for one sample app per category (seed 20260925).
 - `scripts/build_site.py`, `scripts/templates/index.html.j2`, `scripts/qa_site.py`: the single-page report and its browser QA.
 
