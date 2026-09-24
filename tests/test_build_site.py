@@ -156,3 +156,25 @@ def test_agent_reference_labels_are_disclosed(rows):
     assert "not verified accuracy" in html
     assert "<b>8</b> correct, <b>1</b> wrong, <b>1</b> could not tell" in html
     assert res["verification"]["labeller_is_human"] is False
+
+
+def test_pass1_and_pass2_are_defined_for_new_readers(results):
+    html = render_html(results)
+    agent = html[html.index('id="agent"'):html.index('id="verification"')]
+    assert "<b>Pass 1</b> (steps 1–5)" in agent and "<b>Pass 2</b> (steps 6–8)" in agent
+    assert agent.count('class="passtag">Pass 1<') == 5 and agent.count('class="passtag">Pass 2<') == 3
+    hero = html[html.index('id="result"'):html.index('id="patterns"')]
+    assert "Pass 1 is the agent's first answer; pass 2 is after its verification loops" in hero
+    verif = html[html.index('id="verification"'):html.index('id="table"')]
+    assert "Pass 1 is the agent's first answer" in verif
+
+
+def test_human_needed_box_matches_who_labelled(rows):
+    splits = {"seed": 20260924, "sample": load_split("sample")}
+    spot = {"seed": 7, "checks": [{"judgement": "correct"}] * 10}
+    agent_html = render_html(build_results(rows, rows, "pass2", {}, [], splits, None, "agent:gemini-cli (x)", spot))
+    box = agent_html[agent_html.index("Where a human was needed"):agent_html.index('class="stats"')]
+    assert "Labelling the 20-app sample blind" not in box and "Spot-checking" in box
+    human_html = render_html(build_results(rows, rows, "pass2", {}, [], splits, None, "human", None))
+    box = human_html[human_html.index("Where a human was needed"):human_html.index('class="stats"')]
+    assert "Labelling the 20-app sample blind" in box

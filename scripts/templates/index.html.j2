@@ -83,12 +83,15 @@ section > h2{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.02e
 .steps b{font-weight:500;display:block;margin-bottom:4px}
 .steps span{color:var(--muted);font-size:14px}
 .steps .pass2 b{color:var(--gated)}
+.passtag{display:inline-block;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;font-style:normal;color:var(--faint);border:1px solid var(--line);border-radius:2px;padding:0 5px;margin-left:8px;vertical-align:2px}
+.steps .pass2 .passtag{color:var(--gated);border-color:var(--gated)}
+.tile p.note{margin-top:10px;font-size:13px;color:var(--faint)}
 .human{border:1px solid var(--hi);border-radius:2px;padding:14px 18px;margin-top:22px;max-width:760px}
 .human h3{color:var(--hi);font-weight:500;font-size:15px;margin:0 0 6px}
 .human ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);margin-top:22px}
-.stats div{padding:16px 18px;border-right:1px solid var(--line)}
-.stats div:last-child{border-right:0}
+.stats > div{padding:16px 18px;border-right:1px solid var(--line)}
+.stats > div:last-child{border-right:0}
 .stats .v{font-size:24px;font-weight:300;letter-spacing:-.02em;margin-top:6px}
 .kv{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
 .kv th,.kv td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);font-weight:400}
@@ -145,7 +148,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
 @media (max-width:768px){
   section{padding:40px 16px}.top .frame{padding:12px 16px}
   .tiles,.cards,.split,.stats{grid-template-columns:1fr}
-  .tile,.card,.stats div{border-right:0;border-bottom:1px solid var(--line)}
+  .tile,.card,.stats > div{border-right:0;border-bottom:1px solid var(--line)}
   .steps{grid-template-columns:1fr 1fr}.steps li:nth-child(2n){border-right:0}
   .matrix{grid-template-columns:1fr auto}.matrix .cat{grid-column:1/-1;margin-bottom:-6px}
   .matrix .dots .dot{width:12px;height:12px}
@@ -194,6 +197,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
       <div class="big">Pending</div>
       <p>Waiting for the reference labels of the {{ v.n_sample }}-app sample.</p>
       {% endif %}
+      <p class="note">Pass 1 is the agent's first answer; pass 2 is after its verification loops.</p>
     </div>
     <div class="tile">
       <div class="mono" style="color:var(--faint)">Buildable now</div>
@@ -291,21 +295,22 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
 
 <section id="agent">
   <h2>How the agent works</h2>
-  <p class="lede">A fixed first pass researches every app, then verification loops re-check the answers. Every model call and tool call is logged, costed and budget-capped.</p>
+  <p class="lede">The agent works in two passes. <b>Pass 1</b> (steps 1–5) researches each app once and records its first answers. <b>Pass 2</b> (steps 6–8) re-checks those answers with a second model, a judge and targeted re-research, and records every change. Every model call and tool call is logged, costed and budget-capped.</p>
   <ol class="steps">
-    <li><b>Search</b><span>Four query templates per app, top three results each.</span></li>
-    <li><b>Fetch</b><span>Up to six pages, official domains first, 20,000 characters each, saved as an evidence bundle.</span></li>
-    <li><b>Extract</b><span>One schema-bound call answers every field from the pages only, with a verbatim quote per answer.</span></li>
-    <li><b>Validate</b><span>Schema, four consistency rules and up to two repair calls; no evidence means “unknown”.</span></li>
-    <li><b>Check quotes</b><span>Every quote must appear on the page it cites (whitespace, case and punctuation normalised).</span></li>
-    <li class="pass2"><b>Second model</b><span>A model from a different family answers again from the same pages.</span></li>
-    <li class="pass2"><b>Judge</b><span>A stronger model settles only the fields that disagree, fail the quote check or break a rule.</span></li>
-    <li class="pass2"><b>Re-research</b><span>Unresolved fields get at most five more tool calls for new pages, then a fresh quote check.</span></li>
+    <li><b>Search <em class="passtag">Pass 1</em></b><span>Four query templates per app, top three results each.</span></li>
+    <li><b>Fetch <em class="passtag">Pass 1</em></b><span>Up to six pages, official domains first, 20,000 characters each, saved as an evidence bundle.</span></li>
+    <li><b>Extract <em class="passtag">Pass 1</em></b><span>One schema-bound call answers every field from the pages only, with a verbatim quote per answer.</span></li>
+    <li><b>Validate <em class="passtag">Pass 1</em></b><span>Schema, four consistency rules and up to two repair calls; no evidence means “unknown”.</span></li>
+    <li><b>Check quotes <em class="passtag">Pass 1</em></b><span>Every quote must appear on the page it cites (whitespace, case and punctuation normalised).</span></li>
+    <li class="pass2"><b>Second model <em class="passtag">Pass 2</em></b><span>A model from a different family answers again from the same pages.</span></li>
+    <li class="pass2"><b>Judge <em class="passtag">Pass 2</em></b><span>A stronger model settles only the fields that disagree, fail the quote check or break a rule.</span></li>
+    <li class="pass2"><b>Re-research <em class="passtag">Pass 2</em></b><span>Unresolved fields get at most five more tool calls for new pages, then a fresh quote check.</span></li>
   </ol>
   <div class="human">
     <h3>Where a human was needed</h3>
     <ul>
-      <li>Labelling the {{ v.n_sample }}-app sample blind, before seeing any agent output, to measure accuracy honestly.</li>
+      {% if v.labeller_is_human or not v.labeller %}<li>Labelling the {{ v.n_sample }}-app sample blind, before seeing any agent output, to measure accuracy honestly.</li>
+      {% else %}<li>Spot-checking the reference verdicts that an independent AI agent produced for the {{ v.n_sample }}-app sample{% if v.spot_check %} ({{ v.spot_check.n }} apps, one per category){% endif %}; hand-labelling all {{ v.n_sample * 7 }} fields did not fit the time available.</li>{% endif %}
       <li>{{ v.needs_human|length }} app{{ '' if v.needs_human|length == 1 else 's' }} still flagged “needs human” after pass 2{% if v.needs_human %}: {{ v.needs_human|map(attribute='app')|join(', ') }}{% endif %}.</li>
       <li>Issuing API keys with the right permissions, reconciling spend with the provider, and approving every push.</li>
     </ul>
@@ -331,6 +336,7 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
   {% else %}
   <p class="lede">{{ v.n_sample }} randomly drawn apps (two per category) were labelled from the vendors' own documentation by an independent AI research agent, {{ v.labeller.replace('agent:', '') }}, a different model family from every model in the pipeline, working in a separate folder with no access to the pipeline or its answers. The numbers below measure agreement with those reference labels, not verified accuracy. The same labels score pass 1 and pass 2; unknown answers count as wrong.</p>
   {% endif %}
+  <p class="lede" style="margin-top:-18px">Pass 1 is the agent's first answer; pass 2 is after its verification loops (see <a href="#agent">how the agent works</a>).</p>
   {% if v.spot_check %}
   <div class="human" style="border-color:var(--now);margin:0 0 28px"><h3 style="color:var(--now)">Checked by a person</h3>
     <ul><li>A person checked the reference verdict for {{ v.spot_check.n }} apps, one per category (seed {{ v.spot_check.seed }}): <b>{{ v.spot_check.correct }}</b> correct, <b>{{ v.spot_check.wrong }}</b> wrong, <b>{{ v.spot_check.cant_tell }}</b> could not tell from the source page.</li></ul></div>

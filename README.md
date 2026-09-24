@@ -1,6 +1,6 @@
 # Toolkit Buildability Research
 
-Which of 100 SaaS apps could become an AI-agent toolkit today? This repository holds a research agent that reads each app's own documentation, records how an agent would authenticate, how a developer gets credentials, what API exists and what blocks it — with a verbatim quote behind every answer — then re-checks its answers with verification loops and measures its accuracy against a blind, human-labelled sample.
+Which of 100 SaaS apps could become an AI-agent toolkit today? This repository holds a research agent that reads each app's own documentation, records how an agent would authenticate, how a developer gets credentials, what API exists and what blocks it — with a verbatim quote behind every answer — then re-checks its answers with verification loops and measures its agreement with blind reference labels for a 20-app sample (produced by an independent AI agent and spot-checked by a person).
 
 The findings ship as one static page (`site/index.html`) plus the data behind every number (`site/results.json`).
 
@@ -20,7 +20,7 @@ data/apps.json (100 apps, 10 categories)
   │    · L3 judge on disputed fields only · L4 re-research (≤5 tool calls)
   │    → results/pass2.json (every change recorded in pass2_diff)
   │
-  ├─ SCORING agent/score.py vs verification/ground_truth.json (blind human labels, 20 apps)
+  ├─ SCORING agent/score.py vs verification/ground_truth.json (blind reference labels, 20 apps)
   │
   └─ PAGE    scripts/build_site.py → site/index.html + site/results.json
 ```
