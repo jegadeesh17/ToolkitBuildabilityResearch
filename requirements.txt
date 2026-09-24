@@ -1,0 +1,13 @@
+# Python 3.13. Direct dependencies, pinned to the versions tested.
+pydantic==2.13.5
+httpx==0.28.1
+tenacity==9.1.4
+composio==0.23.0
+Jinja2==3.1.6
+python-dotenv==1.2.3
+
+# Tests / QA / lint
+pytest==9.1.1
+pytest-asyncio==1.4.0
+playwright==1.63.0
+ruff==0.16.8

@@ -1,20 +1,40 @@
+# Secrets
 .env
 .env.local
+.env.*
+!.env.example
+
+# Python
 venv/
 .venv/
+test_env/
 __pycache__/
-*.pyc
-node_modules/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Tool caches
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# OS / editor
 .DS_Store
 Thumbs.db
+node_modules/
+
 # Brief is company-provided; keep out of the public repo
 docs/reference/ASSIGNMENT.md
 docs/reference/HANDOFF.md
 # Private working notes (process notes, not deliverables)
 docs/PROJECT_MENTAL_MODEL.md
 docs/PROJECT_STATUS.md
-# Large/raw run artefacts
+
+# Large/raw run artefacts (prompts, responses, evidence bundles)
 results/raw/
-test_env/
+
+# Claude Code: per-user settings stay local; shared settings.json + hooks are committed
 .claude/settings.local.json

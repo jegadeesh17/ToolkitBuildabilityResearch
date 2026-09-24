@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/stop_hook.py\"",
+            "timeout": 330,
+            "statusMessage": "Running test suite (stop hook)..."
+          }
+        ]
+      }
+    ]
+  }
+}
