@@ -66,3 +66,15 @@ def test_apply_grounding_sets_and_clears_flag(make_row, make_bundle):
     assert Flag.GROUNDING_FAILED in apply_grounding(bad, ground_row(bad, make_bundle([]))).flags
     good = make_row(flags=["grounding_failed"], evidence={})
     assert Flag.GROUNDING_FAILED not in apply_grounding(good, ground_row(good, make_bundle([]))).flags
+
+
+
+def test_escaped_newlines_and_html_breaks_are_whitespace():
+    page = "| Accounts | |\n| Application | |\n- Invite User To Workspace\n- Get User"
+    assert normalize(r"| Accounts | |\n| Application | |") in normalize(page)
+    assert normalize("- Invite User To Workspace<br>- Get User") in normalize(page)
+    assert normalize("a<br/>b <p>c</p>") == "a b c"
+
+
+def test_changed_word_still_fails():
+    assert normalize("no paid tier or per-call fee") not in normalize("no paid tier, no per-call fee")

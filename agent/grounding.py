@@ -13,12 +13,14 @@ from urllib.parse import urlsplit, urlunsplit
 from agent.schema import AppResult, EvidenceBundle, Extraction, Flag
 
 _MD_LINK = re.compile(r"\]\([^)]*\)")
+_HTML_TAG = re.compile(r"<[^<>]{1,40}>")  # <br>, <br/>, <p> … are layout, not words
+_ESCAPED_WS = re.compile(r"\\[nrt]")  # a literal backslash-n typed by the model for a line break
 _NON_WORD = re.compile(r"[\W_]+")
 
 
 def normalize(text: str) -> str:
     t = unicodedata.normalize("NFKC", text or "")
-    t = _MD_LINK.sub("]", t).casefold()
+    t = _ESCAPED_WS.sub(" ", _HTML_TAG.sub(" ", _MD_LINK.sub("]", t))).casefold()
     return " ".join(_NON_WORD.sub(" ", t).split())
 
 
