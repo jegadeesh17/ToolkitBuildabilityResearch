@@ -143,3 +143,16 @@ def fake_llm():
 @pytest.fixture
 def fake_tools():
     return FakeTools
+
+
+@pytest.fixture
+def make_label():
+    from agent.schema import GroundTruthLabel
+
+    def _make(**over) -> GroundTruthLabel:
+        d = dict(id=1, app="X", auth_methods=["oauth2"], access_model="self_serve_free", api_type=["rest"],
+                 api_breadth="broad", existing_mcp="official", verdict="buildable_now", blocker="none",
+                 source_url="https://ex.com")
+        d.update(over)
+        return GroundTruthLabel.model_validate(d)
+    return _make
