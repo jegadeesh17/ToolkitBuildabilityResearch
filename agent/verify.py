@@ -64,6 +64,8 @@ CONFIDENCE = {"agree": 0.9, "judge": 0.7, "grounded_only": 0.7, "reresearch": 0.
 MAX_RERESEARCH_TOOL_CALLS = 5
 RERESEARCH_QUERIES = 2
 RERESEARCH_FETCHES = 3
+JUDGE_PAGE_CHARS = 12_000  # judge sees only cited pages, each capped (cost control)
+JUDGE_MAX_TOKENS = 2000
 RULE_FIELDS = {1: ("api_type", "verdict"), 2: ("verdict", "blocker", "access_model"),
                3: ("access_model", "verdict"), 4: ("blocker", "verdict")}
 
@@ -181,10 +183,16 @@ async def judge_fields(app: AppSeed, bundle: EvidenceBundle, row: AppResult, ext
         return {"value": plain(getattr(src, f)), "evidence": [e.model_dump() for e in src.evidence.get(f, [])]}
     disputes = {f: {"candidate_A": candidate(row, f), "candidate_B": candidate(ext2, f),
                     "definition": FIELD_DEFINITIONS[f]} for f in fields}
-    user = (render_user_message(app, bundle) + "\n\nDecide these fields (candidates may be wrong or ungrounded):\n"
+    cited = {canonical_url(e.url) for src in (row, ext2) if src is not None for f in fields
+             for e in src.evidence.get(f, [])}
+    pages = [p for p in usable_pages(bundle)
+             if canonical_url(p.url) in cited or (p.final_url and canonical_url(p.final_url) in cited)]
+    judge_view = bundle.model_copy(update={"pages": pages or usable_pages(bundle)[:2]})
+    user = (render_user_message(app, judge_view, max_chars=JUDGE_PAGE_CHARS)
+            + "\n\nDecide these fields (candidates may be wrong or ungrounded):\n"
             + json.dumps(disputes, ensure_ascii=False, indent=1))
     data = await _ask_json(ctx, app=app, system=ctx.judge.text, user=user, model=ctx.judge_model, stage="judge",
-                           prompt_version=ctx.judge.version, max_tokens=4000)
+                           prompt_version=ctx.judge.version, max_tokens=JUDGE_MAX_TOKENS)
     decided = data.get("fields") if isinstance(data, dict) else None
     out: dict[str, FieldResult | None] = {}
     for f in fields:

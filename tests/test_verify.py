@@ -242,3 +242,21 @@ def test_cli_budget_stop_exit_4_and_resume(tmp_path, pass1_file, verify_env, mon
     llm = ScriptedLLM({"verify": [VALID, VALID]})
     assert main(["--input", str(pass1_file), "--output", str(out), "--resume"], clients_factory=factory_with(llm)) == 0
     assert len(json.loads(out.read_text(encoding="utf-8"))) == 2
+
+
+
+async def test_judge_sees_only_cited_pages(make_row, make_bundle, run_logger):
+    other = "https://pipe.com/blog/unrelated"
+    seen = {}
+
+    class Spy(ScriptedLLM):
+        async def chat(self, **kw):
+            if kw["stage"] == "judge":
+                seen["user"] = kw["messages"][1]["content"]
+                seen["max_tokens"] = kw["max_tokens"]
+            return await super().chat(**kw)
+    llm = Spy({"verify": [reply(api_breadth="moderate")],
+               "judge": [judge_reply(api_breadth=("moderate", DOC, BREADTH_QUOTE))]})
+    b = make_bundle([(DOC, PAGE_TEXT), (other, "Unrelated blog post text. " * 40)])
+    await verify_row(p1_row(make_row), b, APP, ctx(llm, FakeTools(), run_logger))
+    assert DOC in seen["user"] and other not in seen["user"] and seen["max_tokens"] <= 2000
