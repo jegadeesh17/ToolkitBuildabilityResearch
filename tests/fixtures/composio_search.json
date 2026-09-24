@@ -1,0 +1,48 @@
+{
+ "answer": "Close provides two primary authentication methods for its REST API: API Keys and OAuth 2.0 [1][2].\n\nAPI Keys are intended for internal tools, scripts, and server-side integrations [3][1]. They use HTTP Basic authentication, where the API key serves as the username and the password is left empty [3][1]. You can generate and manage these keys in your account under Settings, Developer, API Keys [3][2].\n\n```bash\ncurl https://api.close.com/api/v1/me/ -u yourapikey:\n```\n\nOAuth 2.0 is recommended for user-facing integrations [1][2]. It uses the authorization code flow, requiring you to register an OAuth app in your Close settings to obtain a Client ID and Client Secret [4][5][2].",
+ "citations": [
+  {
+   "id": "https://developer.close.com/api/overview.md",
+   "title": "API Overview",
+   "url": "https://developer.close.com/api/overview.md"
+  },
+  {
+   "id": "https://docs.nexla.com/user-guides/connectors/close_com_api",
+   "image": "https://docs.nexla.com/img/logo_header.svg",
+   "title": "Close | Nexla Docs",
+   "url": "https://docs.nexla.com/user-guides/connectors/close_com_api"
+  },
+  {
+   "id": "https://developer.close.com/topics/authentication",
+   "title": "Authentication with API keys",
+   "url": "https://developer.close.com/topics/authentication"
+  },
+  {
+   "id": "https://developer.close.com/llms.txt",
+   "title": "Close | Developer API Documentation",
+   "url": "https://developer.close.com/llms.txt"
+  },
+  {
+   "id": "https://apis.io/security/close/close-authentication/",
+   "image": "https://apis.io/assets/branding/apisio-social-card.png",
+   "title": "Close Authentication | APIs.io Security",
+   "url": "https://apis.io/security/close/close-authentication/"
+  },
+  {
+   "id": "https://developer.close.com/api/resources/activities/list.md",
+   "title": "",
+   "url": "https://developer.close.com/api/resources/activities/list.md"
+  },
+  {
+   "id": "https://developer.close.com/api/resources/leads/list.md",
+   "title": "",
+   "url": "https://developer.close.com/api/resources/leads/list.md"
+  },
+  {
+   "id": "https://help.close.com/docs/mcp-server",
+   "image": "https://close-prd-help-docs.s3.us-west-2.amazonaws.com/integrations/close-mcp-server/mcp-server/ai_agent_connector_diagram_d9d2aa.png",
+   "title": "Close MCP Server",
+   "url": "https://help.close.com/docs/mcp-server"
+  }
+ ]
+}

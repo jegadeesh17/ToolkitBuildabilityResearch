@@ -1,0 +1,20 @@
+{
+ "composio_execution_message": null,
+ "requestId": "d8af0e4e50204e1bf53682fb9bf2f07d",
+ "results": [
+  {
+   "author": null,
+   "id": "https://developer.close.com/topics/authentication",
+   "text": "> For a complete page index, fetch https://developer.close.com/llms.txt\n\n# Authentication with API keys\n\nAPI keys are best used for scripts and simple integrations that are internal to\nyour organization. Alternatively, see Authentication with OAuth\ninstead.\n\n## Getting an API key\n\nAPI keys can be created and managed in your Close account under Settings → Developer → API Keys.\n\nAPI keys are scoped to a particular user/organization combination and can be generated and deleted in the Settings page. See API Keys & OAuth for more information.\n\n## Perform API calls with API key\n\nAPI keys use\nHTTP Basic client side authentication.\nBasic authentication is a simple authentication scheme built into the HTTP\nprotocol. To use it, send your HTTP requests with an Authorization header that\ncontains the word Basic followed by a space and a base64-encoded string composed\nof an api key followed by a colon. The API key acts as the username and the\npassword is always empty.\n\n### cURL example\n\nExample cURL request with an api key.\n\n```bash\ncurl https://api.close.com/api/v1/me/ -u yourapikey:\n\n```\n\nNotice the ':' at the end of the api key. This is used because the key is sent\nas the username with a blank password.\n\n```\nGET /api/v1/me/ HTTP/1.1\nAuthorization: Basic eW91cmFwaWtleTo=\nHost: api.close.com\n\n```\n\nThis results in the header `Authorization: Basic eW91cmFwaWtleTo=` sent with the\nrequest as base64-encoded string `yourapikey:` is `eW91cmFwaWtleTo=`\n\nAPI Base URL: `https://api.close.com/api/v1`",
+   "title": "Authentication with API keys",
+   "url": "https://developer.close.com/topics/authentication"
+  }
+ ],
+ "statuses": [
+  {
+   "id": "https://developer.close.com/topics/authentication",
+   "source": "cached",
+   "status": "success"
+  }
+ ]
+}

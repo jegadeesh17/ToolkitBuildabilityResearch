@@ -38,8 +38,10 @@ Candidate models (prices $/M tokens in/out, OpenRouter catalogue 2026-09-24, not
 | Auth | `COMPOSIO_API_KEY`; dedicated project, **no connected accounts** | per SPEC |
 | Toolkit | `composio_search` (no auth), toolkit version `20260903_00` | **Verified** via `tools.get_raw_composio_tools(toolkits=["composio_search"])`, 2026-09-24 18:36 IST |
 | Tool slugs (allowlist) | `COMPOSIO_SEARCH_WEB` (`query`), `COMPOSIO_SEARCH_DUCK_DUCK_GO` (`query`, `start`), `COMPOSIO_SEARCH_FETCH_URL_CONTENT` (`urls[]` required; `text` bool default true; `max_characters`; `summary`; `extras`) | **Verified** (metadata listing). Fetch rejects images/PDFs/binaries per its schema |
-| Call signature / `user_id` | `client.tools.execute(slug, arguments, user_id="default", version="20260903_00")` | SDK 0.23 signature verified by inspection. **Execute returned 403**: the key lacked the `tool_execution` write permission, so Composio keys DO have per-key permissions. Needs a key with `tool_execution` access |
-| Rate limit | assumed ≈1–2 req/s | *UNVERIFIED*: measure during the pilot |
+| Call signature / `user_id` | `client.tools.execute(slug, arguments, user_id="default", version="20260903_00")` → dict `{data, error, successful}` | **Verified by live call 2026-09-24 ~18:55 IST** after the key was re-issued with `tool_execution` write access (the first key returned 403: Composio keys DO have per-key permissions) |
+| Response: `COMPOSIO_SEARCH_WEB` | `data = {answer: str (AI-generated summary), citations: [{id, title, url, image?}]}` | Verified; ~3.2 s. The pipeline uses citation URLs only; the generated `answer` is never evidence |
+| Response: `COMPOSIO_SEARCH_FETCH_URL_CONTENT` | `data = {requestId, results: [{id, url, title, text, author}], statuses: [{id, status, source}]}`; `text` is markdown | Verified; ~1.7 s per URL |
+| Rate limit | assumed ≈1–2 req/s; client throttles to ≥0.6 s between calls | *UNVERIFIED*: measure during the pilot |
 
 Allowlist rule: `tools.py` rejects any slug not listed in this section.
 
