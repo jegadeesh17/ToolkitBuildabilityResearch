@@ -67,3 +67,13 @@ def test_tools_optional_when_not_needed():
 def test_llm_optional_when_not_needed():
     env = {k: v for k, v in GOOD.items() if k not in ("OPENROUTER_API_KEY", "PASS1_MODEL")}
     assert load_settings(env=env, need_llm=False).openrouter_api_key is None
+
+
+def test_network_is_blocked_in_tests():  # Review Focus #2
+    import socket
+    s = socket.socket()
+    try:
+        with pytest.raises(RuntimeError, match="offline test"):
+            s.connect(("93.184.216.34", 80))
+    finally:
+        s.close()

@@ -11,9 +11,15 @@ def _offline(monkeypatch, request, tmp_path):
         monkeypatch.delenv(var, raising=False)
     monkeypatch.setenv("TBR_DOTENV_PATH", str(tmp_path / "no.env"))
     if "browser" not in request.keywords:
-        def _blocked(*args, **kwargs):
+        real_connect = socket.socket.connect
+
+        def _guarded(sock, address, *args, **kwargs):
+            # Loopback is allowed: the Windows asyncio event loop uses a local socketpair internally.
+            host = address[0] if isinstance(address, tuple) else address
+            if host in ("127.0.0.1", "::1", "localhost"):
+                return real_connect(sock, address, *args, **kwargs)
             raise RuntimeError("network access attempted in an offline test")
-        monkeypatch.setattr(socket.socket, "connect", _blocked)
+        monkeypatch.setattr(socket.socket, "connect", _guarded)
     # Run log and raw payloads never land in the repo during tests.
     import agent.config as config
     monkeypatch.setattr(config, "RUN_LOG", tmp_path / "runs" / "run_log.jsonl")
