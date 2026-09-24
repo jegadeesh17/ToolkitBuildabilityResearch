@@ -38,3 +38,6 @@ results/raw/
 
 # Claude Code: per-user settings stay local; shared settings.json + hooks are committed
 .claude/settings.local.json
+
+# Local smoke-test output (not a deliverable)
+results/smoke.json
