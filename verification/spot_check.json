@@ -1,0 +1,88 @@
+{
+ "created_at": "2026-09-24T16:09:19.855Z",
+ "checker": "human",
+ "seed": 20260925,
+ "labeller": "agent:gemini-cli (Gemini 3.8 Flash)",
+ "checks": [
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "category": "CRM and Sales",
+   "reference_verdict": "buildable_now",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "category": "Support and Helpdesk",
+   "reference_verdict": "buildable_now",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "category": "Communications and Messaging",
+   "reference_verdict": "buildable_now",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "category": "Marketing, Ads, Email and Social",
+   "reference_verdict": "buildable_now",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "category": "Ecommerce",
+   "reference_verdict": "buildable_gated",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "category": "Data, SEO and Scraping",
+   "reference_verdict": "buildable_gated",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "category": "Developer, Infra and Data platforms",
+   "reference_verdict": "buildable_now",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "category": "Productivity and Project Management",
+   "reference_verdict": "buildable_now",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "category": "Finance and Fintech",
+   "reference_verdict": "buildable_gated",
+   "judgement": "correct",
+   "corrected_verdict": null
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "category": "AI, Research and Media-native",
+   "reference_verdict": "buildable_now",
+   "judgement": "correct",
+   "corrected_verdict": null
+  }
+ ]
+}

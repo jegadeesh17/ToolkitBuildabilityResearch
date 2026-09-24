@@ -152,6 +152,7 @@ def test_agent_reference_labels_are_disclosed(rows):
     spot = {"seed": 7, "checks": [{"judgement": "correct"}] * 8 + [{"judgement": "wrong"}, {"judgement": "cant_tell"}]}
     res = build_results(rows, rows, "pass2", {}, [], splits, None, "agent:gemini-cli (pro)", spot)
     html = render_html(res)
-    assert "independent AI research agent (gemini-cli (pro))" in html and "not verified accuracy" in html
+    assert "independent AI research agent, gemini-cli (pro), a different model family" in html
+    assert "not verified accuracy" in html
     assert "<b>8</b> correct, <b>1</b> wrong, <b>1</b> could not tell" in html
     assert res["verification"]["labeller_is_human"] is False

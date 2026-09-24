@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verdict spot check</title>
+<style>
+body{margin:0;background:#0b0b0c;color:#f2f2f2;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+h1{font-weight:500;font-size:24px;margin:0 0 8px}p.lede{color:rgba(255,255,255,.75);margin:0 0 14px}
+.defs{border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:12px 16px;margin:0 0 22px;color:rgba(255,255,255,.8);font-size:15px}
+.defs b{color:#fff}
+.card{border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:16px 18px;margin:0 0 14px}
+.card.done{border-color:rgba(52,211,153,.6)}
+.card h2{font-size:18px;font-weight:600;margin:0}.meta{color:rgba(255,255,255,.65);font-size:14px;margin:2px 0 10px}
+.v{display:inline-block;border:1px solid #60a5fa;color:#60a5fa;border-radius:2px;padding:1px 8px;font-size:14px}
+blockquote{margin:10px 0;padding:8px 12px;border-left:3px solid rgba(255,255,255,.25);color:#fff}
+a{color:#60a5fa;word-break:break-all}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button{background:transparent;color:#f2f2f2;border:1px solid rgba(255,255,255,.3);border-radius:3px;padding:7px 12px;font:inherit;cursor:pointer}
+button[aria-pressed=true]{background:#fff;color:#000;border-color:#fff}
+select{background:#111;color:#fff;border:1px solid rgba(255,255,255,.3);padding:6px;margin-left:8px}
+.bar{position:sticky;top:0;background:#0b0b0c;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:16px;display:flex;gap:14px;align-items:center}
+#export{background:#fff;color:#000;border:0;font-weight:600}#export[disabled]{opacity:.35;cursor:not-allowed}
+</style></head><body><main>
+<h1>Verdict spot check</h1>
+<p class="lede">An AI agent researched these apps on its own. For each one, open the link, read the quoted sentence, and say whether the agent's verdict is right. About 1–2 minutes per app. Your answers save automatically in this browser.</p>
+<div class="defs"><b>Buildable now</b>: the app has a public API and a developer can get working credentials alone, free or on a trial.<br>
+<b>Gated</b>: there is a public API, but you need a paid plan, an approval, a partnership or a sales call first.<br>
+<b>Blocked</b>: no public API, read-only, or the terms forbid automation.<br>
+<b>Can't tell</b>: pick this if the page doesn't let you decide in two minutes. That's a valid answer.</div>
+<div class="bar"><span id="progress">0 of 0 answered</span><button id="export" disabled>Export spot_check.json</button></div>
+<div id="cards"></div>
+</main>
+<script type="application/json" id="cfg">{"items": [{"id": 1, "app": "Salesforce", "category": "CRM and Sales", "verdict": "buildable_now", "reason": "Salesforce provides free self-serve Developer Edition orgs with full REST and SOAP API access and an official hosted MCP server.", "url": "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/quickstart.htm", "quote": "Developer Edition provides a free and easy solution so that you can use Salesforce for testing and development."}, {"id": 14, "app": "Front", "category": "Support and Helpdesk", "verdict": "buildable_now", "reason": "Front provides a public REST API and free developer accounts with Bearer API tokens, OAuth 2.0, and an official MCP server.", "url": "https://dev.frontapp.com/docs/mcp-server", "quote": "Connect AI assistants to Front via the MCP server (open beta)"}, {"id": 25, "app": "Pumble", "category": "Communications and Messaging", "verdict": "buildable_now", "reason": "Pumble provides a public REST API with self-serve API keys on its free plan and an official MCP server.", "url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/", "quote": "Pumble's public API lets you interact with Pumble. You can generate an API key, and use it to send messages and more."}, {"id": 36, "app": "Klaviyo", "category": "Marketing, Ads, Email and Social", "verdict": "buildable_now", "reason": "Klaviyo provides a public REST API accessible on its self-serve free plan with API keys and OAuth, plus an official remote MCP server.", "url": "https://help.klaviyo.com/", "quote": "Klaviyo provides API access to all accounts, including those on the free plan, to allow you to integrate with third-party applications and manage data."}, {"id": 45, "app": "Magento (Adobe Commerce)", "category": "Ecommerce", "verdict": "buildable_gated", "reason": "Adobe Commerce requires an enterprise sales engagement or partner license to access cloud developer environments and credentials.", "url": "https://business.adobe.com/products/commerce/pricing.html", "quote": "You can contact the Adobe for Business sales team directly or request a product demo through their official portal."}, {"id": 59, "app": "Waterfall.io", "category": "Data, SEO and Scraping", "verdict": "buildable_gated", "reason": "Waterfall.io provides a REST API using API keys, but access is gated behind custom quoting and booking a sales call.", "url": "https://waterfall.io/pricing", "quote": "Per-credit rates depend on the endpoints you use and the volume you commit to."}, {"id": 68, "app": "MongoDB Atlas", "category": "Developer, Infra and Data platforms", "verdict": "buildable_now", "reason": "MongoDB Atlas provides a public REST Administration API with self-serve free tier access and official MCP servers.", "url": "https://www.mongodb.com/docs/atlas/api/", "quote": "Use APIs and the Atlas CLI to programmatically access your deployments and apps."}, {"id": 76, "app": "Monday.com", "category": "Productivity and Project Management", "verdict": "buildable_now", "reason": "Monday.com provides a public GraphQL API accessible via a free self-serve developer account using API tokens or OAuth 2.0, along with an official MCP server.", "url": "https://developer.monday.com/", "quote": "The developer account is free with no expiration date."}, {"id": 85, "app": "iPayX", "category": "Finance and Fintech", "verdict": "buildable_gated", "reason": "iPayX Protocol provides a narrow REST API and official MCP server for FX audits, requiring a paid API plan ($99/mo).", "url": "https://www.ipayx.ai/llms.txt", "quote": "Forensic Pack from $297, API plans from $99/mo."}, {"id": 99, "app": "YouTube Transcript", "category": "AI, Research and Media-native", "verdict": "buildable_now", "reason": "TranscriptAPI provides a public REST API and official MCP server for YouTube transcripts with 100 free credits upon self-serve registration.", "url": "https://transcriptapi.com/", "quote": "New users receive 100 free credits upon registration."}], "labeller": "agent:gemini-cli (Gemini 3.8 Flash)", "seed": 20260925}</script>
+<script>
+(function(){
+const CFG = JSON.parse(document.getElementById('cfg').textContent), KEY = 'tbr-spot-v1';
+const LABEL = {buildable_now:'Buildable now', buildable_gated:'Gated', blocked:'Blocked', unknown:'Unknown'};
+let st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+function el(t, a, ...k){ const e = document.createElement(t); Object.entries(a||{}).forEach(([x,y]) => x==='text' ? e.textContent=y : e.setAttribute(x,y)); k.forEach(c => c && e.appendChild(c)); return e; }
+function done(id){ const s = st[id]; return s && (s.judgement === 'correct' || s.judgement === 'cant_tell' || (s.judgement === 'wrong' && s.corrected)); }
+function render(){
+  const root = document.getElementById('cards'); root.innerHTML = '';
+  CFG.items.forEach(it => {
+    const s = st[it.id] || {}; const c = el('section', {class: 'card' + (done(it.id) ? ' done' : '')});
+    c.appendChild(el('h2', {text: it.app})); c.appendChild(el('div', {class: 'meta', text: it.category}));
+    c.appendChild(el('div', {}, document.createTextNode('Agent verdict: '), el('span', {class: 'v', text: LABEL[it.verdict] || it.verdict})));
+    if (it.reason) c.appendChild(el('p', {text: 'Why: ' + it.reason}));
+    if (it.quote) c.appendChild(el('blockquote', {text: it.quote}));
+    if (it.url) c.appendChild(el('div', {}, el('a', {href: it.url, target: '_blank', rel: 'noopener', text: 'Open the source page'})));
+    const b = el('div', {class: 'btns'});
+    [['correct','Correct'],['wrong','Wrong'],['cant_tell',"Can't tell"]].forEach(([v,t]) => {
+      const btn = el('button', {type: 'button', 'aria-pressed': String(s.judgement === v), text: t});
+      btn.onclick = () => { st[it.id] = Object.assign({}, st[it.id], {judgement: v}); save(); render(); };
+      b.appendChild(btn);
+    });
+    if (s.judgement === 'wrong') {
+      const sel = el('select', {}); sel.appendChild(el('option', {value: '', text: 'Right verdict…'}));
+      ['buildable_now','buildable_gated','blocked'].filter(v => v !== it.verdict).forEach(v => sel.appendChild(el('option', {value: v, text: LABEL[v]})));
+      sel.value = s.corrected || ''; sel.onchange = () => { st[it.id].corrected = sel.value; save(); render(); };
+      b.appendChild(sel);
+    }
+    c.appendChild(b); root.appendChild(c);
+  });
+  const n = CFG.items.filter(it => done(it.id)).length;
+  document.getElementById('progress').textContent = n + ' of ' + CFG.items.length + ' answered';
+  document.getElementById('export').disabled = n !== CFG.items.length;
+}
+document.getElementById('export').onclick = () => {
+  const checks = CFG.items.map(it => ({id: it.id, app: it.app, category: it.category, reference_verdict: it.verdict,
+    judgement: st[it.id].judgement, corrected_verdict: st[it.id].corrected || null}));
+  const doc = {created_at: new Date().toISOString(), checker: 'human', seed: CFG.seed, labeller: CFG.labeller, checks: checks};
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(doc, null, 1)], {type: 'application/json'}));
+  a.download = 'spot_check.json'; document.body.appendChild(a); a.click(); a.remove();
+};
+render();
+})();
+</script></body></html>

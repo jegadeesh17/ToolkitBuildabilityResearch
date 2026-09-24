@@ -329,10 +329,10 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
   {% if v.labeller_is_human or not v.labeller %}
   <p class="lede">A person labelled {{ v.n_sample }} randomly drawn apps (two per category) from the real documentation, before seeing any agent output. The same labels score pass 1 and pass 2. Unknown answers count as wrong.</p>
   {% else %}
-  <p class="lede">{{ v.n_sample }} randomly drawn apps (two per category) were labelled from the vendors' own documentation by an independent AI research agent ({{ v.labeller.replace('agent:', '') }}), a different model family from every model in the pipeline, working in a separate folder with no access to the pipeline or its answers. The numbers below measure agreement with those reference labels, not verified accuracy. The same labels score pass 1 and pass 2; unknown answers count as wrong.</p>
+  <p class="lede">{{ v.n_sample }} randomly drawn apps (two per category) were labelled from the vendors' own documentation by an independent AI research agent, {{ v.labeller.replace('agent:', '') }}, a different model family from every model in the pipeline, working in a separate folder with no access to the pipeline or its answers. The numbers below measure agreement with those reference labels, not verified accuracy. The same labels score pass 1 and pass 2; unknown answers count as wrong.</p>
   {% endif %}
   {% if v.spot_check %}
-  <div class="human" style="border-color:var(--now)"><h3 style="color:var(--now)">Checked by a person</h3>
+  <div class="human" style="border-color:var(--now);margin:0 0 28px"><h3 style="color:var(--now)">Checked by a person</h3>
     <ul><li>A person checked the reference verdict for {{ v.spot_check.n }} apps, one per category (seed {{ v.spot_check.seed }}): <b>{{ v.spot_check.correct }}</b> correct, <b>{{ v.spot_check.wrong }}</b> wrong, <b>{{ v.spot_check.cant_tell }}</b> could not tell from the source page.</li></ul></div>
   {% endif %}
   {% if v.pass1 %}
