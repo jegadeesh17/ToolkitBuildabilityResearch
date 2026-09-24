@@ -11,3 +11,6 @@ target-version = "py313"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/gen_label_tool.py" = ["E501"]  # embedded CSS/JS template strings
