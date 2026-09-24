@@ -2,7 +2,7 @@
 
 High-level view of how the research agent, verification loops, scoring and site build fit together. Details (schema, CLI flags, exit codes, Definition of Done) live in [SPEC.md](SPEC.md).
 
-Status: **design only**. The modules below are specified, not yet implemented; update this file as they land.
+Status: **pass 1 implemented** (M0 code complete; live runs pending). `verify.py` and `build_site.py` are still design only.
 
 ## Data flow
 
@@ -52,7 +52,9 @@ Every LLM and tool call, from every stage, appends one line to `results/runs/run
 |---|---|---|
 | `agent/config.py` | Load `.env`, validate required vars (exit 3), expose settings | Print or log key values |
 | `agent/schema.py` | `AppResult` + enums, evidence objects, Pydantic validators | Contain business rules beyond field shape |
-| `agent/rules.py` | The 5 deterministic consistency rules (§2.3) | Call models or tools |
+| `agent/rules.py` | The 5 deterministic consistency rules (§2.3); evidence-or-unknown enforcement | Call models or tools |
+| `agent/grounding.py` | L1 grounding: URL in bundle + normalised verbatim quote; `grounded_rate` | Re-fetch pages |
+| `agent/store.py` | UTF-8 JSON I/O: seed apps, splits, atomic results writes, evidence bundles | Call APIs |
 | `agent/llm_client.py` | The ONLY OpenRouter caller: retries (tenacity), `usage` cost capture, JSON-schema response format, raw prompt/response capture, run-log line | Be bypassed by any other module |
 | `agent/tools.py` | The ONLY Composio caller: slug allowlist (search/fetch only), backoff 1/2/4 s, run-log line | Execute any slug outside the allowlist |
 | `agent/budget.py` | Sum logged spend; refuse a call that would start past `BUDGET_CAP_USD` (exit 4) | Estimate spend from anything but the log (+ fallback pricing) |
@@ -62,7 +64,7 @@ Every LLM and tool call, from every stage, appends one line to `results/runs/run
 | `agent/verify.py` | Pass-2 loops L1–L4 and merge | Look at ground truth |
 | `agent/score.py` | Accuracy vs `ground_truth.json`, hits/misses, calibration | Modify results |
 | `agent/validate.py` | CLI validity gate on a results file (exit 5 on failure) | Fix data |
-| `agent/run.py` | CLI entry: arg parsing (exit 2), resume, dispatch | Hold pipeline logic |
+| `agent/run.py` | CLI entry: arg parsing (exit 2), config (exit 3), budget stop (exit 4), resume, `--bundles-from` reuse, concurrency | Hold pipeline logic |
 | `scripts/*` | Splits, label tool, pilot comparison, site build, site QA | Call OpenRouter/Composio except via `agent/` |
 
 ## External dependencies
@@ -76,3 +78,9 @@ Every LLM and tool call, from every stage, appends one line to `results/runs/run
 
 ## Known architectural limitation
 L2 cross-model shares the evidence bundle with pass 1, so retrieval misses can be correlated across both models. L4 re-research is the only loop that gathers new evidence. This is disclosed on the page.
+
+## Implementation notes (M0)
+- `--bundles-from RUN_ID` reuses stored evidence bundles; the reused bundle is re-saved under the new run so every row's `meta.run_id` locates its own bundle.
+- A pass-1 field with a value but no evidence is converted to `unknown` / `model_unsure` before grounding (guardrail: evidence or unknown).
+- CLI progress lines print counts only (no field values), so the blind sample stays blind while runs execute.
+- Composio auth/permission rejection aborts a run with exit 3 (configuration), rather than producing `unknown` rows.
