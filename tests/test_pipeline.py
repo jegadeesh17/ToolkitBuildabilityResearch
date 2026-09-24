@@ -230,3 +230,13 @@ async def test_empty_content_counts_as_schema_failure(fake_tools, run_logger):
     row, _ = await research_app(APP, llm=Empty(), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger,
                                 **kw())
     assert Empty.calls == 3 and Flag.NEEDS_HUMAN in row.flags
+
+
+def test_prompt_version_ignores_line_endings(tmp_path, monkeypatch):
+    import agent.pipeline as pl
+    src = (pl.PROMPTS_DIR / "extract.md").read_text(encoding="utf-8").replace("\r\n", "\n")
+    (tmp_path / "extract.md").write_bytes(src.replace("\n", "\r\n").encode("utf-8"))
+    monkeypatch.setattr(pl, "PROMPTS_DIR", tmp_path)
+    crlf = pl.load_prompt()
+    (tmp_path / "extract.md").write_bytes(src.encode("utf-8"))
+    assert crlf.version == pl.load_prompt().version and "\r" not in crlf.text

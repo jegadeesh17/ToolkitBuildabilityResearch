@@ -55,7 +55,7 @@ class Prompt:
 
 
 def load_prompt(name: str = "extract") -> Prompt:
-    text = (PROMPTS_DIR / f"{name}.md").read_text(encoding="utf-8")
+    text = (PROMPTS_DIR / f"{name}.md").read_text(encoding="utf-8")  # universal newlines: CRLF-safe hash
     digest = hashlib.sha256((text + json.dumps(EXTRACTION_SCHEMA, sort_keys=True)).encode("utf-8")).hexdigest()
     return Prompt(text=text, version="p1-" + digest[:6])
 
