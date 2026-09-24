@@ -42,6 +42,7 @@ QUERY_TEMPLATES = (
 MAX_PAGES = 6
 RESULTS_PER_QUERY = 3
 MAX_REPAIRS = 2
+MAX_OUTPUT_TOKENS = 8000  # reasoning models spend output tokens before the JSON
 PROMPTS_DIR = Path(__file__).parent / "prompts"
 EXTRACTION_SCHEMA = Extraction.model_json_schema()
 _BINARY = re.compile(r"\.(pdf|png|jpe?g|gif|svg|zip|gz|mp4|mp3|docx?|xlsx?|pptx?)(\?|$)", re.IGNORECASE)
@@ -223,7 +224,8 @@ async def extract(app: AppSeed, bundle: EvidenceBundle, llm: Any, *, model: str,
         text = ""
         try:
             resp = await llm.chat(messages=messages, model=model, stage=stage, app_id=app.id,
-                                  prompt_version=prompt.version, json_schema=EXTRACTION_SCHEMA)
+                                  prompt_version=prompt.version, json_schema=EXTRACTION_SCHEMA,
+                                  max_tokens=MAX_OUTPUT_TOKENS)
             text = resp.text
             parsed = parse_json_loose(text)
             last_parsed = parsed

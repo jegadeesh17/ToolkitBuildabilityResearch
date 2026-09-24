@@ -215,12 +215,12 @@ class Extraction(ScoredFields):
             return None
         return str(v).strip()
 
-    @field_validator("evidence", "unknown_reason")
+    @field_validator("evidence", "unknown_reason", mode="before")
     @classmethod
-    def _keys(cls, v: dict) -> dict:
-        bad = set(v) - set(REASONABLE_FIELDS)
-        if bad:
-            raise ValueError(f"unknown field keys: {sorted(bad)}")
+    def _keys(cls, v: Any) -> Any:
+        # Model output: entries keyed by non-scored names (e.g. "description") are not claims; drop them.
+        if isinstance(v, dict):
+            return {k: val for k, val in v.items() if k in REASONABLE_FIELDS}
         return v
 
 
@@ -258,6 +258,15 @@ class AppResult(Extraction):
     @classmethod
     def _flags(cls, v: list[Flag]) -> list[Flag]:
         return sorted(set(v), key=str)
+
+    @field_validator("evidence", "unknown_reason", mode="before")
+    @classmethod
+    def _keys(cls, v: Any) -> Any:  # stored rows stay strict (overrides Extraction's lenient filter)
+        if isinstance(v, dict):
+            bad = set(v) - set(REASONABLE_FIELDS)
+            if bad:
+                raise ValueError(f"unknown field keys: {sorted(bad)}")
+        return v
 
     def to_json_dict(self) -> dict:
         return self.model_dump(mode="json", by_alias=True)

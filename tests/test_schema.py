@@ -100,14 +100,20 @@ def test_flags_deduped_and_sorted():
     assert [str(f) for f in row.flags] == ["needs_human", "rule_violation"]
 
 
-def test_evidence_keys_must_be_known_fields():
-    with pytest.raises(ValidationError):
-        Extraction.model_validate(base(evidence={"colour": []}))
+def test_extraction_drops_unknown_evidence_and_reason_keys():
+    ev = {"url": "https://ex.com/docs", "quote": "The API uses OAuth 2.0 tokens"}
+    e = Extraction.model_validate(base(evidence={"verdict": [ev], "description": [ev], "existing_mcp_url": [ev]},
+                                       unknown_reason={"colour": "model_unsure"}))
+    assert set(e.evidence) == {"verdict"} and e.unknown_reason == {}
 
 
-def test_unknown_reason_keys_must_be_known_fields():
+def test_appresult_rejects_unknown_evidence_keys():
+    ev = {"url": "https://ex.com/docs", "quote": "The API uses OAuth 2.0 tokens"}
     with pytest.raises(ValidationError):
-        Extraction.model_validate(base(unknown_reason={"colour": "model_unsure"}))
+        AppResult.model_validate(dict(base(evidence={"colour": [ev]}), id=1, app="X", category="C", meta=META))
+    with pytest.raises(ValidationError):
+        AppResult.model_validate(dict(base(unknown_reason={"colour": "model_unsure"}), id=1, app="X", category="C",
+                                      meta=META))
 
 
 def test_is_unknown():

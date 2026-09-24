@@ -262,3 +262,15 @@ async def test_exhausted_rate_limit_propagates_not_unknown(fake_tools, run_logge
         await research_app(APP, llm=Throttled(), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger,
                            **kw())
     assert Throttled.calls == 1  # no repair loop on transport/HTTP failures
+
+
+async def test_extraction_requests_room_for_reasoning_models(fake_tools, run_logger):
+    seen = {}
+
+    class Spy:
+        async def chat(self, **kw):
+            from agent.llm_client import LLMResponse
+            seen.update(kw)
+            return LLMResponse(VALID, kw["model"], 1, 1, 0.0, False, 1, 0, "raw.json")
+    await research_app(APP, llm=Spy(), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger, **kw())
+    assert seen["max_tokens"] >= 8000
