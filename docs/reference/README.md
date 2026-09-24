@@ -12,10 +12,10 @@ Files in this folder that are gitignored (local only, never published): `ASSIGNM
 |---|---|---|
 | Endpoint | `POST https://openrouter.ai/api/v1/chat/completions` (OpenAI-compatible) | per SPEC; confirm on first live call |
 | Auth | `Authorization: Bearer $OPENROUTER_API_KEY` | per SPEC |
-| Cost accounting | request body `"usage": {"include": true}`; cost expected at `response.usage.cost` | *UNVERIFIED*: confirm the field name against a live response; fall back to tokens × published price |
-| Structured output | `response_format: {"type": "json_schema", ...}` where the model supports it | *UNVERIFIED* per model; the pilot records which models honour it |
+| Cost accounting | request body `"usage": {"include": true}`; cost at `response.usage.cost` (USD) | **Verified by live call 2026-09-24 19:08 IST** (deepseek-v4-flash, 1-line probe: `usage.cost` = 0.0000200). Fallback to tokens × price only if absent |
+| Structured output | `response_format: {"type": "json_schema", ...}` where the model supports it | Verified accepted (no downgrade) by `deepseek/deepseek-v4-flash` and `nvidia/nemotron-3-super-120b-a12b:free`, 2026-09-24. Client downgrades to `json_object` then none on a 400 |
 | Key status | `GET https://openrouter.ai/api/v1/key` → `data.limit`, `data.limit_remaining`, `data.usage`, `data.is_free_tier` | **Verified by live call 2026-09-24 18:38 IST**: limit 5, limit_remaining 5, usage 0, is_free_tier false. No `free_model_daily_requests` field is returned; `is_free_tier: false` indicates ≥$10 purchased (1,000 free req/day per docs) |
-| Free models | `:free` suffix; 20 req/min; 1,000 req/day once ≥$10 of credit has been purchased (50/day otherwise) | from OpenRouter docs, 2026-09-24; confirm via `/key` |
+| Free models | `:free` suffix; 20 req/min; 1,000 req/day once ≥$10 of credit has been purchased (50/day otherwise) | from OpenRouter docs, 2026-09-24. Observed 18:59: `qwen/qwen3.8-27b:free` and `google/gemma-4-31b-it:free` returned upstream `429 Provider returned error`; `nvidia/nemotron-3-super-120b-a12b:free` worked (≈30–65 s per extraction) |
 | Settings | `temperature=0` on every call | project rule |
 
 Candidate models (prices $/M tokens in/out, OpenRouter catalogue 2026-09-24, not benchmarked):
