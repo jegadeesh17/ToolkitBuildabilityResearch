@@ -28,7 +28,7 @@ data/apps.json (100 apps, 10 categories)
 - **Evidence or `unknown`.** Every answered field carries `{url, quote}`; the quote must appear on the cited page (checked deterministically). No evidence → `unknown` with a reason code.
 - **Single chokepoints.** Only `agent/llm_client.py` calls the LLM provider (OpenRouter); only `agent/tools.py` calls the search/fetch tools (Composio search toolkit, slug allow-list).
 - **Observability.** Every model and tool call appends one line to `results/runs/run_log.jsonl` (tokens, cost, latency, retries, errors). `agent/budget.py` refuses a call that would pass `BUDGET_CAP_USD`.
-- **Honest accuracy.** 20 apps (2 per category, seeded) were labelled by a person before seeing agent output; prompts were tuned only on a separate 10-app pilot set.
+- **Measured, with the method disclosed.** 20 apps (2 per category, seeded) were labelled blind by an independent Gemini CLI agent working outside this repository (a model family not used in the pipeline), and a person spot-checked one reference verdict per category. Results are reported as agreement with these reference labels. Prompts were tuned only on a separate 10-app pilot set and frozen before scoring.
 
 Design details and every contract: [`docs/SPEC.md`](docs/SPEC.md) · module boundaries: [`docs/architecture.md`](docs/architecture.md) · verified API contracts: [`docs/reference/README.md`](docs/reference/README.md) · history: [`docs/CHANGELOG.md`](docs/CHANGELOG.md).
 
@@ -69,7 +69,7 @@ See the page (`site/index.html`) or `site/results.json`: verdict counts and patt
 
 ## Known limitations and tradeoffs
 
-- **Small accuracy sample.** 20 apps × 7 fields, labelled by one person; treat the accuracy figure as an estimate with wide error bars.
+- **Reference labels are from an AI agent, not a person.** Hand-labelling 140 fields did not fit the time available (a recorded deviation from the spec); a person spot-checked 10 of the reference verdicts. With 20 apps × 7 fields, treat the agreement figures as estimates with wide error bars.
 - **Retrieval limits.** Web search plus plain page fetches miss documentation that needs JavaScript, a login or a PDF; those fields end up `unknown` with a reason.
 - **Correlated evidence.** The second model reads the same evidence bundle as the first, so a retrieval miss can fool both; only re-research (≤5 tool calls per app) gathers new pages.
 - **Narrow definition of "buildable now".** Public API plus credentials a developer can obtain alone (free or trial). Rate limits, deep terms-of-service review and approval timelines are out of scope.

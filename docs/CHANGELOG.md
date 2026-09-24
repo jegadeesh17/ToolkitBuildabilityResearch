@@ -23,6 +23,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `results/pass2.json`: pass 2 on all 100 apps (verify runs `20260924T150032Z-15c3cf` + resume `20260924T151837Z-f99e52` after a Windows file-lock crash at row 76; fixed by retrying the atomic rename). `validate --expect 100` OK; unknown fields 45 → 5; grounding-failed apps 37 → 6; rule violations 1 → 0; 142 fields changed (judge 119, re-research 23), each in `pass2_diff`; 4 apps still need a human.
 - `results/runs/run_log.jsonl`: the complete append-only run log (secret-scanned) behind every spend and call count.
 
+- `verification/ground_truth.json`: reference labels for the 20-app sample produced by an independent Gemini CLI agent (self-reported model "Gemini 3.8 Flash") working in a separate folder outside this repository, validated by `scripts/import_reference_labels.py`. **Deviation from SPEC §2.6**: the labels are not human; accuracy figures are reported as agreement with this reference. Agreement pass 1 → pass 2: 74.3% → 77.9% (n=140; fixed 11, regressed 6). No prompt or loop changed after scoring.
+- `scripts/gen_spot_check.py` → `verification/spot_check.html`: guided human check of the reference verdict for one sample app per category (seed 20260925).
+- `scripts/build_site.py`, `scripts/templates/index.html.j2`, `scripts/qa_site.py`: the single-page report and its browser QA.
+
 ### Budget
 - Pass 2 cost more than estimated (the judge, called on most apps, was ~$0.03 per call). With the owner's explicit approval, `BUDGET_CAP_USD` was raised from $4.00 to $4.50 for the pass-2 resume only. Cumulative spend $4.38 (run log), so the milestone-2 target of ≤ $4 was missed by $0.38. The OpenRouter key's own $5 limit stayed in place.
 
