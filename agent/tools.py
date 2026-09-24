@@ -193,8 +193,9 @@ class ToolClient:
                             "error": redact(error, self._secrets) if error else None, "cost_usd": 0.0,
                             "latency_ms": int((time.monotonic() - started) * 1000)})
 
-    async def search(self, query: str, *, app_id: int | None, stage: str, k: int = 3) -> list[SearchHit]:
-        for slug in (SEARCH_SLUG, SEARCH_FALLBACK_SLUG):
+    async def search(self, query: str, *, app_id: int | None, stage: str, k: int = 3,
+                     fallback: bool = True) -> list[SearchHit]:
+        for slug in (SEARCH_SLUG, SEARCH_FALLBACK_SLUG) if fallback else (SEARCH_SLUG,):
             res = await self._execute(slug, {"query": query}, app_id=app_id, stage=stage, url=query)
             hits = parse_search_hits(res.get("data")) if res.get("successful", True) else []
             if hits:

@@ -107,3 +107,10 @@ def test_thin_page_detection():
     assert is_thin("Please enable JavaScript to view this site")
     assert is_thin("short")
     assert not is_thin("word " * 200)
+
+
+
+async def test_search_without_fallback_makes_exactly_one_call(tool_client):
+    tc, calls = tool_client(lambda s, a: {"successful": True, "data": {"results": []}})
+    assert await tc.search("q", app_id=1, stage="reresearch", fallback=False) == []
+    assert [c[0] for c in calls] == [SEARCH_SLUG]
