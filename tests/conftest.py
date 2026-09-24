@@ -32,3 +32,20 @@ def make_row():
         d.update(over)
         return AppResult.model_validate(d)
     return _make
+
+
+@pytest.fixture
+def make_bundle():
+    import hashlib
+
+    from agent.schema import EvidenceBundle, Page
+
+    def _make(pages) -> EvidenceBundle:
+        out = []
+        for p in pages:
+            url, text = p[0], p[1]
+            final = p[2] if len(p) > 2 else None
+            out.append(Page(url=url, final_url=final, title="", text=text, http_status=200, fetched_at="t",
+                            sha256=hashlib.sha256(text.encode("utf-8")).hexdigest(), error=None, thin=False))
+        return EvidenceBundle(app_id=1, app="X", run_id="r", created_at="t", queries=[], pages=out)
+    return _make
