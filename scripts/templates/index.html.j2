@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolkit Buildability — 100 SaaS apps, researched and verified</title>
+<meta name="description" content="Which of 100 SaaS apps could become an AI-agent toolkit today? Evidence-grounded research agent with verification loops and a blind 20-app accuracy check.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;--line:rgba(255,255,255,.10);--rule:rgba(255,255,255,.06);--hover:rgba(255,255,255,.03);
+  --text:#fff;--muted:rgba(255,255,255,.70);--faint:rgba(255,255,255,.60);--ghost:rgba(255,255,255,.14);
+  --now:#34d399;--gated:#60a5fa;--blocked:#fb7185;--unknown:rgba(255,255,255,.34);
+  --accent:#51a2ff;--hi:#d4ff4a;--yellow:#facc15;--orange:#fb923c;--magenta:#e879f9;--cyan:#22d3ee;--indigo:#818cf8;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--sans);letter-spacing:-.011em;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--text);text-decoration:underline;text-decoration-color:var(--ghost);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--text)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+.frame{max-width:1120px;margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top .frame{display:flex;align-items:center;gap:20px;padding:14px 24px;flex-wrap:wrap}
+.brand{font-weight:500;font-size:15px;letter-spacing:-.01em;text-decoration:none}
+.tag{border:1px solid var(--now);color:var(--now);border-radius:2px;padding:1px 6px;font-size:10px}
+.top nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--muted)}
+.top nav a:hover{color:var(--text)}
+section{border-bottom:1px solid var(--line);padding:56px 24px}
+section > h2{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.02em;margin:0 0 8px;max-width:36ch}
+.lede{color:var(--muted);max-width:68ch;margin:0 0 32px}
+.foot{color:var(--faint);font-size:11px;margin-top:14px}
+/* hero */
+.hero{padding-top:72px}
+.hero h1{font-weight:300;font-size:clamp(34px,5.2vw,58px);line-height:1.06;letter-spacing:-.035em;margin:0 0 20px;max-width:20ch}
+.hero .lede{font-size:18px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);margin-top:40px}
+.tile{padding:22px 22px 18px;border-right:1px solid var(--line)}
+.tile:last-child{border-right:0}
+.tile .big{font-weight:300;font-size:40px;line-height:1.1;letter-spacing:-.03em;margin:10px 0 6px}
+.tile .big small{font-size:18px;color:var(--muted)}
+.tile p{margin:0;color:var(--muted);font-size:14px}
+/* dots: one dot = one app (or one checked field) */
+.dots{display:flex;flex-wrap:wrap;gap:3px}
+.dot{width:10px;height:10px;border-radius:2px;background:var(--ghost);flex:none}
+.dot.now{background:var(--now)}.dot.gated{background:var(--gated)}.dot.blocked{background:var(--blocked)}
+.dot.unknown{background:transparent;box-shadow:inset 0 0 0 1px var(--unknown)}
+.dot.fill{background:var(--accent)}.dot.hit{background:var(--now)}.dot.miss{background:transparent;box-shadow:inset 0 0 0 1px var(--blocked)}
+.dot.abstain{background:transparent;box-shadow:inset 0 0 0 1px var(--unknown)}
+.matrix{display:grid;grid-template-columns:minmax(150px,230px) 1fr auto;gap:10px 18px;align-items:center}
+.matrix .cat{color:var(--muted);font-size:14px}
+.matrix .dots .dot{width:16px;height:16px}
+.matrix .count{color:var(--faint);font-size:11px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0 0;color:var(--muted);font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.cards{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);margin-top:28px}
+.card{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.card:nth-child(2n){border-right:0}
+.card.wide{grid-column:1/-1;border-right:0}
+.card h3{font-weight:500;font-size:17px;margin:0 0 4px;letter-spacing:-.01em}
+.card .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+.bars{display:grid;grid-template-columns:minmax(120px,170px) 1fr 3ch;gap:8px 14px;align-items:center}
+.bars .label{color:var(--muted);font-size:14px}
+.bars .n{color:var(--faint);font-size:12px;text-align:right}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.chips-list{display:flex;flex-wrap:wrap;gap:6px}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:2px;padding:1px 7px;font-size:13px;color:var(--muted);white-space:nowrap}
+.pill.now{border-color:var(--now);color:var(--now)}.pill.gated{border-color:var(--gated);color:var(--gated)}
+.pill.blocked{border-color:var(--blocked);color:var(--blocked)}.pill.unknown{border-color:var(--unknown);color:var(--muted)}
+/* agent */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}
+.steps li{padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);counter-increment:s}
+.steps li:nth-child(4n){border-right:0}
+.steps li::before{content:counter(s);display:block;font:500 11px var(--mono);color:var(--faint);margin-bottom:10px}
+.steps b{font-weight:500;display:block;margin-bottom:4px}
+.steps span{color:var(--muted);font-size:14px}
+.steps .pass2 b{color:var(--gated)}
+.human{border:1px solid var(--hi);border-radius:2px;padding:14px 18px;margin-top:22px;max-width:760px}
+.human h3{color:var(--hi);font-weight:500;font-size:15px;margin:0 0 6px}
+.human ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);margin-top:22px}
+.stats div{padding:16px 18px;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats .v{font-size:24px;font-weight:300;letter-spacing:-.02em;margin-top:6px}
+.kv{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
+.kv th,.kv td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);font-weight:400}
+.kv th{color:var(--faint)}
+.kv td{color:var(--muted)}
+.kv td.r,.kv th.r{text-align:right}
+/* verification */
+.acc{display:grid;grid-template-columns:minmax(120px,160px) 1fr 11ch;gap:10px 16px;align-items:center}
+.acc .label{color:var(--muted);font-size:14px}
+.acc .v{text-align:right;font-size:14px}
+.acc .dots .dot{width:8px;height:8px}
+.pending{border:1px dashed var(--line);padding:20px;color:var(--muted);max-width:760px}
+details.list{border-top:1px solid var(--rule);padding:10px 0}
+details.list summary{cursor:pointer;color:var(--text)}
+details.list table{margin-top:10px}
+/* table */
+.filters{display:flex;flex-direction:column;gap:10px;margin:0 0 20px}
+.filters .group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.filters .group > .glabel{color:var(--faint);width:84px}
+.chip{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:2px;padding:3px 8px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:#fff;color:#000;border-color:#fff}
+.nojs-note{color:var(--faint);font-size:13px}
+.js .nojs-note{display:none}
+.filters{display:none}.js .filters{display:flex}
+table.apps{width:100%;border-collapse:collapse;font-size:14px}
+table.apps thead th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);position:sticky;top:57px;background:#000}
+table.apps td{padding:10px 8px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--muted)}
+table.apps tr.app-row{cursor:pointer}
+table.apps tr.app-row:hover td{background:var(--hover)}
+table.apps td.rank{color:var(--faint);font:12px var(--mono)}
+table.apps td.name{color:var(--text);font-weight:500}
+table.apps td.name small{display:block;color:var(--faint);font-weight:400}
+.conf{display:flex;gap:2px}.conf i{width:6px;height:12px;background:var(--ghost);border-radius:1px}.conf i.on{background:var(--accent)}
+.js tr.detail{display:none}
+tr.detail.open{display:table-row}
+tr.detail td{background:rgba(255,255,255,.02);padding:18px 16px 22px}
+.ev{display:grid;grid-template-columns:130px 1fr;gap:6px 16px;font-size:14px}
+.ev dt{color:var(--faint)}
+.ev dd{margin:0;color:var(--muted)}
+.ev q{color:var(--text)}
+.ev q::before{content:"“"}.ev q::after{content:"”"}
+.ev .src{font-size:12px;word-break:break-all}
+.diff{margin-top:12px;font-size:14px;color:var(--muted)}
+.diff b{color:var(--text);font-weight:500}
+.hidden{display:none!important}
+/* proof + limits */
+pre{background:#0a0a0a;border:1px solid var(--line);border-radius:2px;padding:14px 16px;overflow-x:auto;font:13px/1.6 var(--mono);color:#e5e5e5}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{display:inline-block;background:#fff;color:#000;text-decoration:none;border-radius:2px;padding:8px 12px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+ul.limits{max-width:76ch;color:var(--muted);padding-left:18px}
+ul.limits li{margin-bottom:8px}
+footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);font-size:13px}
+@media (max-width:768px){
+  section{padding:40px 16px}.top .frame{padding:12px 16px}
+  .tiles,.cards,.split,.stats{grid-template-columns:1fr}
+  .tile,.card,.stats div{border-right:0;border-bottom:1px solid var(--line)}
+  .steps{grid-template-columns:1fr 1fr}.steps li:nth-child(2n){border-right:0}
+  .matrix{grid-template-columns:1fr auto}.matrix .cat{grid-column:1/-1;margin-bottom:-6px}
+  .matrix .dots .dot{width:12px;height:12px}
+  .bars{grid-template-columns:1fr 3ch}.bars .label{grid-column:1/-1;margin-bottom:-4px}
+  .acc{grid-template-columns:1fr 11ch}.acc .label{grid-column:1/-1;margin-bottom:-4px}
+  table.apps thead{display:none}
+  table.apps,table.apps tbody,table.apps tr,table.apps td{display:block;width:100%}
+  table.apps tr.app-row{border:1px solid var(--line);border-bottom:0;padding:8px 10px}
+  table.apps td{border:0;padding:3px 0}
+  table.apps td[data-label]::before{content:attr(data-label);display:inline-block;width:92px;color:var(--faint);font:11px var(--mono);text-transform:uppercase;letter-spacing:.06em}
+  table.apps td.rank{display:none}
+  tr.detail td{border:1px solid var(--line);border-top:0}
+  .ev{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+{% set p = r.patterns %}{% set h = p.headline %}{% set v = r.verification %}{% set m = r.meta %}
+{% set vc = p.verdict_counts %}
+<header class="top" id="top">
+  <div class="frame">
+    <a class="brand" href="#result">Toolkit Buildability</a>
+    <span class="tag mono">Research</span>
+    <nav class="mono" aria-label="Sections">
+      <a href="#patterns">Patterns</a><a href="#agent">Agent</a><a href="#verification">Verification</a><a href="#table">Table</a><a href="results.json">Data ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="frame">
+
+<section id="result" class="hero">
+  <h1>{{ vc.buildable_now }} of {{ p.n }} SaaS apps could become an agent toolkit today.</h1>
+  <p class="lede">A research agent read each app's own documentation and recorded how an AI agent would authenticate, how a developer gets credentials, and what stands in the way, with a verbatim quote behind every answer. {{ vc.buildable_gated }} more have a public API behind a paid plan, an approval or a sales call; {% if vc.blocked %}{{ vc.blocked }} {{ 'is' if vc.blocked == 1 else 'are' }} blocked{% else %}none is blocked outright{% endif %}{% if vc.unknown %}, and {{ vc.unknown }} could not be settled from the evidence{% endif %}.</p>
+  <div class="tiles">
+    <div class="tile">
+      <div class="mono" style="color:var(--faint)">Accuracy, pass 1 → pass 2</div>
+      {% if v.compare %}
+      <div class="big num">{{ v.compare.overall.pass1|pct }} <small>→</small> {{ v.compare.overall.pass2|pct }}</div>
+      <p>Field-level accuracy on a blind, human-labelled sample of {{ v.n_sample }} apps (n={{ v.compare.n }} checked fields).</p>
+      {% elif v.pass1 %}
+      <div class="big num">{{ v.pass1.overall.accuracy_overall|pct }}</div>
+      <p>Pass-1 field-level accuracy on the blind {{ v.n_sample }}-app sample (n={{ v.pass1.overall.n }}).</p>
+      {% else %}
+      <div class="big">Pending</div>
+      <p>Waiting for the blind labels of the {{ v.n_sample }}-app sample.</p>
+      {% endif %}
+    </div>
+    <div class="tile">
+      <div class="mono" style="color:var(--faint)">Buildable now</div>
+      <div class="big num">{{ h.pct_buildable_now|round|int }}<small>%</small></div>
+      <p>Public API plus credentials a developer can get alone, free or on a trial.</p>
+    </div>
+    <div class="tile">
+      <div class="mono" style="color:var(--faint)">Most common blocker</div>
+      <div class="big" style="font-size:30px">{{ BLOCKER_LABEL.get(h.top_blocker, "None") }}</div>
+      <p>{{ h.top_blocker_n }} of {{ p.n }} apps; blockers are ranked in Patterns.</p>
+    </div>
+  </div>
+</section>
+
+<section id="patterns">
+  <h2>Patterns across the 100 apps</h2>
+  <p class="lede">Every dot below is one app. Colours are always paired with a label or symbol; hover a dot for its name.</p>
+  <div class="matrix" role="list" aria-label="Verdict by category">
+    {% for cat, c in p.by_category.items() %}
+    <div class="cat" role="listitem">{{ cat }}</div>
+    <div class="dots">{% for a in c.apps %}{% set cls = {"buildable_now":"now","buildable_gated":"gated","blocked":"blocked","unknown":"unknown"}[a.verdict] %}<span class="dot {{ cls }}" title="{{ a.app }}: {{ VERDICT_LABEL[a.verdict] }}" aria-label="{{ a.app }}: {{ VERDICT_LABEL[a.verdict] }}"></span>{% endfor %}</div>
+    <div class="count mono num" title="buildable now / gated / blocked / unknown">{{ c.verdicts.buildable_now }} ✓ · {{ c.verdicts.buildable_gated }} ◐ · {{ c.verdicts.blocked }} ✗</div>
+    {% endfor %}
+  </div>
+  <div class="legend">
+    {% for vd in verdicts %}<span><i class="dot {{ {"buildable_now":"now","buildable_gated":"gated","blocked":"blocked","unknown":"unknown"}[vd] }}"></i>{{ VERDICT_MARK[vd] }} {{ VERDICT_LABEL[vd] }} <b class="num">{{ vc[vd] }}</b></span>{% endfor %}
+  </div>
+  <p class="foot mono">Each dot = 1 app · rows = the 10 input categories · verdict after pass-2 verification</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>How agents would authenticate</h3>
+      <p class="sub">Auth methods the public APIs support. An app can offer several.</p>
+      <div class="bars">
+        {% for k, n in p.auth_counts.items() %}
+        <div class="label">{{ AUTH_LABEL.get(k, k) }}</div>
+        <div class="dots" title="{{ n }} apps">{% for i in range(n) %}<span class="dot fill"></span>{% endfor %}</div>
+        <div class="n mono num">{{ n }}</div>
+        {% endfor %}
+      </div>
+      <p class="foot mono">Each dot = 1 app · n={{ p.n }}</p>
+    </div>
+    <div class="card">
+      <h3>How a developer gets credentials</h3>
+      <p class="sub">The access model decides whether an integration can start today.</p>
+      <div class="bars">
+        {% for k, n in p.access_counts.items() %}
+        <div class="label">{{ ACCESS_LABEL.get(k, k) }}</div>
+        <div class="dots" title="{{ n }} apps">{% for i in range(n) %}<span class="dot {{ 'now' if k.startswith('self_serve') else ('unknown' if k == 'unknown' else 'gated') }}"></span>{% endfor %}</div>
+        <div class="n mono num">{{ n }}</div>
+        {% endfor %}
+      </div>
+      <p class="foot mono">Each dot = 1 app · n={{ p.n }}</p>
+    </div>
+    <div class="card">
+      <h3>What stands in the way</h3>
+      <p class="sub">The single primary blocker for every app that is not buildable now.</p>
+      <div class="bars">
+        {% for b in p.blocker_ranking %}
+        <div class="label">{{ BLOCKER_LABEL.get(b.blocker, b.blocker) }}</div>
+        <div class="dots" title="{{ b.n }} apps">{% for i in range(b.n) %}<span class="dot blocked"></span>{% endfor %}</div>
+        <div class="n mono num">{{ b.n }}</div>
+        {% endfor %}
+      </div>
+      <p class="foot mono">Each dot = 1 app · excludes "none" and "unknown"</p>
+    </div>
+    <div class="card">
+      <h3>Existing MCP servers</h3>
+      <p class="sub">Whether someone has already published an MCP server for the app.</p>
+      <div class="bars">
+        {% for k, n in p.mcp_counts.items() %}
+        <div class="label">{{ MCP_LABEL[k] }}</div>
+        <div class="dots" title="{{ n }} apps">{% for i in range(n) %}<span class="dot {{ 'now' if k == 'official' else ('gated' if k == 'third_party' else 'unknown') }}"></span>{% endfor %}</div>
+        <div class="n mono num">{{ n }}</div>
+        {% endfor %}
+      </div>
+      <p class="foot mono">Each dot = 1 app · n={{ p.n }}</p>
+    </div>
+    <div class="card wide">
+      <h3>Where to start, and who to call</h3>
+      <div class="split">
+        <div>
+          <p class="sub"><b class="num" style="color:var(--now)">{{ p.easy_wins|length }}</b> easy wins: buildable now, with a moderate or broad API.</p>
+          <div class="chips-list">{% for a in p.easy_wins[:16] %}<span class="pill now">✓ {{ a.app }}</span>{% endfor %}</div>
+          {% if p.easy_wins|length > 16 %}<details class="list"><summary>Show all {{ p.easy_wins|length }}</summary><div class="chips-list">{% for a in p.easy_wins[16:] %}<span class="pill now">✓ {{ a.app }}</span>{% endfor %}</div></details>{% endif %}
+        </div>
+        <div>
+          <p class="sub"><b class="num" style="color:var(--gated)">{{ p.needs_outreach|length }}</b> need outreach: an API exists, but access runs through a partnership, an approval or sales.</p>
+          <div class="chips-list">{% for a in p.needs_outreach %}<span class="pill gated">◐ {{ a.app }}</span>{% endfor %}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agent">
+  <h2>How the agent works</h2>
+  <p class="lede">A fixed first pass researches every app, then verification loops re-check the answers. Every model call and tool call is logged, costed and budget-capped.</p>
+  <ol class="steps">
+    <li><b>Search</b><span>Four query templates per app, top three results each.</span></li>
+    <li><b>Fetch</b><span>Up to six pages, official domains first, 20,000 characters each, saved as an evidence bundle.</span></li>
+    <li><b>Extract</b><span>One schema-bound call answers every field from the pages only, with a verbatim quote per answer.</span></li>
+    <li><b>Validate</b><span>Schema, four consistency rules and up to two repair calls; no evidence means “unknown”.</span></li>
+    <li><b>Check quotes</b><span>Every quote must appear on the page it cites (whitespace, case and punctuation normalised).</span></li>
+    <li class="pass2"><b>Second model</b><span>A model from a different family answers again from the same pages.</span></li>
+    <li class="pass2"><b>Judge</b><span>A stronger model settles only the fields that disagree, fail the quote check or break a rule.</span></li>
+    <li class="pass2"><b>Re-research</b><span>Unresolved fields get at most five more tool calls for new pages, then a fresh quote check.</span></li>
+  </ol>
+  <div class="human">
+    <h3>Where a human was needed</h3>
+    <ul>
+      <li>Labelling the {{ v.n_sample }}-app sample blind, before seeing any agent output, to measure accuracy honestly.</li>
+      <li>{{ v.needs_human|length }} app{{ '' if v.needs_human|length == 1 else 's' }} still flagged “needs human” after pass 2{% if v.needs_human %}: {{ v.needs_human|map(attribute='app')|join(', ') }}{% endif %}.</li>
+      <li>Issuing API keys with the right permissions, reconciling spend with the provider, and approving every push.</li>
+    </ul>
+  </div>
+  {% set rs = m.run_stats %}
+  <div class="stats">
+    <div><div class="mono" style="color:var(--faint)">Total spend</div><div class="v num">${{ '%.2f'|format(rs.total_cost_usd) }}</div></div>
+    <div><div class="mono" style="color:var(--faint)">Model calls</div><div class="v num">{{ rs.llm_calls }}</div></div>
+    <div><div class="mono" style="color:var(--faint)">Tool calls</div><div class="v num">{{ rs.tool_calls }}</div></div>
+    <div><div class="mono" style="color:var(--faint)">Retries / failures</div><div class="v num">{{ rs.retries }} / {{ rs.failures }}</div></div>
+  </div>
+  <table class="kv">
+    <thead><tr><th>Model</th><th class="r">Calls</th><th class="r">Spend</th></tr></thead>
+    <tbody>{% for model, g in rs.by_model.items() %}<tr><td>{{ model }}</td><td class="r num">{{ g.llm_calls }}</td><td class="r num">${{ '%.3f'|format(g.cost_usd) }}</td></tr>{% endfor %}</tbody>
+  </table>
+  <p class="foot mono">From the append-only run log · reconciled with the provider's own usage figure · includes pilots and retries</p>
+</section>
+
+<section id="verification">
+  <h2>How accurate is it?</h2>
+  <p class="lede">A person labelled {{ v.n_sample }} randomly drawn apps (two per category) from the real documentation, before seeing any agent output. The same labels score pass 1 and pass 2. Unknown answers count as wrong.</p>
+  {% if v.pass1 %}
+  <div class="acc">
+    {% for label, rep in [("Pass 1", v.pass1), ("Pass 2", v.pass2)] if rep %}
+    <div class="label">{{ label }} · overall</div>
+    <div class="dots" aria-label="{{ rep.overall.correct }} of {{ rep.overall.n }} fields correct">{% for i in range(rep.overall.correct) %}<span class="dot hit"></span>{% endfor %}{% for i in range(rep.overall.answered - rep.overall.correct) %}<span class="dot miss"></span>{% endfor %}{% for i in range(rep.overall.n - rep.overall.answered) %}<span class="dot abstain"></span>{% endfor %}</div>
+    <div class="v num">{{ rep.overall.accuracy_overall|pct }} <span style="color:var(--faint)">n={{ rep.overall.n }}</span></div>
+    {% endfor %}
+  </div>
+  <div class="legend"><span><i class="dot hit"></i>✓ correct</span><span><i class="dot miss"></i>✗ wrong</span><span><i class="dot abstain"></i>? answered unknown</span></div>
+  <p class="foot mono">Each cell = 1 checked field · {{ v.n_sample }} sampled apps × 7 fields{% if v.pass1.n_excluded_truth_unknown %} · {{ v.pass1.n_excluded_truth_unknown }} fields the labeller marked unknown are excluded{% endif %}</p>
+  <table class="kv">
+    <thead><tr><th>Field</th><th class="r">Pass 1</th>{% if v.pass2 %}<th class="r">Pass 2</th>{% endif %}<th class="r">When answered (final)</th><th class="r">Abstained (final)</th></tr></thead>
+    <tbody>
+    {% for f in fields %}{% set a = v.pass1.per_field[f] %}{% set b = (v.pass2 or v.pass1).per_field[f] %}
+    <tr><td>{{ FIELD_LABEL[f] }}</td><td class="r num">{{ a.accuracy_overall|pct }}</td>{% if v.pass2 %}<td class="r num">{{ b.accuracy_overall|pct }}</td>{% endif %}<td class="r num">{{ b.accuracy_when_answered|pct }}</td><td class="r num">{{ b.abstain_rate|pct }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p class="foot mono">n={{ v.n_sample }} apps per field{% if v.compare and v.compare.tuned_on_sample %} · includes changes tuned on the sample{% endif %}</p>
+  {% set final_rep = v.pass2 or v.pass1 %}
+  <details class="list"><summary>Misses in the final answers ({{ final_rep.misses|length }})</summary>
+    <table class="kv"><thead><tr><th>App</th><th>Field</th><th>Agent said</th><th>Human label</th><th class="r">Confidence</th></tr></thead><tbody>
+    {% for x in final_rep.misses %}<tr><td>{{ x.app }}</td><td>{{ FIELD_LABEL[x.field] }}</td><td>{{ x.pred if x.pred is string else x.pred|join(', ') }}</td><td>{{ x.truth if x.truth is string else x.truth|join(', ') }}</td><td class="r num">{{ x.confidence }}</td></tr>{% endfor %}
+    </tbody></table></details>
+  <details class="list"><summary>Hits in the final answers ({{ final_rep.hits|length }})</summary>
+    <table class="kv"><thead><tr><th>App</th><th>Field</th><th>Value</th></tr></thead><tbody>
+    {% for x in final_rep.hits %}<tr><td>{{ x.app }}</td><td>{{ FIELD_LABEL[x.field] }}</td><td>{{ x.pred if x.pred is string else x.pred|join(', ') }}</td></tr>{% endfor %}
+    </tbody></table></details>
+  {% if v.compare %}
+  <details class="list"><summary>Pass 2 fixed {{ v.compare.fixed|length }} field{{ '' if v.compare.fixed|length == 1 else 's' }} and broke {{ v.compare.regressed|length }}</summary>
+    <p class="nojs-note" style="display:block">Fixed: {% for x in v.compare.fixed %}app {{ x.id }} {{ FIELD_LABEL[x.field] }}{{ ", " if not loop.last }}{% endfor %}{% if not v.compare.fixed %}none{% endif %}. Broken: {% for x in v.compare.regressed %}app {{ x.id }} {{ FIELD_LABEL[x.field] }}{{ ", " if not loop.last }}{% endfor %}{% if not v.compare.regressed %}none{% endif %}.</p></details>
+  {% endif %}
+  <table class="kv">
+    <thead><tr><th>Stated confidence (final)</th><th class="r">Fields</th><th class="r">Accuracy</th></tr></thead>
+    <tbody>{% for b in final_rep.calibration %}<tr><td>{{ b.bucket }}</td><td class="r num">{{ b.n }}</td><td class="r num">{{ b.accuracy|pct }}</td></tr>{% endfor %}</tbody>
+  </table>
+  <p class="foot mono">Confidence calibration on the sample · n={{ v.n_sample }} apps</p>
+  {% else %}
+  <div class="pending">Accuracy is pending: the blind labels for the {{ v.n_sample }}-app sample have not been exported yet. Everything else on this page is final.</div>
+  {% endif %}
+  <div class="cards">
+    <div class="card">
+      <h3>What the verification loops changed</h3>
+      <p class="sub">{{ v.pass2_changed_fields }} field{{ '' if v.pass2_changed_fields == 1 else 's' }} across all 100 apps changed in pass 2, each with a recorded before and after.</p>
+      <table class="kv"><tbody>{% for k, n in v.pass2_resolved_by.items() %}<tr><td>Resolved by {{ {"judge":"the judge","reresearch":"re-research","cross":"the second model"}.get(k, k) }}</td><td class="r num">{{ n }}</td></tr>{% endfor %}</tbody></table>
+    </div>
+    <div class="card">
+      <h3>Where the agent failed</h3>
+      <p class="sub">Checks that run on all 100 apps, before and after verification.</p>
+      <table class="kv"><thead><tr><th></th><th class="r">Pass 1</th><th class="r">Final</th></tr></thead><tbody>
+        <tr><td>Fields answered “unknown”</td><td class="r num">{{ v.unknown_fields_pass1 }}</td><td class="r num">{{ v.unknown_fields_final }}</td></tr>
+        {% for fl in ["grounding_failed", "rule_violation", "cross_model_disagree", "needs_human"] %}
+        <tr><td>Apps flagged {{ fl.replace('_', ' ') }}</td><td class="r num">{{ v.flags_pass1.get(fl, 0) }}</td><td class="r num">{{ v.flags_final.get(fl, 0) }}</td></tr>
+        {% endfor %}
+        {% if v.grounding_pass1 %}<tr><td>Quotes found on their page</td><td class="r num">{{ v.grounding_pass1.rate|pct }}</td><td class="r num">{{ v.grounding_final.rate|pct if v.grounding_final else 'n/a' }}</td></tr>{% endif %}
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<section id="table">
+  <h2>All 100 apps</h2>
+  <p class="lede">Select a row to see the evidence: the cited page and the verbatim quote for every answer, the blocker, and what pass 2 changed.</p>
+  <div class="filters" aria-label="Filters">
+    <div class="group" data-key="verdict"><span class="mono glabel">Verdict</span>{% for vd in verdicts %}<button class="chip" type="button" aria-pressed="false" data-value="{{ vd }}">{{ VERDICT_MARK[vd] }} {{ VERDICT_LABEL[vd] }}</button>{% endfor %}</div>
+    <div class="group" data-key="auth"><span class="mono glabel">Auth</span>{% for k in p.auth_counts %}<button class="chip" type="button" aria-pressed="false" data-value="{{ k }}">{{ AUTH_LABEL.get(k, k) }}</button>{% endfor %}</div>
+    <div class="group" data-key="cat"><span class="mono glabel">Category</span>{% for cat in p.by_category %}<button class="chip" type="button" aria-pressed="false" data-value="{{ cat }}">{{ cat }}</button>{% endfor %}</div>
+    <div class="group"><span class="mono glabel">Showing</span><span><span id="shown" class="num">{{ r.rows|length }}</span> of {{ r.rows|length }} apps</span></div>
+  </div>
+  <p class="nojs-note">Filters need JavaScript; every row and its evidence is shown below.</p>
+  <table class="apps">
+    <thead><tr><th>#</th><th>App</th><th>Auth</th><th>Access</th><th>API</th><th>MCP</th><th>Verdict</th><th>Confidence</th></tr></thead>
+    <tbody>
+    {% for row in r.rows %}{% set cls = {"buildable_now":"now","buildable_gated":"gated","blocked":"blocked","unknown":"unknown"}[row.verdict] %}
+    {% set auths = row.auth_methods if row.auth_methods is not string else [row.auth_methods] %}
+    <tr class="app-row" tabindex="0" aria-expanded="false" aria-controls="d{{ row.id }}" data-id="{{ row.id }}" data-verdict="{{ row.verdict }}" data-cat="{{ row.category }}" data-auth="{{ auths|join(' ') }}">
+      <td class="rank num">{{ loop.index }}</td>
+      <td class="name" data-label="App">{{ row.app }}<small>{{ row.category }}</small></td>
+      <td data-label="Auth">{% for a in auths %}<span class="pill">{{ AUTH_LABEL.get(a, a) }}</span> {% endfor %}</td>
+      <td data-label="Access">{{ ACCESS_LABEL.get(row.access_model, row.access_model) }}</td>
+      <td data-label="API">{{ (row.api_type if row.api_type is string else row.api_type|join(', '))|upper }} · {{ row.api_breadth }}</td>
+      <td data-label="MCP">{{ MCP_LABEL.get(row.existing_mcp, row.existing_mcp) }}</td>
+      <td data-label="Verdict"><span class="pill {{ cls }}">{{ VERDICT_MARK[row.verdict] }} {{ VERDICT_LABEL[row.verdict] }}</span></td>
+      <td data-label="Confidence"><span class="conf" title="confidence {{ row.confidence }}" aria-label="confidence {{ row.confidence }}">{% for i in range(10) %}<i class="{{ 'on' if i < (row.confidence * 10)|round|int }}"></i>{% endfor %}</span></td>
+    </tr>
+    <tr class="detail" id="d{{ row.id }}"><td colspan="8">
+      <p style="margin:0 0 12px;color:var(--muted)">{{ row.description }}</p>
+      <dl class="ev">
+        <dt>Blocker</dt><dd>{{ BLOCKER_LABEL.get(row.blocker, row.blocker) }}</dd>
+        {% for f in fields %}
+        <dt>{{ FIELD_LABEL[f] }}</dt>
+        <dd>{% set val = row[f] %}<b style="color:var(--text);font-weight:500">{{ val if val is string else val|join(', ') }}</b>
+          {% for e in row.evidence.get(f, []) %}<div><q>{{ e.quote }}</q> <a class="src" href="{{ e.url }}" rel="noopener nofollow">{{ e.url }}</a></div>{% endfor %}
+          {% if row.unknown_reason.get(f) %}<div style="color:var(--faint)">Reason: {{ row.unknown_reason[f].replace('_', ' ') }}</div>{% endif %}
+        </dd>
+        {% endfor %}
+        {% if row.existing_mcp_url %}<dt>MCP server</dt><dd><a class="src" href="{{ row.existing_mcp_url }}" rel="noopener nofollow">{{ row.existing_mcp_url }}</a></dd>{% endif %}
+        {% if row.flags %}<dt>Flags</dt><dd>{{ row.flags|join(', ')|replace('_', ' ') }}</dd>{% endif %}
+      </dl>
+      {% if row.pass2_diff %}<div class="diff">Pass 1 → pass 2: {% for d in row.pass2_diff %}<b>{{ FIELD_LABEL[d.field] }}</b> {{ d.before if d.before is string else d.before|join(', ') }} → {{ d.after if d.after is string else d.after|join(', ') }} ({{ d.resolved_by }}){{ "; " if not loop.last }}{% endfor %}</div>{% elif row.meta.pass == 2 %}<div class="diff">Pass 2 confirmed every pass-1 answer.</div>{% endif %}
+    </td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section id="proof">
+  <h2>Check it yourself</h2>
+  <p class="lede">The repository runs the agent end to end with your own API keys; the offline test suite needs none.</p>
+<pre>pip install -r requirements.txt
+cp .env.example .env          # add your own OpenRouter and search-tool keys
+python -m agent.run --ids 1   # research one app into results/pass1.json
+python -m agent.verify        # pass 2 → results/pass2.json
+python -m agent.validate results/pass2.json --expect 100
+pytest -q                     # offline tests, no keys needed</pre>
+  <div class="links">
+    <a class="btn" href="results.json">results.json</a>
+    <a class="btn ghost" href="run_log_summary.json">Run log summary</a>
+    <a class="btn ghost" href="replay.json">Replay of one app</a>
+    <a class="btn ghost" href="https://github.com/jegadeesh17/ToolkitBuildabilityResearch">Source code</a>
+  </div>
+  <p class="foot mono">Generated {{ m.generated_at }} from {{ m.source }} · prompt {{ m.prompt_versions|join(', ') }} · sample seed {{ m.seed }}</p>
+</section>
+
+<section id="limitations">
+  <h2>Limitations and tradeoffs</h2>
+  <ul class="limits">
+    <li>Accuracy is measured on {{ v.n_sample }} apps ({{ v.n_sample * 7 }} fields), labelled by one person. It is an estimate with wide error bars, not a guarantee.</li>
+    <li>Evidence comes from web search and plain page fetches. Documentation that only renders with JavaScript, sits behind a login or lives in PDFs is often missed; those fields show “unknown” with a reason.</li>
+    <li>The second model reads the same pages as the first, so a retrieval miss can fool both. Only re-research gathers new evidence, and it is capped at five tool calls per app.</li>
+    <li>“Buildable now” means a developer can obtain credentials alone today. It does not check rate limits, terms of service in depth, or approval timelines.</li>
+    <li>The free model named in the plan was unavailable (its provider rate-limited every call), so a different free model was piloted against the paid one; the paid model was chosen on schema validity and quote grounding.</li>
+    <li>Pass 1 was re-run once on the same evidence after two fixes found on non-sample apps (answers without evidence, and empty replies from reasoning overruns); every row uses the same pipeline version.</li>
+    <li>This is an independent research submission. It is not affiliated with, or endorsed by, any of the companies whose products are listed.</li>
+  </ul>
+</section>
+</main>
+<footer>Toolkit Buildability · an independent research submission · every number on this page comes from <a href="results.json">results.json</a></footer>
+
+<script type="application/json" id="results">{{ embedded_json|safe }}</script>
+<script>
+(function(){
+  var active = {verdict: new Set(), auth: new Set(), cat: new Set()};
+  var rows = Array.prototype.slice.call(document.querySelectorAll('tr.app-row'));
+  var shown = document.getElementById('shown');
+  function matches(tr){
+    if (active.verdict.size && !active.verdict.has(tr.dataset.verdict)) return false;
+    if (active.cat.size && !active.cat.has(tr.dataset.cat)) return false;
+    if (active.auth.size){
+      var auths = tr.dataset.auth.split(' '), ok = false;
+      active.auth.forEach(function(a){ if (auths.indexOf(a) >= 0) ok = true; });
+      if (!ok) return false;
+    }
+    return true;
+  }
+  function apply(){
+    var n = 0;
+    rows.forEach(function(tr){
+      var on = matches(tr), d = document.getElementById(tr.getAttribute('aria-controls'));
+      tr.classList.toggle('hidden', !on);
+      if (d) d.classList.toggle('hidden', !on);
+      if (on) n++;
+    });
+    shown.textContent = n;
+  }
+  document.querySelectorAll('.filters .group[data-key]').forEach(function(g){
+    g.addEventListener('click', function(e){
+      var b = e.target.closest('button.chip'); if (!b) return;
+      var on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      active[g.dataset.key][on ? 'add' : 'delete'](b.dataset.value);
+      apply();
+    });
+  });
+  function toggle(tr){
+    var d = document.getElementById(tr.getAttribute('aria-controls'));
+    var open = tr.getAttribute('aria-expanded') !== 'true';
+    tr.setAttribute('aria-expanded', open ? 'true' : 'false');
+    d.classList.toggle('open', open);
+  }
+  rows.forEach(function(tr){
+    tr.addEventListener('click', function(e){ if (!e.target.closest('a')) toggle(tr); });
+    tr.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(tr); } });
+  });
+})();
+</script>
+</body>
+</html>
