@@ -274,3 +274,31 @@ async def test_extraction_requests_room_for_reasoning_models(fake_tools, run_log
             return LLMResponse(VALID, kw["model"], 1, 1, 0.0, False, 1, 0, "raw.json")
     await research_app(APP, llm=Spy(), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger, **kw())
     assert seen["max_tokens"] >= 8000
+
+
+async def test_searches_and_fetches_run_concurrently_in_order(run_logger):
+    import asyncio
+
+    from agent.pipeline import gather_bundle
+    from agent.schema import Page
+    from agent.tools import SearchHit
+    state = {"active": 0, "peak": 0}
+
+    class SlowTools:
+        async def _tick(self):
+            state["active"] += 1
+            state["peak"] = max(state["peak"], state["active"])
+            await asyncio.sleep(0.01)
+            state["active"] -= 1
+
+        async def search(self, query, **kw):
+            await self._tick()
+            return [SearchHit(f"https://pipe.com/docs/{abs(hash(query)) % 1000}")]
+
+        async def fetch(self, url, **kw):
+            await self._tick()
+            return Page(url=url, text="x" * 600, fetched_at="t")
+    b = await gather_bundle(APP, SlowTools(), "r", "pass1")
+    assert state["peak"] > 1
+    assert [q["query"] for q in b.queries] == [" ".join(t.format(app="Pipe", hint="pipe.com").split())
+                                              for t in QUERY_TEMPLATES]

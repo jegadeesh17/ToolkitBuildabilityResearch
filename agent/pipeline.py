@@ -5,6 +5,7 @@ Talks to the outside world only through the injected `llm` (LLMClient) and `tool
 """
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import re
@@ -127,15 +128,13 @@ def select_urls(hits_by_query: list[list[Any]], hint: HintTarget, max_pages: int
 
 
 async def gather_bundle(app: AppSeed, tools: Any, run_id: str, stage: str) -> EvidenceBundle:
-    queries: list[dict] = []
-    hits_by_query: list[list[Any]] = []
-    for template in QUERY_TEMPLATES:
-        query = " ".join(template.format(app=app.app, hint=app.hint).split())
-        hits = await tools.search(query, app_id=app.id, stage=stage, k=RESULTS_PER_QUERY)
-        queries.append({"query": query, "hits": [asdict(h) for h in hits]})
-        hits_by_query.append(hits)
-    pages = [await tools.fetch(url, app_id=app.id, stage=stage)
-             for url in select_urls(hits_by_query, parse_hint(app.hint))]
+    texts = [" ".join(t.format(app=app.app, hint=app.hint).split()) for t in QUERY_TEMPLATES]
+    # Concurrent within the app; ToolClient's global throttle still spaces the calls. gather keeps order.
+    hits_by_query = list(await asyncio.gather(
+        *(tools.search(q, app_id=app.id, stage=stage, k=RESULTS_PER_QUERY) for q in texts)))
+    queries = [{"query": q, "hits": [asdict(h) for h in hits]} for q, hits in zip(texts, hits_by_query, strict=True)]
+    urls = select_urls(hits_by_query, parse_hint(app.hint))
+    pages = list(await asyncio.gather(*(tools.fetch(u, app_id=app.id, stage=stage) for u in urls)))
     bundle = EvidenceBundle(app_id=app.id, app=app.app, run_id=run_id, created_at=utc_now(),
                             queries=queries, pages=pages)
     save_bundle(bundle)
