@@ -6,7 +6,7 @@ addopts = "-p no:cacheprovider"
 markers = ["browser: needs local Chromium (Playwright); skipped if unavailable"]
 
 [tool.ruff]
-line-length = 110
+line-length = 120
 target-version = "py313"
 
 [tool.ruff.lint]
