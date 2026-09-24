@@ -145,3 +145,13 @@ def test_partial_pass2_falls_back_to_pass1(tmp_path, rows):
 
 def test_site_is_not_a_python_package():
     assert not Path("site/__init__.py").exists()
+
+
+def test_agent_reference_labels_are_disclosed(rows):
+    splits = {"seed": 20260924, "sample": load_split("sample")}
+    spot = {"seed": 7, "checks": [{"judgement": "correct"}] * 8 + [{"judgement": "wrong"}, {"judgement": "cant_tell"}]}
+    res = build_results(rows, rows, "pass2", {}, [], splits, None, "agent:gemini-cli (pro)", spot)
+    html = render_html(res)
+    assert "independent AI research agent (gemini-cli (pro))" in html and "not verified accuracy" in html
+    assert "<b>8</b> correct, <b>1</b> wrong, <b>1</b> could not tell" in html
+    assert res["verification"]["labeller_is_human"] is False

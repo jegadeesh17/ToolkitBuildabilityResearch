@@ -183,16 +183,16 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
   <p class="lede">A research agent read each app's own documentation and recorded how an AI agent would authenticate, how a developer gets credentials, and what stands in the way, with a verbatim quote behind every answer. {{ vc.buildable_gated }} more have a public API behind a paid plan, an approval or a sales call; {% if vc.blocked %}{{ vc.blocked }} {{ 'is' if vc.blocked == 1 else 'are' }} blocked{% else %}none is blocked outright{% endif %}{% if vc.unknown %}, and {{ vc.unknown }} could not be settled from the evidence{% endif %}.</p>
   <div class="tiles">
     <div class="tile">
-      <div class="mono" style="color:var(--faint)">Accuracy, pass 1 → pass 2</div>
+      <div class="mono" style="color:var(--faint)">{{ "Accuracy" if v.labeller_is_human else "Agreement with reference" }}, pass 1 → pass 2</div>
       {% if v.compare %}
       <div class="big num">{{ v.compare.overall.pass1|pct }} <small>→</small> {{ v.compare.overall.pass2|pct }}</div>
-      <p>Field-level accuracy on a blind, human-labelled sample of {{ v.n_sample }} apps (n={{ v.compare.n }} checked fields).</p>
+      <p>Field-level {{ "accuracy on a blind, human-labelled" if v.labeller_is_human else "agreement with independent reference labels on a blind" }} sample of {{ v.n_sample }} apps (n={{ v.compare.n }} checked fields).</p>
       {% elif v.pass1 %}
       <div class="big num">{{ v.pass1.overall.accuracy_overall|pct }}</div>
       <p>Pass-1 field-level accuracy on the blind {{ v.n_sample }}-app sample (n={{ v.pass1.overall.n }}).</p>
       {% else %}
       <div class="big">Pending</div>
-      <p>Waiting for the blind labels of the {{ v.n_sample }}-app sample.</p>
+      <p>Waiting for the reference labels of the {{ v.n_sample }}-app sample.</p>
       {% endif %}
     </div>
     <div class="tile">
@@ -326,7 +326,15 @@ footer{max-width:1120px;margin:0 auto;padding:28px 24px 56px;color:var(--faint);
 
 <section id="verification">
   <h2>How accurate is it?</h2>
+  {% if v.labeller_is_human or not v.labeller %}
   <p class="lede">A person labelled {{ v.n_sample }} randomly drawn apps (two per category) from the real documentation, before seeing any agent output. The same labels score pass 1 and pass 2. Unknown answers count as wrong.</p>
+  {% else %}
+  <p class="lede">{{ v.n_sample }} randomly drawn apps (two per category) were labelled from the vendors' own documentation by an independent AI research agent ({{ v.labeller.replace('agent:', '') }}), a different model family from every model in the pipeline, working in a separate folder with no access to the pipeline or its answers. The numbers below measure agreement with those reference labels, not verified accuracy. The same labels score pass 1 and pass 2; unknown answers count as wrong.</p>
+  {% endif %}
+  {% if v.spot_check %}
+  <div class="human" style="border-color:var(--now)"><h3 style="color:var(--now)">Checked by a person</h3>
+    <ul><li>A person checked the reference verdict for {{ v.spot_check.n }} apps, one per category (seed {{ v.spot_check.seed }}): <b>{{ v.spot_check.correct }}</b> correct, <b>{{ v.spot_check.wrong }}</b> wrong, <b>{{ v.spot_check.cant_tell }}</b> could not tell from the source page.</li></ul></div>
+  {% endif %}
   {% if v.pass1 %}
   <div class="acc">
     {% for label, rep in [("Pass 1", v.pass1), ("Pass 2", v.pass2)] if rep %}
@@ -454,7 +462,8 @@ pytest -q                     # offline tests, no keys needed</pre>
 <section id="limitations">
   <h2>Limitations and tradeoffs</h2>
   <ul class="limits">
-    <li>Accuracy is measured on {{ v.n_sample }} apps ({{ v.n_sample * 7 }} fields), labelled by one person. It is an estimate with wide error bars, not a guarantee.</li>
+    {% if v.labeller_is_human or not v.labeller %}<li>Accuracy is measured on {{ v.n_sample }} apps ({{ v.n_sample * 7 }} fields), labelled by one person. It is an estimate with wide error bars, not a guarantee.</li>
+    {% else %}<li>The reference labels for the {{ v.n_sample }}-app sample come from an independent AI agent, not a person, because hand-labelling 140 fields did not fit the time available. Agreement with them is not the same as accuracy{% if v.spot_check %}; a person spot-checked {{ v.spot_check.n }} of their verdicts{% endif %}. The sample is small ({{ v.n_sample * 7 }} fields), so treat the numbers as estimates with wide error bars.</li>{% endif %}
     <li>Evidence comes from web search and plain page fetches. Documentation that only renders with JavaScript, sits behind a login or lives in PDFs is often missed; those fields show “unknown” with a reason.</li>
     <li>The second model reads the same pages as the first, so a retrieval miss can fool both. Only re-research gathers new evidence, and it is capped at five tool calls per app.</li>
     <li>“Buildable now” means a developer can obtain credentials alone today. It does not check rate limits, terms of service in depth, or approval timelines.</li>

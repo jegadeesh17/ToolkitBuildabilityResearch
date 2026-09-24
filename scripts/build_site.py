@@ -120,7 +120,17 @@ def run_stats(log: list[dict], pass1_rows: list[dict], final_rows: list[dict]) -
             "final_run_id": final_rows[0]["meta"]["run_id"] if final_rows else None}
 
 
-def verification_block(scores: dict, pass1: list[dict], final: list[dict], sample_ids: list[int]) -> dict:
+def spot_summary(spot: dict | None) -> dict | None:
+    if not spot:
+        return None
+    checks = spot.get("checks") or []
+    c = Counter(x.get("judgement") for x in checks)
+    return {"n": len(checks), "correct": c.get("correct", 0), "wrong": c.get("wrong", 0),
+            "cant_tell": c.get("cant_tell", 0), "seed": spot.get("seed"), "checks": checks}
+
+
+def verification_block(scores: dict, pass1: list[dict], final: list[dict], sample_ids: list[int],
+                       labeller: str | None = None, spot: dict | None = None) -> dict:
     p1, p2, cmp_ = scores.get("pass1"), scores.get("pass2"), scores.get("compare")
     needs_human = [{"id": r["id"], "app": r["app"]} for r in final if "needs_human" in r["flags"]]
     changed = sum(len(r.get("pass2_diff") or []) for r in final)
@@ -132,6 +142,8 @@ def verification_block(scores: dict, pass1: list[dict], final: list[dict], sampl
         return {k: rep[k] for k in ("n_apps", "n_items", "n_excluded_truth_unknown", "overall", "per_field", "hits",
                                     "misses", "calibration", "jaccard", "ground_truth_sha256") if k in rep}
     return {"status": "scored" if p1 else "pending_labels", "n_sample": len(sample_ids), "sample_ids": sample_ids,
+            "labeller": labeller, "labeller_is_human": bool(labeller) and labeller.startswith("human"),
+            "spot_check": spot_summary(spot),
             "pass1": slim(p1), "pass2": slim(p2),
             "compare": {k: cmp_[k] for k in ("overall", "per_field", "fixed", "regressed", "tuned_on_sample", "n")
                         if k in cmp_} if cmp_ else None,
@@ -144,7 +156,7 @@ def verification_block(scores: dict, pass1: list[dict], final: list[dict], sampl
 
 
 def build_results(pass1: list[dict], final: list[dict], source: str, scores: dict, log: list[dict],
-                  splits: dict, pilot: dict | None) -> dict:
+                  splits: dict, pilot: dict | None, labeller: str | None = None, spot: dict | None = None) -> dict:
     rows = sorted(final, key=lambda r: r["id"])
     stats = run_stats(log, pass1, rows)
     models = sorted({r["meta"]["model"] for r in rows})
@@ -157,7 +169,7 @@ def build_results(pass1: list[dict], final: list[dict], source: str, scores: dic
                  "run_stats": stats, "pilot": pilot},
         "rows": rows,
         "patterns": compute_patterns(rows),
-        "verification": verification_block(scores, pass1, rows, splits.get("sample", [])),
+        "verification": verification_block(scores, pass1, rows, splits.get("sample", []), labeller, spot),
     }
 
 
@@ -212,8 +224,10 @@ def main(argv: list[str] | None = None) -> int:
         print(f"--replay-id {args.replay_id} is a sample app; choose a non-sample app")
         return 2
     log = read_log(config.RUN_LOG)
+    gt = _load_json(v / "ground_truth.json") or {}
     results = build_results(pass1, final, source, scores, log, splits,
-                            _load_json(config.RESULTS_DIR / "pilot" / "compare.json"))
+                            _load_json(config.RESULTS_DIR / "pilot" / "compare.json"),
+                            gt.get("labeller"), _load_json(v / "spot_check.json"))
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
     (out / "results.json").write_text(json.dumps(results, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
