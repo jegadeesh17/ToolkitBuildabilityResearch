@@ -84,3 +84,6 @@ L2 cross-model shares the evidence bundle with pass 1, so retrieval misses can b
 - A pass-1 field with a value but no evidence is converted to `unknown` / `model_unsure` before grounding (guardrail: evidence or unknown).
 - CLI progress lines print counts only (no field values), so the blind sample stays blind while runs execute.
 - Composio auth/permission rejection aborts a run with exit 3 (configuration), rather than producing `unknown` rows.
+- `schema_valid` is recorded on a separate `kind: "llm_validation"` log line per attempt (it is only known after the reply is parsed); `kind: "llm"` lines carry cost/latency. `cost_report` and `pilot_compare` read both; the budget sums `llm` lines only.
+- Extraction repair loop (≤2 repairs) triggers on: unparseable/invalid JSON, an empty reply (the retry then sends OpenRouter `reasoning: {effort: "low"}`), and values given without evidence. Evidence gaps that survive both repairs are converted to `unknown` / `model_unsure`.
+- LLM transport/HTTP failures after retries stop that app (`app_error` log line, exit 1, `--resume` retries it); they never become research results.
