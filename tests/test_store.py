@@ -35,3 +35,22 @@ def test_bundle_roundtrip(tmp_path, make_bundle):
     save_bundle(b, raw_dir=tmp_path)
     assert load_bundle("r", 1, raw_dir=tmp_path) == b
     assert isinstance(load_bundle("r", 1, raw_dir=tmp_path), EvidenceBundle)
+
+
+
+def test_atomic_write_retries_when_windows_locks_the_target(tmp_path, make_row, monkeypatch):
+    import os
+
+    import agent.store as store
+    real, calls = os.replace, {"n": 0}
+
+    def flaky(src, dst):
+        calls["n"] += 1
+        if calls["n"] <= 2:
+            raise PermissionError(5, "Access is denied")
+        return real(src, dst)
+    monkeypatch.setattr(store.os, "replace", flaky)
+    monkeypatch.setattr(store, "_RETRY_DELAY_S", 0)
+    p = tmp_path / "r.json"
+    write_results_atomic(p, [make_row(id=2)])
+    assert calls["n"] == 3 and [r.id for r in load_results(p)] == [2]
