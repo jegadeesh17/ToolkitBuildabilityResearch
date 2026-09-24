@@ -282,6 +282,9 @@ async def research_app(app: AppSeed, *, llm: Any, tools: Any, logger: RunLogger,
                        run_id: str, prompt: Prompt, bundle: EvidenceBundle | None = None) -> tuple[AppResult, dict]:
     if bundle is None:
         bundle = await gather_bundle(app, tools, run_id, stage)
+    elif bundle.run_id != run_id:  # reused bundle: keep a copy beside this run's rows for later grounding
+        bundle = bundle.model_copy(update={"run_id": run_id, "app_id": app.id, "app": app.app})
+        save_bundle(bundle)
     if not usable_pages(bundle):
         any_hits = any(q.get("hits") for q in bundle.queries) or bool(bundle.pages)
         reason = UnknownReason.FETCH_FAILED if any_hits else UnknownReason.NO_DOCS_FOUND

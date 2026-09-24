@@ -240,3 +240,10 @@ def test_prompt_version_ignores_line_endings(tmp_path, monkeypatch):
     crlf = pl.load_prompt()
     (tmp_path / "extract.md").write_bytes(src.encode("utf-8"))
     assert crlf.version == pl.load_prompt().version and "\r" not in crlf.text
+
+
+async def test_injected_bundle_is_saved_under_current_run(fake_llm, fake_tools, run_logger, make_bundle):
+    from agent.store import load_bundle
+    await research_app(APP, llm=fake_llm([VALID]), tools=fake_tools({}, []), logger=run_logger,
+                       bundle=make_bundle([(DOC, PAGE_TEXT)]), **kw(run_id="newrun"))
+    assert load_bundle("newrun", 3).pages[0].url == DOC
