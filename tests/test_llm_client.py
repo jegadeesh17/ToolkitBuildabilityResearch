@@ -173,3 +173,18 @@ def test_parse_json_loose(text):
 def test_parse_json_loose_rejects(text):
     with pytest.raises(ValueError):
         parse_json_loose(text)
+
+
+async def test_exhausted_retries_carry_status_and_kind(tmp_path):
+    c, _ = client(tmp_path, lambda req: httpx.Response(429, json={"error": {"message": "Provider returned error"}}))
+    with pytest.raises(LLMError) as e:
+        await ask(c)
+    assert e.value.status == 429 and e.value.kind == "transient"
+
+
+async def test_empty_content_kind(tmp_path):
+    body = {**OK, "choices": [{"message": {"content": ""}}]}
+    c, _ = client(tmp_path, lambda req: httpx.Response(200, json=body))
+    with pytest.raises(LLMError) as e:
+        await ask(c)
+    assert e.value.kind == "empty_content"

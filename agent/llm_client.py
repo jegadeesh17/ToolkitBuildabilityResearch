@@ -29,13 +29,18 @@ _FENCE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 
 
 class LLMError(Exception):
-    def __init__(self, message: str, status: int | None = None):
+    """kind: "http" (non-retryable HTTP error), "transient" (retries exhausted), "empty_content" (no text)."""
+
+    def __init__(self, message: str, status: int | None = None, kind: str = "http"):
         super().__init__(message)
         self.status = status
+        self.kind = kind
 
 
 class _Retryable(Exception):
-    pass
+    def __init__(self, message: str, status: int | None = None):
+        super().__init__(message)
+        self.status = status
 
 
 @dataclass
@@ -151,7 +156,7 @@ class LLMClient:
                             continue
                         break
                     if resp.status_code == 429 or resp.status_code >= 500:
-                        raise _Retryable(f"http_{resp.status_code}: {_error_message(resp)}")
+                        raise _Retryable(f"http_{resp.status_code}: {_error_message(resp)}", resp.status_code)
                     if resp.status_code >= 400:
                         raise LLMError(f"http_{resp.status_code}: {_error_message(resp)}", resp.status_code)
                     try:
@@ -159,10 +164,12 @@ class LLMClient:
                     except ValueError:
                         raise _Retryable("non-JSON response body") from None
                     if isinstance(data, dict) and data.get("error"):
-                        raise _Retryable(f"provider error: {str(data['error'])[:300]}")
+                        code = data["error"].get("code") if isinstance(data["error"], dict) else None
+                        raise _Retryable(f"provider error: {str(data['error'])[:300]}",
+                                         code if isinstance(code, int) else None)
         except _Retryable as e:
             log("error", redact(str(e), self._secrets))
-            raise LLMError(str(e)) from None
+            raise LLMError(str(e), e.status, kind="transient") from None
         except LLMError as e:
             log("error", redact(str(e), self._secrets))
             raise
@@ -181,7 +188,7 @@ class LLMClient:
                   "cost_estimated": cost_estimated, "raw_path": raw_path}
         if not isinstance(text, str) or not text.strip():
             log("error", "empty_content", **common)
-            raise LLMError("empty_content")
+            raise LLMError("empty_content", kind="empty_content")
         log("ok", None, **common)
         return LLMResponse(text=text, model=model, tokens_in=tokens_in, tokens_out=tokens_out, cost_usd=cost,
                            cost_estimated=cost_estimated, latency_ms=int((time.monotonic() - started) * 1000),

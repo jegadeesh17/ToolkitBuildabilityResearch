@@ -226,7 +226,7 @@ async def test_empty_content_counts_as_schema_failure(fake_tools, run_logger):
 
         async def chat(self, **kw):
             Empty.calls += 1
-            raise LLMError("empty_content")
+            raise LLMError("empty_content", kind="empty_content")
     row, _ = await research_app(APP, llm=Empty(), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger,
                                 **kw())
     assert Empty.calls == 3 and Flag.NEEDS_HUMAN in row.flags
@@ -247,3 +247,18 @@ async def test_injected_bundle_is_saved_under_current_run(fake_llm, fake_tools, 
     await research_app(APP, llm=fake_llm([VALID]), tools=fake_tools({}, []), logger=run_logger,
                        bundle=make_bundle([(DOC, PAGE_TEXT)]), **kw(run_id="newrun"))
     assert load_bundle("newrun", 3).pages[0].url == DOC
+
+
+async def test_exhausted_rate_limit_propagates_not_unknown(fake_tools, run_logger):
+    from agent.llm_client import LLMError
+
+    class Throttled:
+        calls = 0
+
+        async def chat(self, **kw):
+            Throttled.calls += 1
+            raise LLMError("http_429: Provider returned error", 429, kind="transient")
+    with pytest.raises(LLMError):
+        await research_app(APP, llm=Throttled(), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger,
+                           **kw())
+    assert Throttled.calls == 1  # no repair loop on transport/HTTP failures

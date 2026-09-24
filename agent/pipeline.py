@@ -233,13 +233,13 @@ async def extract(app: AppSeed, bundle: EvidenceBundle, llm: Any, *, model: str,
                            "retries": attempt - 1})
             return extraction, False
         except LLMError as e:
-            if e.status is not None:
+            if e.kind != "empty_content":
                 if e.status == 400 and "context" in str(e).lower() and not truncated:
                     truncated = True  # one retry with shorter pages; not counted as a repair
                     messages[1] = {"role": "user", "content": render_user_message(app, bundle, max_chars=10_000)}
                     attempt -= 1
                     continue
-                raise  # HTTP errors are not schema problems: surface them to the run
+                raise  # HTTP/transient failures are not schema problems: surface them (--resume retries)
             error = f"no usable reply ({e})"
         except (ValueError, ValidationError) as e:
             error = _short_error(e)
