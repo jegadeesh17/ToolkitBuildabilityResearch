@@ -1,0 +1,785 @@
+{
+ "overall": {
+  "pass1": 0.7429,
+  "pass2": 0.7786,
+  "delta": 0.0357
+ },
+ "per_field": {
+  "auth_methods": {
+   "pass1": 0.55,
+   "pass2": 0.4,
+   "delta": -0.15
+  },
+  "access_model": {
+   "pass1": 0.65,
+   "pass2": 0.65,
+   "delta": 0.0
+  },
+  "api_type": {
+   "pass1": 1.0,
+   "pass2": 0.95,
+   "delta": -0.05
+  },
+  "api_breadth": {
+   "pass1": 0.75,
+   "pass2": 0.85,
+   "delta": 0.1
+  },
+  "existing_mcp": {
+   "pass1": 0.9,
+   "pass2": 0.95,
+   "delta": 0.05
+  },
+  "verdict": {
+   "pass1": 0.7,
+   "pass2": 0.85,
+   "delta": 0.15
+  },
+  "blocker": {
+   "pass1": 0.65,
+   "pass2": 0.8,
+   "delta": 0.15
+  }
+ },
+ "fixed": [
+  {
+   "id": 18,
+   "field": "api_breadth"
+  },
+  {
+   "id": 25,
+   "field": "blocker"
+  },
+  {
+   "id": 25,
+   "field": "verdict"
+  },
+  {
+   "id": 40,
+   "field": "blocker"
+  },
+  {
+   "id": 40,
+   "field": "verdict"
+  },
+  {
+   "id": 45,
+   "field": "verdict"
+  },
+  {
+   "id": 56,
+   "field": "api_breadth"
+  },
+  {
+   "id": 59,
+   "field": "access_model"
+  },
+  {
+   "id": 59,
+   "field": "blocker"
+  },
+  {
+   "id": 85,
+   "field": "api_breadth"
+  },
+  {
+   "id": 99,
+   "field": "existing_mcp"
+  }
+ ],
+ "regressed": [
+  {
+   "id": 14,
+   "field": "access_model"
+  },
+  {
+   "id": 40,
+   "field": "auth_methods"
+  },
+  {
+   "id": 45,
+   "field": "auth_methods"
+  },
+  {
+   "id": 72,
+   "field": "api_breadth"
+  },
+  {
+   "id": 72,
+   "field": "auth_methods"
+  },
+  {
+   "id": 85,
+   "field": "api_type"
+  }
+ ],
+ "pass1_misses": [
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_trial",
+   "confidence": 0.95
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.95
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_trial",
+   "confidence": 0.9
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "api_breadth",
+   "pred": "moderate",
+   "truth": "broad",
+   "confidence": 0.9
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "verdict",
+   "pred": "buildable_gated",
+   "truth": "buildable_now",
+   "confidence": 0.9
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "blocker",
+   "pred": "paid_plan_required",
+   "truth": "none",
+   "confidence": 0.9
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "verdict",
+   "pred": "unknown",
+   "truth": "buildable_now",
+   "confidence": 0.8
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "blocker",
+   "pred": "unknown",
+   "truth": "none",
+   "confidence": 0.8
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "verdict",
+   "pred": "buildable_gated",
+   "truth": "buildable_now",
+   "confidence": 0.9
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "blocker",
+   "pred": "paid_plan_required",
+   "truth": "none",
+   "confidence": 0.9
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2"
+   ],
+   "confidence": 0.95
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "access_model",
+   "pred": "unknown",
+   "truth": "partner_or_sales",
+   "confidence": 0.7
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "verdict",
+   "pred": "unknown",
+   "truth": "buildable_gated",
+   "confidence": 0.7
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "blocker",
+   "pred": "unknown",
+   "truth": "sales_contact_only",
+   "confidence": 0.7
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "auth_methods",
+   "pred": [
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.95
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "moderate",
+   "confidence": 0.95
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "access_model",
+   "pred": "paid_plan_required",
+   "truth": "partner_or_sales",
+   "confidence": 0.8
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "moderate",
+   "confidence": 0.8
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "existing_mcp",
+   "pred": "unknown",
+   "truth": "third_party",
+   "confidence": 0.8
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "blocker",
+   "pred": "paid_plan_required",
+   "truth": "sales_contact_only",
+   "confidence": 0.8
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "access_model",
+   "pred": "unknown",
+   "truth": "self_serve_free",
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "verdict",
+   "pred": "unknown",
+   "truth": "buildable_now",
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "blocker",
+   "pred": "unknown",
+   "truth": "none",
+   "confidence": 0.6
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "truth": [
+    "api_key"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_trial",
+   "confidence": 0.9
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "auth_methods",
+   "pred": [
+    "api_key",
+    "basic"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "basic"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "auth_methods",
+   "pred": [
+    "bearer_token"
+   ],
+   "truth": [
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.92
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "paid_plan_required",
+   "confidence": 0.92
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "api_breadth",
+   "pred": "moderate",
+   "truth": "narrow",
+   "confidence": 0.92
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_gated",
+   "confidence": 0.92
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "paid_plan_required",
+   "confidence": 0.92
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2"
+   ],
+   "truth": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "auth_methods",
+   "pred": [
+    "bearer_token"
+   ],
+   "truth": [
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.95
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "narrow",
+   "confidence": 0.95
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "existing_mcp",
+   "pred": "third_party",
+   "truth": "official",
+   "confidence": 0.95
+  }
+ ],
+ "pass2_misses": [
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_trial",
+   "confidence": 0.9
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.7571
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "access_model",
+   "pred": "self_serve_trial",
+   "truth": "self_serve_free",
+   "confidence": 0.7571
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key",
+    "basic"
+   ],
+   "truth": [
+    "oauth2"
+   ],
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "access_model",
+   "pred": "paid_plan_required",
+   "truth": "self_serve_trial",
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "verdict",
+   "pred": "buildable_gated",
+   "truth": "buildable_now",
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "blocker",
+   "pred": "paid_plan_required",
+   "truth": "none",
+   "confidence": 0.5429
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "auth_methods",
+   "pred": [
+    "api_key",
+    "basic"
+   ],
+   "truth": [
+    "api_key"
+   ],
+   "confidence": 0.8143
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2"
+   ],
+   "confidence": 0.7571
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "bearer_token",
+    "other"
+   ],
+   "truth": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "confidence": 0.6286
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "access_model",
+   "pred": "admin_or_approval",
+   "truth": "partner_or_sales",
+   "confidence": 0.6286
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "blocker",
+   "pred": "approval_or_partnership",
+   "truth": "sales_contact_only",
+   "confidence": 0.6286
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "auth_methods",
+   "pred": [
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "moderate",
+   "confidence": 0.5857
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "existing_mcp",
+   "pred": "unknown",
+   "truth": "third_party",
+   "confidence": 0.5857
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "access_model",
+   "pred": "unknown",
+   "truth": "self_serve_free",
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "verdict",
+   "pred": "unknown",
+   "truth": "buildable_now",
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "blocker",
+   "pred": "unknown",
+   "truth": "none",
+   "confidence": 0.6
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "truth": [
+    "api_key"
+   ],
+   "confidence": 0.5714
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_trial",
+   "confidence": 0.5714
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "api_breadth",
+   "pred": "moderate",
+   "truth": "broad",
+   "confidence": 0.8429
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "auth_methods",
+   "pred": [
+    "api_key",
+    "basic"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "basic"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "auth_methods",
+   "pred": [
+    "bearer_token"
+   ],
+   "truth": [
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "paid_plan_required",
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "api_type",
+   "pred": [
+    "rest",
+    "other"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_gated",
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "paid_plan_required",
+   "confidence": 0.8429
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2"
+   ],
+   "truth": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "auth_methods",
+   "pred": [
+    "api_key"
+   ],
+   "truth": [
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "narrow",
+   "confidence": 0.8429
+  }
+ ],
+ "n": 140,
+ "tuned_on_sample": false,
+ "ground_truth_sha256": "59fcdefbf885b29fef4a2cc35871ddc7cbda99279c4c0cfd27562f01a62f7524"
+}

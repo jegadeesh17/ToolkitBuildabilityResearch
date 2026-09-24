@@ -1,0 +1,1434 @@
+{
+ "pass": 2,
+ "n_apps": 20,
+ "n_items": 140,
+ "n_excluded_truth_unknown": 0,
+ "overall": {
+  "n": 140,
+  "correct": 109,
+  "answered": 136,
+  "accuracy_overall": 0.7786,
+  "accuracy_when_answered": 0.8015,
+  "abstain_rate": 0.0286
+ },
+ "per_field": {
+  "auth_methods": {
+   "n": 20,
+   "correct": 8,
+   "answered": 20,
+   "accuracy_overall": 0.4,
+   "accuracy_when_answered": 0.4,
+   "abstain_rate": 0.0
+  },
+  "access_model": {
+   "n": 20,
+   "correct": 13,
+   "answered": 19,
+   "accuracy_overall": 0.65,
+   "accuracy_when_answered": 0.6842,
+   "abstain_rate": 0.05
+  },
+  "api_type": {
+   "n": 20,
+   "correct": 19,
+   "answered": 20,
+   "accuracy_overall": 0.95,
+   "accuracy_when_answered": 0.95,
+   "abstain_rate": 0.0
+  },
+  "api_breadth": {
+   "n": 20,
+   "correct": 17,
+   "answered": 20,
+   "accuracy_overall": 0.85,
+   "accuracy_when_answered": 0.85,
+   "abstain_rate": 0.0
+  },
+  "existing_mcp": {
+   "n": 20,
+   "correct": 19,
+   "answered": 19,
+   "accuracy_overall": 0.95,
+   "accuracy_when_answered": 1.0,
+   "abstain_rate": 0.05
+  },
+  "verdict": {
+   "n": 20,
+   "correct": 17,
+   "answered": 19,
+   "accuracy_overall": 0.85,
+   "accuracy_when_answered": 0.8947,
+   "abstain_rate": 0.05
+  },
+  "blocker": {
+   "n": 20,
+   "correct": 16,
+   "answered": 19,
+   "accuracy_overall": 0.8,
+   "accuracy_when_answered": 0.8421,
+   "abstain_rate": 0.05
+  }
+ },
+ "jaccard": {
+  "auth_methods": 0.6917,
+  "api_type": 0.975
+ },
+ "hits": [
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2"
+   ],
+   "truth": [
+    "oauth2"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.9
+  },
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "field": "api_type",
+   "pred": [
+    "rest",
+    "soap"
+   ],
+   "truth": [
+    "rest",
+    "soap"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.9
+  },
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.9
+  },
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.9
+  },
+  {
+   "id": 1,
+   "app": "Salesforce",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.9
+  },
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.9
+  },
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "existing_mcp",
+   "pred": "third_party",
+   "truth": "third_party",
+   "confidence": 0.9
+  },
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.9
+  },
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.9
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.7571
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.7571
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.7571
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.7571
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.7571
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.5429
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "auth_methods",
+   "pred": [
+    "api_key"
+   ],
+   "truth": [
+    "api_key"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.8429
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "api_breadth",
+   "pred": "moderate",
+   "truth": "moderate",
+   "confidence": 0.8429
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.8429
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8429
+  },
+  {
+   "id": 25,
+   "app": "Pumble",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8429
+  },
+  {
+   "id": 26,
+   "app": "Discord",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 26,
+   "app": "Discord",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.8429
+  },
+  {
+   "id": 26,
+   "app": "Discord",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 26,
+   "app": "Discord",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.8429
+  },
+  {
+   "id": 26,
+   "app": "Discord",
+   "field": "existing_mcp",
+   "pred": "third_party",
+   "truth": "third_party",
+   "confidence": 0.8429
+  },
+  {
+   "id": 26,
+   "app": "Discord",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8429
+  },
+  {
+   "id": 26,
+   "app": "Discord",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8429
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key"
+   ],
+   "confidence": 0.6714
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.6714
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.6714
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.6714
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.6714
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.6714
+  },
+  {
+   "id": 36,
+   "app": "Klaviyo",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.6714
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "access_model",
+   "pred": "self_serve_trial",
+   "truth": "self_serve_trial",
+   "confidence": 0.8143
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8143
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.8143
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "existing_mcp",
+   "pred": "third_party",
+   "truth": "third_party",
+   "confidence": 0.8143
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8143
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8143
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.7571
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "api_type",
+   "pred": [
+    "rest",
+    "graphql"
+   ],
+   "truth": [
+    "rest",
+    "graphql"
+   ],
+   "confidence": 0.7571
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.7571
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.7571
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.7571
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.7571
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "api_type",
+   "pred": [
+    "rest",
+    "graphql"
+   ],
+   "truth": [
+    "rest",
+    "graphql"
+   ],
+   "confidence": 0.6286
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.6286
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "existing_mcp",
+   "pred": "third_party",
+   "truth": "third_party",
+   "confidence": 0.6286
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "verdict",
+   "pred": "buildable_gated",
+   "truth": "buildable_gated",
+   "confidence": 0.6286
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.8429
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "api_breadth",
+   "pred": "moderate",
+   "truth": "moderate",
+   "confidence": 0.8429
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.8429
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8429
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8429
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "auth_methods",
+   "pred": [
+    "api_key"
+   ],
+   "truth": [
+    "api_key"
+   ],
+   "confidence": 0.5857
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "access_model",
+   "pred": "partner_or_sales",
+   "truth": "partner_or_sales",
+   "confidence": 0.5857
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.5857
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "verdict",
+   "pred": "buildable_gated",
+   "truth": "buildable_gated",
+   "confidence": 0.5857
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "blocker",
+   "pred": "sales_contact_only",
+   "truth": "sales_contact_only",
+   "confidence": 0.5857
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.6
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.5714
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.5714
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.5714
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.5714
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.5714
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.8429
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.8429
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8429
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8429
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.8714
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "field": "api_type",
+   "pred": [
+    "graphql"
+   ],
+   "truth": [
+    "graphql"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.8714
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.8714
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8714
+  },
+  {
+   "id": 76,
+   "app": "Monday.com",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8714
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.8714
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "broad",
+   "confidence": 0.8714
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.8714
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8714
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8714
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "api_breadth",
+   "pred": "narrow",
+   "truth": "narrow",
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.8429
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "access_model",
+   "pred": "paid_plan_required",
+   "truth": "paid_plan_required",
+   "confidence": 0.8714
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "api_breadth",
+   "pred": "moderate",
+   "truth": "moderate",
+   "confidence": 0.8714
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "existing_mcp",
+   "pred": "third_party",
+   "truth": "third_party",
+   "confidence": 0.8714
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "verdict",
+   "pred": "buildable_gated",
+   "truth": "buildable_gated",
+   "confidence": 0.8714
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "blocker",
+   "pred": "paid_plan_required",
+   "truth": "paid_plan_required",
+   "confidence": 0.8714
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_free",
+   "confidence": 0.8429
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "api_type",
+   "pred": [
+    "rest"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "existing_mcp",
+   "pred": "official",
+   "truth": "official",
+   "confidence": 0.8429
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_now",
+   "confidence": 0.8429
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "none",
+   "confidence": 0.8429
+  }
+ ],
+ "misses": [
+  {
+   "id": 9,
+   "app": "Copper",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_trial",
+   "confidence": 0.9
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.7571
+  },
+  {
+   "id": 14,
+   "app": "Front",
+   "field": "access_model",
+   "pred": "self_serve_trial",
+   "truth": "self_serve_free",
+   "confidence": 0.7571
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key",
+    "basic"
+   ],
+   "truth": [
+    "oauth2"
+   ],
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "access_model",
+   "pred": "paid_plan_required",
+   "truth": "self_serve_trial",
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "verdict",
+   "pred": "buildable_gated",
+   "truth": "buildable_now",
+   "confidence": 0.5429
+  },
+  {
+   "id": 18,
+   "app": "Help Scout",
+   "field": "blocker",
+   "pred": "paid_plan_required",
+   "truth": "none",
+   "confidence": 0.5429
+  },
+  {
+   "id": 40,
+   "app": "SendGrid",
+   "field": "auth_methods",
+   "pred": [
+    "api_key",
+    "basic"
+   ],
+   "truth": [
+    "api_key"
+   ],
+   "confidence": 0.8143
+  },
+  {
+   "id": 41,
+   "app": "Shopify",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2"
+   ],
+   "confidence": 0.7571
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "bearer_token",
+    "other"
+   ],
+   "truth": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "confidence": 0.6286
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "access_model",
+   "pred": "admin_or_approval",
+   "truth": "partner_or_sales",
+   "confidence": 0.6286
+  },
+  {
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "field": "blocker",
+   "pred": "approval_or_partnership",
+   "truth": "sales_contact_only",
+   "confidence": 0.6286
+  },
+  {
+   "id": 56,
+   "app": "Firecrawl",
+   "field": "auth_methods",
+   "pred": [
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "moderate",
+   "confidence": 0.5857
+  },
+  {
+   "id": 59,
+   "app": "Waterfall.io",
+   "field": "existing_mcp",
+   "pred": "unknown",
+   "truth": "third_party",
+   "confidence": 0.5857
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "access_model",
+   "pred": "unknown",
+   "truth": "self_serve_free",
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "verdict",
+   "pred": "unknown",
+   "truth": "buildable_now",
+   "confidence": 0.6
+  },
+  {
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "field": "blocker",
+   "pred": "unknown",
+   "truth": "none",
+   "confidence": 0.6
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "truth": [
+    "api_key"
+   ],
+   "confidence": 0.5714
+  },
+  {
+   "id": 69,
+   "app": "Datadog",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "self_serve_trial",
+   "confidence": 0.5714
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2",
+    "api_key"
+   ],
+   "truth": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 72,
+   "app": "Airtable",
+   "field": "api_breadth",
+   "pred": "moderate",
+   "truth": "broad",
+   "confidence": 0.8429
+  },
+  {
+   "id": 81,
+   "app": "Stripe",
+   "field": "auth_methods",
+   "pred": [
+    "api_key",
+    "basic"
+   ],
+   "truth": [
+    "oauth2",
+    "api_key",
+    "basic"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "auth_methods",
+   "pred": [
+    "bearer_token"
+   ],
+   "truth": [
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "access_model",
+   "pred": "self_serve_free",
+   "truth": "paid_plan_required",
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "api_type",
+   "pred": [
+    "rest",
+    "other"
+   ],
+   "truth": [
+    "rest"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "verdict",
+   "pred": "buildable_now",
+   "truth": "buildable_gated",
+   "confidence": 0.8429
+  },
+  {
+   "id": 85,
+   "app": "iPayX",
+   "field": "blocker",
+   "pred": "none",
+   "truth": "paid_plan_required",
+   "confidence": 0.8429
+  },
+  {
+   "id": 91,
+   "app": "NotebookLM",
+   "field": "auth_methods",
+   "pred": [
+    "oauth2"
+   ],
+   "truth": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "confidence": 0.8714
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "auth_methods",
+   "pred": [
+    "api_key"
+   ],
+   "truth": [
+    "api_key",
+    "bearer_token"
+   ],
+   "confidence": 0.8429
+  },
+  {
+   "id": 99,
+   "app": "YouTube Transcript",
+   "field": "api_breadth",
+   "pred": "broad",
+   "truth": "narrow",
+   "confidence": 0.8429
+  }
+ ],
+ "missing_rows": [],
+ "calibration": [
+  {
+   "bucket": "0.0-0.5",
+   "n": 0,
+   "correct": 0,
+   "accuracy": null
+  },
+  {
+   "bucket": "0.5-0.7",
+   "n": 42,
+   "correct": 28,
+   "accuracy": 0.6667
+  },
+  {
+   "bucket": "0.7-0.9",
+   "n": 84,
+   "correct": 68,
+   "accuracy": 0.8095
+  },
+  {
+   "bucket": "0.9-1.0",
+   "n": 14,
+   "correct": 13,
+   "accuracy": 0.9286
+  }
+ ],
+ "prompt_versions": [
+  "p1-12ca05+j-ee4126+r-834721"
+ ],
+ "models": [
+  "deepseek/deepseek-v4-flash | verify openai/gpt-5.6-luna | judge anthropic/claude-sonnet-5"
+ ],
+ "ground_truth_sha256": "59fcdefbf885b29fef4a2cc35871ddc7cbda99279c4c0cfd27562f01a62f7524",
+ "input": "results/pass2.json"
+}

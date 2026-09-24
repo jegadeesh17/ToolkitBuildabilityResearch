@@ -1,0 +1,625 @@
+{
+ "labeller": "agent:gemini-cli (Gemini 3.8 Flash)",
+ "apps": {
+  "1": {
+   "app": "Salesforce",
+   "verdict": "buildable_now",
+   "verdict_reason": "Salesforce provides free self-serve Developer Edition orgs with full REST and SOAP API access and an official hosted MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/quickstart.htm",
+     "quote": "Use OAuth to connect to Salesforce and get an access token."
+    },
+    "access_model": {
+     "url": "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/quickstart.htm",
+     "quote": "Developer Edition provides a free and easy solution so that you can use Salesforce for testing and development."
+    },
+    "api_type": {
+     "url": "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/quickstart.htm",
+     "quote": "Connect to Salesforce and authenticate, then make a request to Connect REST API and look at the response."
+    },
+    "api_breadth": {
+     "url": "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/quickstart.htm",
+     "quote": "Connect to Salesforce and authenticate, then make a request to Connect REST API and look at the response."
+    },
+    "existing_mcp": {
+     "url": "https://raw.githubusercontent.com/forcedotcom/mcp-hosted/main/README.md",
+     "quote": "Salesforce’s hosted MCP servers allow AI assistants like Claude, ChatGPT, and more connect securely to your Salesforce logic and assets using the Model Context Protocol."
+    },
+    "verdict": {
+     "url": "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/quickstart.htm",
+     "quote": "Developer Edition provides a free and easy solution so that you can use Salesforce for testing and development."
+    }
+   }
+  },
+  "9": {
+   "app": "Copper",
+   "verdict": "buildable_now",
+   "verdict_reason": "Copper provides a public REST API with API keys and OAuth2, accessible immediately via a self-serve 14-day free business trial.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://developer.copper.com/introduction/authentication.html",
+     "quote": "There are two ways to access the Copper Developer API: API keys and OAuth2.0."
+    },
+    "access_model": {
+     "url": "https://developer.copper.com/introduction/authentication.html",
+     "quote": "To generate an API token, in the Copper web app go to System settings > API Keys and click the 'GENERATE API KEY' button."
+    },
+    "api_type": {
+     "url": "https://developer.copper.com/",
+     "quote": "The Copper Developer API provides a RESTful interface with JSON-formatted responses to access most Copper resources"
+    },
+    "api_breadth": {
+     "url": "https://developer.copper.com/",
+     "quote": "The Copper Developer API provides a RESTful interface with JSON-formatted responses to access most Copper resources"
+    },
+    "existing_mcp": {
+     "url": "https://www.synchub.io/",
+     "quote": "Provides an MCP server that allows you to query Copper data via natural language or SQL-like commands within your AI chatbot."
+    },
+    "verdict": {
+     "url": "https://developer.copper.com/introduction/authentication.html",
+     "quote": "To generate an API token, in the Copper web app go to System settings > API Keys and click the 'GENERATE API KEY' button."
+    }
+   }
+  },
+  "14": {
+   "app": "Front",
+   "verdict": "buildable_now",
+   "verdict_reason": "Front provides a public REST API and free developer accounts with Bearer API tokens, OAuth 2.0, and an official MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://dev.frontapp.com/docs/authentication",
+     "quote": "The Core API uses Bearer tokens to authenticate its user."
+    },
+    "access_model": {
+     "url": "https://dev.frontapp.com/docs/mcp-server",
+     "quote": "Connect AI assistants to Front via the MCP server (open beta)"
+    },
+    "api_type": {
+     "url": "https://dev.frontapp.com/docs/authentication",
+     "quote": "The Core API uses Bearer tokens to authenticate its user."
+    },
+    "api_breadth": {
+     "url": "https://dev.frontapp.com/docs/authentication",
+     "quote": "The Core API uses Bearer tokens to authenticate its user."
+    },
+    "existing_mcp": {
+     "url": "https://dev.frontapp.com/docs/mcp-server",
+     "quote": "Connect AI assistants to Front via the MCP server (open beta)"
+    },
+    "verdict": {
+     "url": "https://dev.frontapp.com/docs/mcp-server",
+     "quote": "Connect AI assistants to Front via the MCP server (open beta)"
+    }
+   }
+  },
+  "18": {
+   "app": "Help Scout",
+   "verdict": "buildable_now",
+   "verdict_reason": "Help Scout provides a public REST API with OAuth 2.0 authentication and an official MCP server, accessible via a self-serve 15-day free trial.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://developer.helpscout.com/",
+     "quote": "To use OAuth2 authentication with the Help Scout API, you must first create an OAuth2 application."
+    },
+    "access_model": {
+     "url": "https://www.helpscout.com/",
+     "quote": "Help Scout offers a 15-day free trial for its Standard and Plus plans that provides access to all features, including the API."
+    },
+    "api_type": {
+     "url": "https://developer.helpscout.com/help-desk-api/",
+     "quote": "Mailbox API Overview | Help Scout Developers"
+    },
+    "api_breadth": {
+     "url": "https://developer.helpscout.com/help-desk-api/",
+     "quote": "Mailbox API Overview | Help Scout Developers"
+    },
+    "existing_mcp": {
+     "url": "https://mcp.helpscout.net/mcp",
+     "quote": "Help Scout provides an official Model Context Protocol (MCP) server that allows AI assistants (such as Claude, ChatGPT, and Cursor) to securely access and interact with your Help Scout data."
+    },
+    "verdict": {
+     "url": "https://www.helpscout.com/",
+     "quote": "Help Scout offers a 15-day free trial for its Standard and Plus plans that provides access to all features, including the API."
+    }
+   }
+  },
+  "25": {
+   "app": "Pumble",
+   "verdict": "buildable_now",
+   "verdict_reason": "Pumble provides a public REST API with self-serve API keys on its free plan and an official MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/",
+     "quote": "Pumble's public API lets you interact with Pumble. You can generate an API key, and use it to send messages and more."
+    },
+    "access_model": {
+     "url": "https://pumble.com/help/integrations/api/",
+     "quote": "The API in Pumble is not a separate paid 'addon' that requires a specific plan upgrade; rather, it is a feature available on all plans."
+    },
+    "api_type": {
+     "url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/",
+     "quote": "Pumble's public API lets you interact with Pumble. You can generate an API key, and use it to send messages and more."
+    },
+    "api_breadth": {
+     "url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/",
+     "quote": "Pumble's public API lets you interact with Pumble. You can generate an API key, and use it to send messages and more."
+    },
+    "existing_mcp": {
+     "url": "https://pumble.com/help/integrations/automation-workflow-integrations/pumble-mcp/",
+     "quote": "The Pumble Model Context Protocol (MCP) server allows you to connect third-party AI agents (such as Claude, Gemini, or Codex) to your Pumble workspace."
+    },
+    "verdict": {
+     "url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/",
+     "quote": "Pumble's public API lets you interact with Pumble. You can generate an API key, and use it to send messages and more."
+    }
+   }
+  },
+  "26": {
+   "app": "Discord",
+   "verdict": "buildable_now",
+   "verdict_reason": "Discord provides an open, self-serve public REST API using bot tokens and OAuth 2.0 with many community MCP servers.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://discord.com/developers/docs/topics/oauth2",
+     "quote": "Discord offers distinct authentication methods depending on whether you are authenticating as a Bot or acting on behalf of a User via OAuth2."
+    },
+    "access_model": {
+     "url": "https://discord.com/developers/docs/reference",
+     "quote": "The Discord API is a REST API that allows you to interact with Discord data from your own applications."
+    },
+    "api_type": {
+     "url": "https://discord.com/developers/docs/reference",
+     "quote": "The Discord API is a REST API that allows you to interact with Discord data from your own applications."
+    },
+    "api_breadth": {
+     "url": "https://discord.com/developers/docs/reference",
+     "quote": "The Discord API is a REST API that allows you to interact with Discord data from your own applications."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/v-3/discordmcp",
+     "quote": "A widely referenced MCP server designed for Claude integration."
+    },
+    "verdict": {
+     "url": "https://discord.com/developers/docs/reference",
+     "quote": "The Discord API is a REST API that allows you to interact with Discord data from your own applications."
+    }
+   }
+  },
+  "36": {
+   "app": "Klaviyo",
+   "verdict": "buildable_now",
+   "verdict_reason": "Klaviyo provides a public REST API accessible on its self-serve free plan with API keys and OAuth, plus an official remote MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://developers.klaviyo.com/en/docs",
+     "quote": "Klaviyo provides three primary methods for authenticating API requests, depending on the endpoint type and your specific use case."
+    },
+    "access_model": {
+     "url": "https://help.klaviyo.com/",
+     "quote": "Klaviyo provides API access to all accounts, including those on the free plan, to allow you to integrate with third-party applications and manage data."
+    },
+    "api_type": {
+     "url": "https://developers.klaviyo.com/en/docs",
+     "quote": "Klaviyo provides three primary methods for authenticating API requests, depending on the endpoint type and your specific use case."
+    },
+    "api_breadth": {
+     "url": "https://developers.klaviyo.com/en/docs",
+     "quote": "Klaviyo provides three primary methods for authenticating API requests, depending on the endpoint type and your specific use case."
+    },
+    "existing_mcp": {
+     "url": "https://mcp.klaviyo.com/mcp",
+     "quote": "Klaviyo provides an official remote MCP server (accessible at https://mcp.klaviyo.com/mcp)."
+    },
+    "verdict": {
+     "url": "https://help.klaviyo.com/",
+     "quote": "Klaviyo provides API access to all accounts, including those on the free plan, to allow you to integrate with third-party applications and manage data."
+    }
+   }
+  },
+  "40": {
+   "app": "SendGrid",
+   "verdict": "buildable_now",
+   "verdict_reason": "SendGrid provides a public REST API authenticated via API keys with a 60-day self-serve trial.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://docs.sendgrid.com/api-reference/auth",
+     "quote": "To authenticate your requests, you must include an Authorization header with the value Bearer <YOUR_API_KEY_HERE>."
+    },
+    "access_model": {
+     "url": "https://sendgrid.com/pricing/",
+     "quote": "Twilio SendGrid offers a 60-day free trial for its Email API, which allows users to send up to 100 emails per day."
+    },
+    "api_type": {
+     "url": "https://docs.sendgrid.com/api-reference/auth",
+     "quote": "To authenticate your requests, you must include an Authorization header with the value Bearer <YOUR_API_KEY_HERE>."
+    },
+    "api_breadth": {
+     "url": "https://docs.sendgrid.com/api-reference/auth",
+     "quote": "To authenticate your requests, you must include an Authorization header with the value Bearer <YOUR_API_KEY_HERE>."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/Garoth/sendgrid-mcp",
+     "quote": "A popular implementation that focuses on SendGrid's v3 API, supporting contact list management, templates, single sends, and stats."
+    },
+    "verdict": {
+     "url": "https://sendgrid.com/pricing/",
+     "quote": "Twilio SendGrid offers a 60-day free trial for its Email API, which allows users to send up to 100 emails per day."
+    }
+   }
+  },
+  "41": {
+   "app": "Shopify",
+   "verdict": "buildable_now",
+   "verdict_reason": "Shopify provides free self-serve development stores via Partner accounts with comprehensive GraphQL and REST Admin APIs and official MCP servers.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://shopify.dev/docs/apps/auth",
+     "quote": "The Shopify Admin API uses access tokens to authenticate requests."
+    },
+    "access_model": {
+     "url": "https://shopify.dev/docs/apps",
+     "quote": "Development Stores: These are free, feature-restricted stores provided to Partners for building and testing themes and apps."
+    },
+    "api_type": {
+     "url": "https://shopify.dev/docs/apps",
+     "quote": "Development Stores: These are free, feature-restricted stores provided to Partners for building and testing themes and apps."
+    },
+    "api_breadth": {
+     "url": "https://shopify.dev/docs/apps",
+     "quote": "Development Stores: These are free, feature-restricted stores provided to Partners for building and testing themes and apps."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/Shopify/dev-mcp",
+     "quote": "Part of the official Shopify AI Toolkit, this server is designed for developers."
+    },
+    "verdict": {
+     "url": "https://shopify.dev/docs/apps",
+     "quote": "Development Stores: These are free, feature-restricted stores provided to Partners for building and testing themes and apps."
+    }
+   }
+  },
+  "45": {
+   "app": "Magento (Adobe Commerce)",
+   "verdict": "buildable_gated",
+   "verdict_reason": "Adobe Commerce requires an enterprise sales engagement or partner license to access cloud developer environments and credentials.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://developer.adobe.com/commerce/webapi/",
+     "quote": "Learn how to use the Adobe Commerce REST and GraphQL APIs."
+    },
+    "access_model": {
+     "url": "https://business.adobe.com/products/commerce/pricing.html",
+     "quote": "You can contact the Adobe for Business sales team directly or request a product demo through their official portal."
+    },
+    "api_type": {
+     "url": "https://developer.adobe.com/commerce/webapi/",
+     "quote": "The Commerce Web APIs allow you to integrate third-party software and build headless applications for Adobe Commerce."
+    },
+    "api_breadth": {
+     "url": "https://developer.adobe.com/commerce/webapi/",
+     "quote": "The Commerce Web APIs allow you to integrate third-party software and build headless applications for Adobe Commerce."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/boldcommerce/magento2-mcp",
+     "quote": "A reference implementation for connecting Magento 2 REST APIs to MCP-compatible clients, allowing AI to query product information."
+    },
+    "verdict": {
+     "url": "https://business.adobe.com/products/commerce/pricing.html",
+     "quote": "You can contact the Adobe for Business sales team directly or request a product demo through their official portal."
+    }
+   }
+  },
+  "56": {
+   "app": "Firecrawl",
+   "verdict": "buildable_now",
+   "verdict_reason": "Firecrawl provides a public REST API with a self-serve free tier using API keys, as well as an official MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://docs.firecrawl.dev/mcp-server.md",
+     "quote": "Configure an API key in your client, no browser needed."
+    },
+    "access_model": {
+     "url": "https://docs.firecrawl.dev/",
+     "quote": "You can sign up for a free account to receive an API key with 1,000 credits and higher rate limits."
+    },
+    "api_type": {
+     "url": "https://docs.firecrawl.dev/mcp-server.md",
+     "quote": "Set up Firecrawl MCP with keyless access, account sign-in, or an API key."
+    },
+    "api_breadth": {
+     "url": "https://docs.firecrawl.dev/mcp-server.md",
+     "quote": "Set up Firecrawl MCP with keyless access, account sign-in, or an API key."
+    },
+    "existing_mcp": {
+     "url": "https://docs.firecrawl.dev/mcp-server.md",
+     "quote": "Set up Firecrawl MCP with keyless access, account sign-in, or an API key."
+    },
+    "verdict": {
+     "url": "https://docs.firecrawl.dev/mcp-server.md",
+     "quote": "Set up Firecrawl MCP with keyless access, account sign-in, or an API key."
+    }
+   }
+  },
+  "59": {
+   "app": "Waterfall.io",
+   "verdict": "buildable_gated",
+   "verdict_reason": "Waterfall.io provides a REST API using API keys, but access is gated behind custom quoting and booking a sales call.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://docs.waterfall.io/",
+     "quote": "All requests require an API key to be passed in the x-api-key header."
+    },
+    "access_model": {
+     "url": "https://waterfall.io/pricing",
+     "quote": "Per-credit rates depend on the endpoints you use and the volume you commit to."
+    },
+    "api_type": {
+     "url": "https://docs.waterfall.io/",
+     "quote": "All requests require an API key to be passed in the x-api-key header."
+    },
+    "api_breadth": {
+     "url": "https://docs.waterfall.io/",
+     "quote": "All requests require an API key to be passed in the x-api-key header."
+    },
+    "existing_mcp": {
+     "url": "https://www.generalinput.com/",
+     "quote": "In the context of the Model Context Protocol (MCP), Waterfall.io is frequently integrated as an 'MCP server' or 'skill,' allowing AI agents to perform data enrichment tasks directly through natural language instructions."
+    },
+    "verdict": {
+     "url": "https://waterfall.io/pricing",
+     "quote": "Per-credit rates depend on the endpoints you use and the volume you commit to."
+    }
+   }
+  },
+  "68": {
+   "app": "MongoDB Atlas",
+   "verdict": "buildable_now",
+   "verdict_reason": "MongoDB Atlas provides a public REST Administration API with self-serve free tier access and official MCP servers.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://www.mongodb.com/docs/atlas/api/",
+     "quote": "MongoDB recommends using Service Accounts instead of API keys for authenticating to the Atlas Administration API."
+    },
+    "access_model": {
+     "url": "https://www.mongodb.com/docs/atlas/api/",
+     "quote": "Use APIs and the Atlas CLI to programmatically access your deployments and apps."
+    },
+    "api_type": {
+     "url": "https://www.mongodb.com/docs/atlas/api/",
+     "quote": "Use APIs and the Atlas CLI to programmatically access your deployments and apps."
+    },
+    "api_breadth": {
+     "url": "https://www.mongodb.com/docs/atlas/api/",
+     "quote": "Use APIs and the Atlas CLI to programmatically access your deployments and apps."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/mongodb-js/mongodb-mcp-server",
+     "quote": "This server enables AI agents and LLM-powered tools (such as Claude, Cursor, VS Code, and others) to interact with MongoDB databases and Atlas clusters using natural language."
+    },
+    "verdict": {
+     "url": "https://www.mongodb.com/docs/atlas/api/",
+     "quote": "Use APIs and the Atlas CLI to programmatically access your deployments and apps."
+    }
+   }
+  },
+  "69": {
+   "app": "Datadog",
+   "verdict": "buildable_now",
+   "verdict_reason": "Datadog provides an extensive public REST API using API/application keys, a 14-day self-serve free trial, and an official MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://docs.datadoghq.com/api/",
+     "quote": "All requests to the Datadog API must be authenticated."
+    },
+    "access_model": {
+     "url": "https://www.datadoghq.com/",
+     "quote": "Datadog offers a 14-day free trial that does not require a credit card to sign up."
+    },
+    "api_type": {
+     "url": "https://docs.datadoghq.com/api/",
+     "quote": "All requests to the Datadog API must be authenticated."
+    },
+    "api_breadth": {
+     "url": "https://docs.datadoghq.com/api/",
+     "quote": "All requests to the Datadog API must be authenticated."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/datadog-labs/mcp-server",
+     "quote": "This repository is maintained by Datadog and is the recommended way to connect AI agents (such as Claude Code, Cursor, GitHub Copilot, etc.) to Datadog's observability tools."
+    },
+    "verdict": {
+     "url": "https://www.datadoghq.com/",
+     "quote": "Datadog offers a 14-day free trial that does not require a credit card to sign up."
+    }
+   }
+  },
+  "72": {
+   "app": "Airtable",
+   "verdict": "buildable_now",
+   "verdict_reason": "Airtable provides a public REST API with self-serve personal access tokens and OAuth 2.0 on its free plan, along with an official MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://airtable.com/developers/web/api/introduction",
+     "quote": "All authentication must now be handled via Personal Access Tokens (PATs) or OAuth."
+    },
+    "access_model": {
+     "url": "https://airtable.com/developers/web/api/introduction",
+     "quote": "Get started for free."
+    },
+    "api_type": {
+     "url": "https://airtable.com/developers/web/api/introduction",
+     "quote": "Get started for free."
+    },
+    "api_breadth": {
+     "url": "https://airtable.com/developers/web/api/introduction",
+     "quote": "Get started for free."
+    },
+    "existing_mcp": {
+     "url": "https://mcp.airtable.com",
+     "quote": "Airtable has released an official remote MCP server."
+    },
+    "verdict": {
+     "url": "https://airtable.com/developers/web/api/introduction",
+     "quote": "Get started for free."
+    }
+   }
+  },
+  "76": {
+   "app": "Monday.com",
+   "verdict": "buildable_now",
+   "verdict_reason": "Monday.com provides a public GraphQL API accessible via a free self-serve developer account using API tokens or OAuth 2.0, along with an official MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://developer.monday.com/api-reference",
+     "quote": "To authenticate GraphQL requests with the monday.com API using an API token, you include the token in the Authorization header of your HTTP request."
+    },
+    "access_model": {
+     "url": "https://developer.monday.com/",
+     "quote": "The developer account is free with no expiration date."
+    },
+    "api_type": {
+     "url": "https://developer.monday.com/api-reference",
+     "quote": "To authenticate GraphQL requests with the monday.com API using an API token, you include the token in the Authorization header of your HTTP request."
+    },
+    "api_breadth": {
+     "url": "https://developer.monday.com/api-reference",
+     "quote": "To authenticate GraphQL requests with the monday.com API using an API token, you include the token in the Authorization header of your HTTP request."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/mondaycom/mcp",
+     "quote": "This repository provides tools for AI agents to interact with the monday.com platform, allowing for actions such as managing boards, creating/updating items, and accessing structured data."
+    },
+    "verdict": {
+     "url": "https://developer.monday.com/",
+     "quote": "The developer account is free with no expiration date."
+    }
+   }
+  },
+  "81": {
+   "app": "Stripe",
+   "verdict": "buildable_now",
+   "verdict_reason": "Stripe provides a public REST API with instant self-serve test-mode API keys on free accounts and an official MCP server.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://stripe.com/docs/api",
+     "quote": "The Stripe API primarily authenticates requests using HTTP Basic Auth, where you provide your secret API key as the username."
+    },
+    "access_model": {
+     "url": "https://stripe.com/docs/api",
+     "quote": "The Stripe API primarily authenticates requests using HTTP Basic Auth, where you provide your secret API key as the username."
+    },
+    "api_type": {
+     "url": "https://stripe.com/docs/api",
+     "quote": "The Stripe API primarily authenticates requests using HTTP Basic Auth, where you provide your secret API key as the username."
+    },
+    "api_breadth": {
+     "url": "https://stripe.com/docs/api",
+     "quote": "The Stripe API primarily authenticates requests using HTTP Basic Auth, where you provide your secret API key as the username."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol",
+     "quote": "The official Stripe Model Context Protocol (MCP) server is maintained by Stripe and is designed to allow AI agents and tools to interact with Stripe APIs."
+    },
+    "verdict": {
+     "url": "https://stripe.com/docs/api",
+     "quote": "The Stripe API primarily authenticates requests using HTTP Basic Auth, where you provide your secret API key as the username."
+    }
+   }
+  },
+  "85": {
+   "app": "iPayX",
+   "verdict": "buildable_gated",
+   "verdict_reason": "iPayX Protocol provides a narrow REST API and official MCP server for FX audits, requiring a paid API plan ($99/mo).",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://www.ipayx.ai/.well-known/openapi.json",
+     "quote": "Supabase JWT or iPayX API key (ipx_live_...)"
+    },
+    "access_model": {
+     "url": "https://www.ipayx.ai/llms.txt",
+     "quote": "Forensic Pack from $297, API plans from $99/mo."
+    },
+    "api_type": {
+     "url": "https://www.ipayx.ai/.well-known/openapi.json",
+     "quote": "Forensic FX audit infrastructure for AI agents and fintechs."
+    },
+    "api_breadth": {
+     "url": "https://www.ipayx.ai/.well-known/openapi.json",
+     "quote": "Forensic FX audit infrastructure for AI agents and fintechs."
+    },
+    "existing_mcp": {
+     "url": "https://www.ipayx.ai/llms.txt",
+     "quote": "Real-time foreign-exchange auditing API and MCP server for AI agents, Canadian CFOs, and fintechs."
+    },
+    "verdict": {
+     "url": "https://www.ipayx.ai/llms.txt",
+     "quote": "Forensic Pack from $297, API plans from $99/mo."
+    }
+   }
+  },
+  "91": {
+   "app": "NotebookLM",
+   "verdict": "buildable_gated",
+   "verdict_reason": "NotebookLM (Gemini Notebook Enterprise) provides REST APIs via Google Cloud Discovery Engine authenticated by OAuth 2.0 / bearer tokens, but requires a paid enterprise subscription.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://cloud.google.com/gemini/docs",
+     "quote": "The API uses standard Google Cloud authentication, typically requiring a bearer token obtained via gcloud auth print-access-token or similar OAuth2 flows."
+    },
+    "access_model": {
+     "url": "https://cloud.google.com/gemini/enterprise/docs",
+     "quote": "To get started with a Gemini Enterprise subscription, you need an invoiced Google Cloud Billing account with a one-seat minimum requirement."
+    },
+    "api_type": {
+     "url": "https://cloud.google.com/gemini/docs",
+     "quote": "Gemini Notebook Enterprise provides a set of REST APIs designed for programmatic notebook management and source operations."
+    },
+    "api_breadth": {
+     "url": "https://cloud.google.com/gemini/docs",
+     "quote": "Gemini Notebook Enterprise provides a set of REST APIs designed for programmatic notebook management and source operations."
+    },
+    "existing_mcp": {
+     "url": "https://github.com/jacob-bd/notebooklm-mcp-cli",
+     "quote": "It provides both a command-line interface (CLI) and an MCP server, allowing you to manage notebooks, add sources, and query content."
+    },
+    "verdict": {
+     "url": "https://cloud.google.com/gemini/enterprise/docs",
+     "quote": "To get started with a Gemini Enterprise subscription, you need an invoiced Google Cloud Billing account with a one-seat minimum requirement."
+    }
+   }
+  },
+  "99": {
+   "app": "YouTube Transcript",
+   "verdict": "buildable_now",
+   "verdict_reason": "TranscriptAPI provides a public REST API and official MCP server for YouTube transcripts with 100 free credits upon self-serve registration.",
+   "evidence": {
+    "auth_methods": {
+     "url": "https://transcriptapi.com/",
+     "quote": "To authenticate your requests, you must include your API key in the Authorization header of every request using the following format: Authorization: Bearer YOUR_API_KEY"
+    },
+    "access_model": {
+     "url": "https://transcriptapi.com/",
+     "quote": "New users receive 100 free credits upon registration."
+    },
+    "api_type": {
+     "url": "https://transcriptapi.com/",
+     "quote": "TranscriptAPI uses Bearer token authentication for its REST API and integrations."
+    },
+    "api_breadth": {
+     "url": "https://transcriptapi.com/",
+     "quote": "TranscriptAPI uses Bearer token authentication for its REST API and integrations."
+    },
+    "existing_mcp": {
+     "url": "https://transcriptapi.com/",
+     "quote": "TranscriptAPI provides a native Model Context Protocol (MCP) server that allows AI assistants (such as Claude, ChatGPT, and Cursor) to directly access YouTube transcripts, search results, channel data, and playlists."
+    },
+    "verdict": {
+     "url": "https://transcriptapi.com/",
+     "quote": "New users receive 100 free credits upon registration."
+    }
+   }
+  }
+ }
+}

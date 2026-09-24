@@ -1,0 +1,437 @@
+{
+ "created_at": "2026-09-24T15:56:00Z",
+ "labeller": "agent:gemini-cli (Gemini 3.8 Flash)",
+ "blind": true,
+ "labels": [
+  {
+   "auth_methods": [
+    "oauth2"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest",
+    "soap"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 1,
+   "app": "Salesforce",
+   "source_url": "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/quickstart.htm",
+   "extra_urls": [
+    "https://raw.githubusercontent.com/forcedotcom/mcp-hosted/main/README.md"
+   ],
+   "notes": "Salesforce provides free self-serve Developer Edition orgs with full REST and SOAP API access and an official hosted MCP server. | Developer Edition includes 15,000 daily API calls with full access to standard and custom objects."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "access_model": "self_serve_trial",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "third_party",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 9,
+   "app": "Copper",
+   "source_url": "https://developer.copper.com/introduction/authentication.html",
+   "extra_urls": [
+    "https://developer.copper.com/",
+    "https://www.synchub.io/"
+   ],
+   "notes": "Copper provides a public REST API with API keys and OAuth2, accessible immediately via a self-serve 14-day free business trial. | Admins generate API keys in Settings. Free trial includes Business tier features."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 14,
+   "app": "Front",
+   "source_url": "https://dev.frontapp.com/docs/mcp-server",
+   "extra_urls": [
+    "https://dev.frontapp.com/docs/authentication"
+   ],
+   "notes": "Front provides a public REST API and free developer accounts with Bearer API tokens, OAuth 2.0, and an official MCP server. | Front offers free developer accounts on dev.frontapp.com supporting up to 3 teammates."
+  },
+  {
+   "auth_methods": [
+    "oauth2"
+   ],
+   "access_model": "self_serve_trial",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 18,
+   "app": "Help Scout",
+   "source_url": "https://www.helpscout.com/",
+   "extra_urls": [
+    "https://developer.helpscout.com/",
+    "https://developer.helpscout.com/help-desk-api/",
+    "https://mcp.helpscout.net/mcp"
+   ],
+   "notes": "Help Scout provides a public REST API with OAuth 2.0 authentication and an official MCP server, accessible via a self-serve 15-day free trial. | The permanent free plan does not include API access, but the 15-day self-serve trial does."
+  },
+  {
+   "auth_methods": [
+    "api_key"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "moderate",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 25,
+   "app": "Pumble",
+   "source_url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/",
+   "extra_urls": [
+    "https://pumble.com/help/integrations/api/",
+    "https://pumble.com/help/integrations/automation-workflow-integrations/pumble-mcp/"
+   ],
+   "notes": "Pumble provides a public REST API with self-serve API keys on its free plan and an official MCP server. | API addon is free to install on all workspaces and generates standard API keys."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "third_party",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 26,
+   "app": "Discord",
+   "source_url": "https://discord.com/developers/docs/reference",
+   "extra_urls": [
+    "https://discord.com/developers/docs/topics/oauth2",
+    "https://github.com/v-3/discordmcp"
+   ],
+   "notes": "Discord provides an open, self-serve public REST API using bot tokens and OAuth 2.0 with many community MCP servers. | Bot tokens function as static dashboard API keys; gateway websocket API also available."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 36,
+   "app": "Klaviyo",
+   "source_url": "https://help.klaviyo.com/",
+   "extra_urls": [
+    "https://developers.klaviyo.com/en/docs",
+    "https://mcp.klaviyo.com/mcp"
+   ],
+   "notes": "Klaviyo provides a public REST API accessible on its self-serve free plan with API keys and OAuth, plus an official remote MCP server. | Remote MCP server available at mcp.klaviyo.com/mcp with role-based scoping."
+  },
+  {
+   "auth_methods": [
+    "api_key"
+   ],
+   "access_model": "self_serve_trial",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "third_party",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 40,
+   "app": "SendGrid",
+   "source_url": "https://sendgrid.com/pricing/",
+   "extra_urls": [
+    "https://docs.sendgrid.com/api-reference/auth",
+    "https://github.com/Garoth/sendgrid-mcp"
+   ],
+   "notes": "SendGrid provides a public REST API authenticated via API keys with a 60-day self-serve trial. | API keys are passed via Bearer header or HTTP Basic Auth."
+  },
+  {
+   "auth_methods": [
+    "oauth2"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest",
+    "graphql"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 41,
+   "app": "Shopify",
+   "source_url": "https://shopify.dev/docs/apps",
+   "extra_urls": [
+    "https://github.com/Shopify/dev-mcp",
+    "https://shopify.dev/docs/apps/auth"
+   ],
+   "notes": "Shopify provides free self-serve development stores via Partner accounts with comprehensive GraphQL and REST Admin APIs and official MCP servers. | Official dev-mcp exists in @shopify/dev-mcp alongside built-in Storefront MCP endpoints on all stores."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "access_model": "partner_or_sales",
+   "api_type": [
+    "rest",
+    "graphql"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "third_party",
+   "verdict": "buildable_gated",
+   "blocker": "sales_contact_only",
+   "id": 45,
+   "app": "Magento (Adobe Commerce)",
+   "source_url": "https://business.adobe.com/products/commerce/pricing.html",
+   "extra_urls": [
+    "https://developer.adobe.com/commerce/webapi/",
+    "https://github.com/boldcommerce/magento2-mcp"
+   ],
+   "notes": "Adobe Commerce requires an enterprise sales engagement or partner license to access cloud developer environments and credentials. | While open source Magento can be self-hosted, Adobe Commerce cloud licenses require sales contact."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key",
+    "bearer_token"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "moderate",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 56,
+   "app": "Firecrawl",
+   "source_url": "https://docs.firecrawl.dev/mcp-server.md",
+   "extra_urls": [
+    "https://docs.firecrawl.dev/"
+   ],
+   "notes": "Firecrawl provides a public REST API with a self-serve free tier using API keys, as well as an official MCP server. | Supports keyless usage and OAuth MCP alongside standard API key authentication."
+  },
+  {
+   "auth_methods": [
+    "api_key"
+   ],
+   "access_model": "partner_or_sales",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "moderate",
+   "existing_mcp": "third_party",
+   "verdict": "buildable_gated",
+   "blocker": "sales_contact_only",
+   "id": 59,
+   "app": "Waterfall.io",
+   "source_url": "https://waterfall.io/pricing",
+   "extra_urls": [
+    "https://docs.waterfall.io/",
+    "https://www.generalinput.com/"
+   ],
+   "notes": "Waterfall.io provides a REST API using API keys, but access is gated behind custom quoting and booking a sales call. | No self-serve signup or free tier; onboarding requires booking a demo call and custom pricing."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 68,
+   "app": "MongoDB Atlas",
+   "source_url": "https://www.mongodb.com/docs/atlas/api/",
+   "extra_urls": [
+    "https://github.com/mongodb-js/mongodb-mcp-server"
+   ],
+   "notes": "MongoDB Atlas provides a public REST Administration API with self-serve free tier access and official MCP servers. | Free M0 cluster available without credit card; supports Service Accounts (OAuth2) and legacy Digest API keys."
+  },
+  {
+   "auth_methods": [
+    "api_key"
+   ],
+   "access_model": "self_serve_trial",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 69,
+   "app": "Datadog",
+   "source_url": "https://www.datadoghq.com/",
+   "extra_urls": [
+    "https://docs.datadoghq.com/api/",
+    "https://github.com/datadog-labs/mcp-server"
+   ],
+   "notes": "Datadog provides an extensive public REST API using API/application keys, a 14-day self-serve free trial, and an official MCP server. | Requires DD-API-KEY and DD-APPLICATION-KEY headers. Official MCP server maintained under datadog-labs."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 72,
+   "app": "Airtable",
+   "source_url": "https://airtable.com/developers/web/api/introduction",
+   "extra_urls": [
+    "https://mcp.airtable.com"
+   ],
+   "notes": "Airtable provides a public REST API with self-serve personal access tokens and OAuth 2.0 on its free plan, along with an official MCP server. | Legacy API keys were deprecated in favor of Personal Access Tokens (Bearer PATs) and OAuth 2.0."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "graphql"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 76,
+   "app": "Monday.com",
+   "source_url": "https://developer.monday.com/",
+   "extra_urls": [
+    "https://developer.monday.com/api-reference",
+    "https://github.com/mondaycom/mcp"
+   ],
+   "notes": "Monday.com provides a public GraphQL API accessible via a free self-serve developer account using API tokens or OAuth 2.0, along with an official MCP server. | Monday.com API is entirely GraphQL-based; free developer account does not expire."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "api_key",
+    "basic"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "broad",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 81,
+   "app": "Stripe",
+   "source_url": "https://stripe.com/docs/api",
+   "extra_urls": [
+    "https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol"
+   ],
+   "notes": "Stripe provides a public REST API with instant self-serve test-mode API keys on free accounts and an official MCP server. | Test mode keys are generated immediately upon signing up for a free account."
+  },
+  {
+   "auth_methods": [
+    "api_key",
+    "bearer_token"
+   ],
+   "access_model": "paid_plan_required",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "narrow",
+   "existing_mcp": "official",
+   "verdict": "buildable_gated",
+   "blocker": "paid_plan_required",
+   "id": 85,
+   "app": "iPayX",
+   "source_url": "https://www.ipayx.ai/llms.txt",
+   "extra_urls": [
+    "https://www.ipayx.ai/.well-known/openapi.json"
+   ],
+   "notes": "iPayX Protocol provides a narrow REST API and official MCP server for FX audits, requiring a paid API plan ($99/mo). | Official MCP server available at mcp.ipayx.ai/mcp. Narrow surface of ~5 endpoints for FX forensics."
+  },
+  {
+   "auth_methods": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "access_model": "paid_plan_required",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "moderate",
+   "existing_mcp": "third_party",
+   "verdict": "buildable_gated",
+   "blocker": "paid_plan_required",
+   "id": 91,
+   "app": "NotebookLM",
+   "source_url": "https://cloud.google.com/gemini/enterprise/docs",
+   "extra_urls": [
+    "https://cloud.google.com/gemini/docs",
+    "https://github.com/jacob-bd/notebooklm-mcp-cli"
+   ],
+   "notes": "NotebookLM (Gemini Notebook Enterprise) provides REST APIs via Google Cloud Discovery Engine authenticated by OAuth 2.0 / bearer tokens, but requires a paid enterprise subscription. | Consumer NotebookLM lacks an official API; enterprise features are exposed via Google Cloud Gemini Enterprise Discovery Engine APIs."
+  },
+  {
+   "auth_methods": [
+    "api_key",
+    "bearer_token"
+   ],
+   "access_model": "self_serve_free",
+   "api_type": [
+    "rest"
+   ],
+   "api_breadth": "narrow",
+   "existing_mcp": "official",
+   "verdict": "buildable_now",
+   "blocker": "none",
+   "id": 99,
+   "app": "YouTube Transcript",
+   "source_url": "https://transcriptapi.com/",
+   "extra_urls": [],
+   "notes": "TranscriptAPI provides a public REST API and official MCP server for YouTube transcripts with 100 free credits upon self-serve registration. | Single-purpose API offering transcripts, metadata, search, and native MCP at transcriptapi.com/mcp."
+  }
+ ]
+}
