@@ -14,6 +14,10 @@ def _offline(monkeypatch, request, tmp_path):
         def _blocked(*args, **kwargs):
             raise RuntimeError("network access attempted in an offline test")
         monkeypatch.setattr(socket.socket, "connect", _blocked)
+    # Run log and raw payloads never land in the repo during tests.
+    import agent.config as config
+    monkeypatch.setattr(config, "RUN_LOG", tmp_path / "runs" / "run_log.jsonl")
+    monkeypatch.setattr(config, "RAW_DIR", tmp_path / "raw")
 
 
 META = {"pass": 1, "run_id": "r", "model": "m", "prompt_version": "p1-abc", "updated_at": "t"}
