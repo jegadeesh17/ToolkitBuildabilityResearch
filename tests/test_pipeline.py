@@ -189,9 +189,9 @@ async def test_evidence_not_in_bundle_flags_grounding(fake_llm, fake_tools, run_
 async def test_unsupported_field_becomes_unknown(fake_llm, fake_tools, run_logger):
     d = json.loads(VALID)
     del d["evidence"]["api_breadth"]
-    row, stats = await research_app(APP, llm=fake_llm([json.dumps(d)]), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]),
-                                    logger=run_logger, **kw())
-    assert row.api_breadth == UNKNOWN and stats["evidence_dropped"] == 1
+    llm = fake_llm([json.dumps(d)] * 3)  # the gap survives both repair attempts
+    row, stats = await research_app(APP, llm=llm, tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger, **kw())
+    assert llm.calls == 3 and row.api_breadth == UNKNOWN and stats["evidence_dropped"] == 1
 
 
 async def test_rule_violation_flagged(fake_llm, fake_tools, run_logger):
@@ -302,3 +302,35 @@ async def test_searches_and_fetches_run_concurrently_in_order(run_logger):
     assert state["peak"] > 1
     assert [q["query"] for q in b.queries] == [" ".join(t.format(app="Pipe", hint="pipe.com").split())
                                               for t in QUERY_TEMPLATES]
+
+
+
+NO_EVIDENCE = json.dumps({k: v for k, v in VALID_DICT.items() if k != "evidence"})
+
+
+async def test_values_without_evidence_trigger_repair(fake_llm, fake_tools, run_logger):
+    llm = fake_llm([NO_EVIDENCE, VALID])
+    row, stats = await research_app(APP, llm=llm, tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger,
+                                    **kw())
+    assert llm.calls == 2 and row.verdict == "buildable_now" and stats["evidence_dropped"] == 0
+
+
+async def test_evidence_still_missing_after_repairs_is_enforced(fake_llm, fake_tools, run_logger):
+    llm = fake_llm([NO_EVIDENCE, NO_EVIDENCE, NO_EVIDENCE])
+    row, stats = await research_app(APP, llm=llm, tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger,
+                                    **kw())
+    assert llm.calls == 3 and all(row.is_unknown(f) for f in SCORED_FIELDS) and stats["evidence_dropped"] == 7
+
+
+async def test_retry_after_empty_reply_lowers_reasoning_effort(fake_tools, run_logger):
+    from agent.llm_client import LLMError, LLMResponse
+    seen = []
+
+    class Spy:
+        async def chat(self, **k):
+            seen.append(k.get("reasoning"))
+            if len(seen) == 1:
+                raise LLMError("empty_content", kind="empty_content")
+            return LLMResponse(VALID, k["model"], 1, 1, 0.0, False, 1, 0, "raw.json")
+    row, _ = await research_app(APP, llm=Spy(), tools=fake_tools({DOC: PAGE_TEXT}, [DOC]), logger=run_logger, **kw())
+    assert seen == [None, {"effort": "low"}] and row.verdict == "buildable_now"

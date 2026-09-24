@@ -188,3 +188,16 @@ async def test_empty_content_kind(tmp_path):
     with pytest.raises(LLMError) as e:
         await ask(c)
     assert e.value.kind == "empty_content"
+
+
+
+async def test_reasoning_option_is_sent(tmp_path):
+    bodies = []
+
+    def h(req):
+        bodies.append(json.loads(req.content))
+        return httpx.Response(200, json=OK)
+    c, _ = client(tmp_path, h)
+    await ask(c, reasoning={"effort": "low"})
+    await ask(c)
+    assert bodies[0]["reasoning"] == {"effort": "low"} and "reasoning" not in bodies[1]

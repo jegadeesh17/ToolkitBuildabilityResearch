@@ -106,9 +106,12 @@ class LLMClient:
     async def aclose(self) -> None:
         await self._client.aclose()
 
-    def _body(self, messages: list[dict], model: str, max_tokens: int, json_schema: dict | None, level: int) -> dict:
+    def _body(self, messages: list[dict], model: str, max_tokens: int, json_schema: dict | None, level: int,
+              reasoning: dict | None = None) -> dict:
         body: dict[str, Any] = {"model": model, "messages": messages, "temperature": 0, "max_tokens": max_tokens,
                                 "usage": {"include": True}}
+        if reasoning is not None:
+            body["reasoning"] = reasoning  # OpenRouter unified reasoning control, e.g. {"effort": "low"}
         if json_schema is not None and level == 0:
             body["response_format"] = {"type": "json_schema",
                                        "json_schema": {"name": "extraction", "strict": False, "schema": json_schema}}
@@ -117,7 +120,8 @@ class LLMClient:
         return body
 
     async def chat(self, *, messages: list[dict], model: str, stage: str, app_id: int | None, prompt_version: str,
-                   json_schema: dict | None = None, max_tokens: int = 4000) -> LLMResponse:
+                   json_schema: dict | None = None, max_tokens: int = 4000,
+                   reasoning: dict | None = None) -> LLMResponse:
         approx_in = len(json.dumps(messages, ensure_ascii=False)) // 4
         estimate = estimate_cost(model, approx_in, max_tokens)
         notes: list[str] = []
@@ -144,7 +148,7 @@ class LLMClient:
                     self.budget.check(estimate)
                     level = self._format_level.get(model, 0)
                     while True:
-                        body = self._body(messages, model, max_tokens, json_schema, level)
+                        body = self._body(messages, model, max_tokens, json_schema, level, reasoning)
                         try:
                             resp = await self._client.post("/chat/completions", json=body)
                         except httpx.TransportError as e:

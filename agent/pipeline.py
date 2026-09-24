@@ -216,6 +216,8 @@ async def extract(app: AppSeed, bundle: EvidenceBundle, llm: Any, *, model: str,
     messages = [{"role": "system", "content": prompt.text},
                 {"role": "user", "content": render_user_message(app, bundle)}]
     last_parsed: Any = None
+    best: Extraction | None = None  # last schema-valid reply (used if evidence is still missing after repairs)
+    reasoning: dict | None = None  # set to low effort after an empty reply (reasoning ate the output budget)
     truncated = False
     attempt = 0
     while attempt < MAX_REPAIRS + 1:
@@ -224,14 +226,20 @@ async def extract(app: AppSeed, bundle: EvidenceBundle, llm: Any, *, model: str,
         try:
             resp = await llm.chat(messages=messages, model=model, stage=stage, app_id=app.id,
                                   prompt_version=prompt.version, json_schema=EXTRACTION_SCHEMA,
-                                  max_tokens=MAX_OUTPUT_TOKENS)
+                                  max_tokens=MAX_OUTPUT_TOKENS, reasoning=reasoning)
             text = resp.text
             parsed = parse_json_loose(text)
             last_parsed = parsed
             extraction = Extraction.model_validate(parsed)
+            best = extraction
+            gaps = [f for f in SCORED_FIELDS if not extraction.is_unknown(f) and not extraction.evidence.get(f)]
+            if gaps and attempt <= MAX_REPAIRS:
+                raise ValueError(f"these fields have a value but no evidence: {', '.join(gaps)}. Add at least one "
+                                 "verbatim {url, quote} from the pages for each, or set the field to unknown "
+                                 "with an unknown_reason")
             logger.append({"kind": "llm_validation", "run_id": run_id, "app_id": app.id, "stage": stage,
                            "model": model, "prompt_version": prompt.version, "schema_valid": True,
-                           "retries": attempt - 1})
+                           "retries": attempt - 1, "error": f"evidence missing: {gaps}" if gaps else None})
             return extraction, False
         except LLMError as e:
             if e.kind != "empty_content":
@@ -242,6 +250,7 @@ async def extract(app: AppSeed, bundle: EvidenceBundle, llm: Any, *, model: str,
                     continue
                 raise  # HTTP/transient failures are not schema problems: surface them (--resume retries)
             error = f"no usable reply ({e})"
+            reasoning = {"effort": "low"}
         except (ValueError, ValidationError) as e:
             error = _short_error(e)
         logger.append({"kind": "llm_validation", "run_id": run_id, "app_id": app.id, "stage": stage, "model": model,
@@ -250,6 +259,8 @@ async def extract(app: AppSeed, bundle: EvidenceBundle, llm: Any, *, model: str,
         if attempt <= MAX_REPAIRS:
             messages = messages + [{"role": "assistant", "content": text or "(empty reply)"},
                                    {"role": "user", "content": _repair_template().format(error=error)}]
+    if best is not None:  # valid reply whose evidence gaps survived the repairs: finalize() enforces them
+        return best, False
     extraction, _ = salvage(last_parsed or {})
     return extraction, True
 
