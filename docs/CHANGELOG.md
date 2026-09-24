@@ -17,7 +17,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Live contracts verified: Composio search/fetch slugs + response shapes (fixtures), OpenRouter `usage.cost`, key limits.
 - 10-app pilot (`results/pilot/`): deepseek-v4-flash chosen as PASS1_MODEL (90% schema-valid first try, 99% grounded, $0.022); prompt frozen at `p1-12ca05`.
 
+- `results/pass1.json`: pass 1 on all 100 apps — run `20260924T143612Z-929b15` (the message of commit ee7b9d1 names the run id incorrectly; this is the correct id), prompt `p1-12ca05`, deepseek-v4-flash, re-extracted from the run-1 evidence bundles after two pipeline fixes so every row uses one pipeline version. `validate --expect 100` OK; 45/700 fields unknown; grounded 778/850 (91.5%). Spend (all runs to date) $0.7498 per run log vs $0.7420 per OpenRouter key usage (1.1%).
+- `agent/verify.py` (pass 2: grounding, cross-model, judge, bounded re-research, deterministic confidence, `pass2_diff`) with `prompts/judge.md` and `prompts/reresearch.md` — built early, on the milestone-1 branch, after the M2 plan was approved.
+
 ### Changed
+- Extraction repair loop also triggers when values are given without evidence; a retry after an empty reply requests low reasoning effort (fixes found on non-sample apps in full run #1).
+- Judge sees only the pages cited for the disputed fields, each capped at 12k chars (cost control).
 - An app's four searches and its page fetches run concurrently (global Composio throttle unchanged).
 - Extraction allows 8k output tokens (reasoning models); prompt adds stricter verbatim-quote guidance (tuned on pilot apps only).
 
