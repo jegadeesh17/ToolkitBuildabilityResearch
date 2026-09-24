@@ -36,6 +36,12 @@ Exit codes: 0 ok · 2 usage/unknown app · 3 missing config · 4 budget cap · 5
 8. **Plan before code.** Non-trivial changes follow explore → plan → implement → verify → review. Stop after 2 failed fix attempts and ask.
 9. **Don't copy or name** any third-party logo, wordmark or copy on the page (design is inspired-by only).
 
+## Lessons from the build (retrospective, 2026-09-24)
+10. **Verify credential scopes with one real call at setup**: a Composio key can list tools yet lack `tool_execution` (403); OpenRouter free models can be upstream-429 for hours. Probe before planning around them.
+11. **Measure cost on a 3-app live sample before any full paid run** and set `BUDGET_CAP_USD` from it (the judge cost ~2x the estimate). Raising the cap is the owner's decision, per run, and is disclosed.
+12. **Paid runs must survive local I/O errors**: on Windows, readers (IDE watchers, antivirus) briefly lock files; atomic writes retry, and a save failure must never kill a run mid-flight.
+13. **Inspect `llm_validation` failures on pilot runs before the full run**: schema-valid replies with no evidence and empty replies from reasoning overruns only surfaced at scale.
+
 ## Repo etiquette
 - Branches: `feature/milestone-<n>-<slug>`; never commit unverified code to `main`.
 - Commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`, `chore:`), one logical change each, tests green first.
