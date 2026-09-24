@@ -59,3 +59,34 @@ def make_bundle():
                             sha256=hashlib.sha256(text.encode("utf-8")).hexdigest(), error=None, thin=False))
         return EvidenceBundle(app_id=1, app="X", run_id="r", created_at="t", queries=[], pages=out)
     return _make
+
+
+TEST_ENV = {"OPENROUTER_API_KEY": "sk-or-v1-testkey", "COMPOSIO_API_KEY": "ck_test", "PASS1_MODEL": "a/b",
+            "VERIFY_MODEL": "c/d", "JUDGE_MODEL": "e/f"}
+
+
+@pytest.fixture
+def run_logger(tmp_path):
+    from agent.observability import RunLogger
+    return RunLogger(tmp_path / "l.jsonl")
+
+
+@pytest.fixture
+def tool_client(tmp_path, monkeypatch):
+    from unittest.mock import AsyncMock
+
+    from agent.config import load_settings
+    from agent.observability import RunLogger
+    from agent.tools import ToolClient
+    monkeypatch.setattr("agent.tools._sleep", AsyncMock())
+    settings = load_settings(env=TEST_ENV)
+
+    def _make(fn):
+        calls = []
+
+        def executor(slug, args):
+            calls.append((slug, args))
+            return fn(slug, args)
+        return ToolClient(settings, RunLogger(tmp_path / "tools.jsonl"), run_id="r", executor=executor,
+                          min_interval_s=0), calls
+    return _make
