@@ -90,3 +90,56 @@ def tool_client(tmp_path, monkeypatch):
         return ToolClient(settings, RunLogger(tmp_path / "tools.jsonl"), run_id="r", executor=executor,
                           min_interval_s=0), calls
     return _make
+
+
+class FakeLLM:
+    """Stands in for LLMClient.chat: scripted replies, optional budget accounting like the real client."""
+
+    def __init__(self, responses=(), default=None, cost=0.001, budget=None):
+        self.responses, self.default, self.cost, self.budget, self.calls = list(responses), default, cost, budget, 0
+
+    async def chat(self, **kw):
+        from agent.llm_client import LLMResponse
+        if self.budget is not None:
+            self.budget.check(self.cost)
+        self.calls += 1
+        text = self.responses.pop(0) if self.responses else self.default
+        if text is None:
+            raise AssertionError("FakeLLM ran out of scripted responses")
+        if self.budget is not None:
+            self.budget.record(self.cost)
+        return LLMResponse(text, kw["model"], 10, 10, self.cost, False, 5, 0, "raw.json")
+
+
+class FakeTools:
+    """Stands in for ToolClient: `pages` maps url -> text; `hits` is returned for every search."""
+
+    def __init__(self, pages=None, hits=()):
+        self.pages, self.hits, self.calls = dict(pages or {}), list(hits), 0
+
+    async def search(self, query, **kw):
+        from agent.tools import SearchHit
+        self.calls += 1
+        return [SearchHit(u) for u in self.hits]
+
+    async def fetch(self, url, **kw):
+        import hashlib
+
+        from agent.schema import Page
+        from agent.tools import is_thin
+        self.calls += 1
+        if url not in self.pages:
+            return Page(url=url, fetched_at="t", error="fetch_failed")
+        text = self.pages[url]
+        return Page(url=url, text=text, http_status=200, fetched_at="t", thin=is_thin(text),
+                    sha256=hashlib.sha256(text.encode("utf-8")).hexdigest())
+
+
+@pytest.fixture
+def fake_llm():
+    return FakeLLM
+
+
+@pytest.fixture
+def fake_tools():
+    return FakeTools
