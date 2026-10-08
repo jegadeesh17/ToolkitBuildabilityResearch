@@ -2,7 +2,7 @@
 
 High-level view of how the research agent, verification loops, scoring and site build fit together. Details (schema, CLI flags, exit codes, Definition of Done) live in [SPEC.md](SPEC.md).
 
-Status: **pass 1 implemented** (M0 code complete; live runs pending). `verify.py` and `build_site.py` are still design only.
+Status: **pass 1, pass 2 (`verify.py`) and the site build (`build_site.py`) are implemented and have been run** on all 100 apps. The page is deployed to GitHub Pages from the `gh-pages` branch.
 
 ## Data flow
 

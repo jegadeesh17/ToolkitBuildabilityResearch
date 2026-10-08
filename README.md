@@ -9,7 +9,7 @@ The findings ship as one static page (`site/index.html`) plus the data behind ev
 ```
 data/apps.json (100 apps, 10 categories)
   │
-  ├─ PASS 1  agent/run.py → agent/pipeline.py          per app, 4–6 at a time
+  ├─ PASS 1  agent/run.py → agent/pipeline.py          4 apps at a time by default (--concurrency)
   │    search (4 query templates) → fetch ≤6 pages → evidence bundle
   │    → one schema-bound extraction (answers only from the pages, verbatim quotes)
   │    → schema validation + up to 2 repair calls → consistency rules → quote grounding
@@ -43,8 +43,8 @@ pip install -r requirements.txt
 pytest -q                          # offline test suite — no API keys needed
 
 cp .env.example .env               # add your own OpenRouter and Composio keys (never commit .env)
-python -m agent.run --ids 1        # research one app → results/pass1.json
-python -m agent.validate results/pass1.json --expect 1
+python -m agent.run --ids 1 --out results/smoke.json   # research one app → results/smoke.json (gitignored; leaves results/pass1.json alone)
+python -m agent.validate results/smoke.json --expect 1
 ```
 
 Full run and page:

@@ -13,7 +13,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `agent/llm_client.py` (sole OpenRouter caller) and `agent/tools.py` (sole Composio caller, slug allowlist).
 - `agent/prompts/extract.md` + `repair.md`; `agent/pipeline.py` (pass 1); `agent/run.py` CLI with `--resume` and `--bundles-from`.
 - `agent/validate.py`, `agent/score.py`, `agent/cost_report.py`, `scripts/pilot_compare.py`.
-- Offline test suite (208 tests; network blocked, no keys needed).
+- Offline test suite (208 tests when first added; 258 at the current HEAD; network blocked, no keys needed).
 - Live contracts verified: Composio search/fetch slugs + response shapes (fixtures), OpenRouter `usage.cost`, key limits.
 - 10-app pilot (`results/pilot/`): deepseek-v4-flash chosen as PASS1_MODEL (90% schema-valid first try, 99% grounded, $0.022); prompt frozen at `p1-12ca05`.
 
