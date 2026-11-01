@@ -30,7 +30,7 @@ data/apps.json (100 apps, 10 categories)
 - **Observability.** Every model and tool call appends one line to `results/runs/run_log.jsonl` (tokens, cost, latency, retries, errors). `agent/budget.py` refuses a call that would pass `BUDGET_CAP_USD`.
 - **Measured, with the method disclosed.** 20 apps (2 per category, seeded) were labelled blind by an independent Gemini CLI agent working outside this repository (a model family not used in the pipeline), and a person spot-checked one reference verdict per category. Results are reported as agreement with these reference labels. Prompts were tuned only on a separate 10-app pilot set and frozen before scoring.
 
-Design details and every contract: [`docs/SPEC.md`](docs/SPEC.md) · module boundaries: [`docs/architecture.md`](docs/architecture.md) · verified API contracts: [`docs/reference/README.md`](docs/reference/README.md) · history: [`docs/CHANGELOG.md`](docs/CHANGELOG.md).
+Design details and every contract: [`docs/SPEC.md`](docs/SPEC.md) · module boundaries: [`docs/architecture.md`](docs/architecture.md) · verified API contracts: [`docs/reference/README.md`](docs/reference/README.md) · history: [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Quickstart
 
@@ -73,7 +73,7 @@ See the page (`site/index.html`) or `site/results.json`: verdict counts and patt
 - **Retrieval limits.** Web search plus plain page fetches miss documentation that needs JavaScript, a login or a PDF; those fields end up `unknown` with a reason.
 - **Correlated evidence.** The second model reads the same evidence bundle as the first, so a retrieval miss can fool both; only re-research (≤5 tool calls per app) gathers new pages.
 - **Narrow definition of "buildable now".** Public API plus credentials a developer can obtain alone (free or trial). Rate limits, deep terms-of-service review and approval timelines are out of scope.
-- **Operational changes are disclosed.** A different free model was piloted when the planned one was unavailable; pass 1 was re-run once on the same evidence after two pipeline fixes found on non-sample apps. Spend against the budget cap is recorded in `docs/CHANGELOG.md`.
+- **Operational changes are disclosed.** A different free model was piloted when the planned one was unavailable; pass 1 was re-run once on the same evidence after two pipeline fixes found on non-sample apps. Spend against the budget cap is recorded in `CHANGELOG.md`.
 - **Prototype scope.** No backend, database or hosted CI; the offline test suite and the validation/QA scripts are the quality gate.
 - **Independent research submission**, not affiliated with or endorsed by any company whose product is listed.
 
@@ -81,4 +81,43 @@ See the page (`site/index.html`) or `site/results.json`: verdict counts and patt
 
 `pytest -q` runs the offline suite (LLM and tool calls are faked; sockets to the internet are blocked in tests; no `.env` is read). `ruff check agent scripts tests` lints.
 
-Built with Claude Code under an iterative plan → build → verify workflow; all code was reviewed and tested by the author.
+## Configuration
+
+Copy `.env.example` to `.env` and fill in the values; `.env` is gitignored.
+
+| Variable | Purpose |
+|---|---|
+| `OPENROUTER_API_KEY` | OpenRouter key for every model call; give it a credit limit |
+| `COMPOSIO_API_KEY` | Composio key for the search and fetch tools; needs `tool_execution` access and no connected accounts |
+| `MODEL_PRESET` | Named set of pinned models for the reported results, or a free-model alternative |
+| `PASS1_MODEL` | Model for pass 1 extraction |
+| `VERIFY_MODEL` | Second model for pass 2; must be a different family from `PASS1_MODEL` |
+| `JUDGE_MODEL` | Model that adjudicates disputed fields only |
+| `BUDGET_CAP_USD` | Spend cap; the agent refuses to start a call once logged spend reaches it (exit code 4) |
+
+## Project structure
+
+```
+agent/       pipeline, verification, scoring, LLM and tool clients, run log, budget guard
+scripts/     sample splits, labelling and spot-check tools, site builder and browser QA
+data/        the 100-app list and sample splits
+results/     pass 1 and pass 2 outputs, pilot comparison, run log
+site/        the static report page and the data behind it
+tests/       offline test suite
+docs/        specification, architecture and API reference
+```
+
+## Documentation
+
+- [docs/README.md](docs/README.md): index of the documents
+- [docs/SPEC.md](docs/SPEC.md): requirements, schema and contracts
+- [docs/architecture.md](docs/architecture.md): module boundaries and data flow
+- [CHANGELOG.md](CHANGELOG.md): history of changes
+
+## How this was built
+
+Designed and built by jegadeesh17 with [SoftwareEngineeringAgents](https://github.com/jegadeesh17/SoftwareEngineeringAgents), a multi-agent workflow for Claude Code. I reviewed and tested all code.
+
+## License
+
+[MIT](LICENSE)
