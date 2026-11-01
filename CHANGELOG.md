@@ -1,7 +1,7 @@
 # Changelog
 
-All notable changes to this project are documented here.
-The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+All notable changes to this project will be documented in this file.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
@@ -18,7 +18,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - 10-app pilot (`results/pilot/`): deepseek-v4-flash chosen as PASS1_MODEL (90% schema-valid first try, 99% grounded, $0.022); prompt frozen at `p1-12ca05`.
 
 - `results/pass1.json`: pass 1 on all 100 apps — run `20260924T143612Z-929b15` (the message of commit ee7b9d1 names the run id incorrectly; this is the correct id), prompt `p1-12ca05`, deepseek-v4-flash, re-extracted from the run-1 evidence bundles after two pipeline fixes so every row uses one pipeline version. `validate --expect 100` OK; 45/700 fields unknown; grounded 778/850 (91.5%). Spend (all runs to date) $0.7498 per run log vs $0.7420 per OpenRouter key usage (1.1%).
-- `agent/verify.py` (pass 2: grounding, cross-model, judge, bounded re-research, deterministic confidence, `pass2_diff`) with `prompts/judge.md` and `prompts/reresearch.md` — built early, on the milestone-1 branch, after the M2 plan was approved.
+- `agent/verify.py` (pass 2: grounding, cross-model, judge, bounded re-research, deterministic confidence, `pass2_diff`) with `prompts/judge.md` and `prompts/reresearch.md` — written ahead of the verification stage.
 
 - `results/pass2.json`: pass 2 on all 100 apps (verify runs `20260924T150032Z-15c3cf` + resume `20260924T151837Z-f99e52` after a Windows file-lock crash at row 76; fixed by retrying the atomic rename). `validate --expect 100` OK; unknown fields 45 → 5; grounding-failed apps 37 → 6; rule violations 1 → 0; 142 fields changed (judge 119, re-research 23), each in `pass2_diff`; 4 apps still need a human.
 - `results/runs/run_log.jsonl`: the complete append-only run log (secret-scanned) behind every spend and call count.
@@ -29,7 +29,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `scripts/build_site.py`, `scripts/templates/index.html.j2`, `scripts/qa_site.py`: the single-page report and its browser QA.
 
 ### Budget
-- Pass 2 cost more than estimated (the judge, called on most apps, was ~$0.03 per call). With the owner's explicit approval, `BUDGET_CAP_USD` was raised from $4.00 to $4.50 for the pass-2 resume only. Cumulative spend $4.38 (run log), so the milestone-2 target of ≤ $4 was missed by $0.38. The OpenRouter key's own $5 limit stayed in place.
+- Pass 2 cost more than estimated (the judge, called on most apps, was ~$0.03 per call). With the owner's explicit approval, `BUDGET_CAP_USD` was raised from $4.00 to $4.50 for the pass-2 resume only. Cumulative spend $4.38 (run log), so the pass-2 target of ≤ $4 was missed by $0.38. The OpenRouter key's own $5 limit stayed in place.
 
 ### Changed
 - Extraction repair loop also triggers when values are given without evidence; a retry after an empty reply requests low reasoning effort (fixes found on non-sample apps in full run #1).
@@ -43,7 +43,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Grounding treats `<br>`-style tags and escaped `
 ` as whitespace (formatting-only differences).
 - `docs/SPEC.md`: authoritative specification (requirements, schema, pipeline, verification loops, accuracy method, Definition of Done).
-- Project scaffolding: `.env.example`, `.gitignore`, `CLAUDE.md`, `requirements.txt` (pinned).
-- Living docs: `docs/architecture.md`, `docs/CHANGELOG.md`, `docs/reference/README.md`.
+- Project scaffolding: `.env.example`, `.gitignore`, `requirements.txt` (pinned).
+- Living docs: `docs/architecture.md`, `CHANGELOG.md`, `docs/reference/README.md`.
 - `.claude/hooks/stop_hook.py`: runs the offline test suite when a Claude Code turn ends; no-op until tests exist.
 - `data/apps.json`: the 100 apps (10 categories × 10) to research.

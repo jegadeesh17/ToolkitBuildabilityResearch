@@ -79,7 +79,7 @@ Every LLM and tool call, from every stage, appends one line to `results/runs/run
 ## Known architectural limitation
 L2 cross-model shares the evidence bundle with pass 1, so retrieval misses can be correlated across both models. L4 re-research is the only loop that gathers new evidence. This is disclosed on the page.
 
-## Implementation notes (M0)
+## Implementation notes (scaffold)
 - `--bundles-from RUN_ID` reuses stored evidence bundles; the reused bundle is re-saved under the new run so every row's `meta.run_id` locates its own bundle.
 - A pass-1 field with a value but no evidence is converted to `unknown` / `model_unsure` before grounding (guardrail: evidence or unknown).
 - CLI progress lines print counts only (no field values), so the blind sample stays blind while runs execute.
