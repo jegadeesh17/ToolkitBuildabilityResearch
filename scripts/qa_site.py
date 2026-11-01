@@ -1,4 +1,4 @@
-"""Browser QA of the built page (SPEC M3): Playwright/Chromium at 1440 px and 390 px.
+"""Browser QA of the built page (see docs/SPEC.md): Playwright/Chromium at 1440 px and 390 px.
 
 Checks: no console errors (font-loading failures are reported but tolerated), no horizontal overflow, all eight
 sections present and visible, 100 table rows, a verdict filter narrows the table to the right count, a row

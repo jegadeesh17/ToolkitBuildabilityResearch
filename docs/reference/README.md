@@ -2,7 +2,6 @@
 
 Verified facts about external APIs this project depends on. Every entry says **how** and **when** it was verified. Anything marked *UNVERIFIED* must be confirmed (live call or official docs) before code depends on it; then update the entry.
 
-Files in this folder that are gitignored (local only, never published): `ASSIGNMENT.md`, `HANDOFF.md`.
 
 ---
 

@@ -236,7 +236,7 @@ Keys only in `.env` (gitignored), never printed, logged or committed. The Compos
 | 6 | Public GitHub repo, `gh-pages` branch, enable Pages via API (only with the human's approval per push) | agent + human | deploy |
 | 7 | Verify `.gitignore` covers `.env`, `results/raw/`, private notes; nothing private ever committed | agent | scaffolding + final audit |
 | 8 | Blind-label the 20 sample apps with `verification/label.html` (~1–1.5 h) | human | as soon as the label tool exists |
-| 9 | Reconcile cost log against the OpenRouter Activity dashboard | human + agent | end of Milestone 1 |
+| 9 | Reconcile cost log against the OpenRouter Activity dashboard | human + agent | end of the first pass |
 | — | No database, Vercel, Firecrawl or Playwright account needed | — | — |
 
 ## 2.14 Risks
@@ -248,7 +248,7 @@ Composio search/fetch quality or rate limits worse than assumed (mitigation: two
 
 All commands run from the repo root. `pytest` must pass offline with no API keys.
 
-## Milestone 0 — Scaffold (gate before any paid call)
+## Stage 1 — Scaffold (gate before any paid call)
 | Check | Command | Pass criterion |
 |---|---|---|
 | Offline tests | `pytest -q` | exit 0; covers schema, rules, budget guard, grounding, scoring, splits, wrappers with mocks |
@@ -257,24 +257,24 @@ All commands run from the repo root. `pytest` must pass offline with no API keys
 | Live smoke | `python -m agent.run --ids 1 --stage pass1 --model <free model>` | one schema-valid row; ≥1 `llm` and ≥1 `tool` line in `run_log.jsonl`; `.env` values absent from all output and logs |
 | Budget guard | `pytest tests/test_budget.py` | a call that would exceed the cap is refused with exit code 4 |
 
-## Milestone 1 — First pass on all 100 + baseline
+## Stage 2 — First pass on all 100 + baseline
 | Check | Command | Pass criterion |
 |---|---|---|
 | Pilot | `python -m agent.run --pilot --model <A>` and `--model <B>`; `python scripts/pilot_compare.py` | comparison table produced; pass-1 model chosen and recorded in `.env.example` |
 | Full run | `python -m agent.run --all --resume` | completes or resumes cleanly; exit 0 |
 | Validity | `python -m agent.validate results/pass1.json --expect 100` | 100 unique rows; schema-valid; every non-`unknown` scored field has evidence; every `unknown` has a reason |
-| Baseline | `python -m agent.score --input results/pass1.json` | accuracy overall / per field / abstain rate computed on the 20-app sample; recorded. If ground truth is not yet ready, Milestone 1 closes on the other criteria and scoring runs as soon as it is |
+| Baseline | `python -m agent.score --input results/pass1.json` | accuracy overall / per field / abstain rate computed on the 20-app sample; recorded. If ground truth is not yet ready, Stage 2 closes on the other criteria and scoring runs as soon as it is |
 | Cost | `python -m agent.cost_report` | run log sums to the reported total; total ≤ $1; within ~10% of the OpenRouter dashboard |
 
-## Milestone 2 — Verification loops + accuracy delta
+## Stage 3 — Verification loops + accuracy delta
 | Check | Command | Pass criterion |
 |---|---|---|
 | Loops | `python -m agent.verify --input results/pass1.json --output results/pass2.json --loops grounding,cross,judge,reresearch` | `results/pass2.json` written; every changed field has a `pass2_diff` entry |
-| Validity | `python -m agent.validate results/pass2.json --expect 100` | same criteria as Milestone 1 |
+| Validity | `python -m agent.validate results/pass2.json --expect 100` | same criteria as Stage 2 |
 | Delta | `python -m agent.score --compare results/pass1.json results/pass2.json` | `verification/compare.json` with per-field and overall pass 1 → pass 2 change, every hit and miss listed, any post-hoc fix labelled "tuned on sample". The delta is reported whatever its sign; the target is a clear improvement, not a gate |
 | Cost | `python -m agent.cost_report` | cumulative spend ≤ $4 |
 
-## Milestone 3 — Patterns, page, deploy, README
+## Stage 4 — Patterns, page, deploy, README
 | Check | Command | Pass criterion |
 |---|---|---|
 | Build | `python scripts/build_site.py` | writes `site/index.html` and `site/results.json`; embedded JSON equals `results.json` |
